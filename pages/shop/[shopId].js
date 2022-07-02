@@ -1,14 +1,19 @@
 import { useRouter } from "next/router"
 import { useSelector,useDispatch } from "react-redux"
 import { useEffect,useState } from "react"
-
+import Link from "next/link"
 import { toast } from "react-toastify"
 import { clearErrors, getShopDetails } from "../../actions/shopAction"
 // import { getShopProducts } from "../../actions/productActions"
 import SingleProductCard from "../../components/products/SingleProductCard"
 import { Disclosure,Popover } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
-import { usePopper } from 'react-popper';
+import { ChevronDoubleLeftIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
+import { SearchIcon } from '@heroicons/react/outline'
+// import { usePopper } from 'react-popper';
+
+import ProductSearch from "../../components/products/ProductSearch"
+import ViewShopReviews from "../../components/reviews/ViewShopReviews"
+import MenuModal from "../../components/allShops/MenuModal"
 
 const Shop = () => {
     const router=useRouter();
@@ -17,6 +22,7 @@ const Shop = () => {
 
     const dispatch=useDispatch();
     const {loading,error,shop,groupProducts,categories}=useSelector(state => state.shopDetails)
+    const {cartItems,cartTotal} = useSelector(state => state.cart)
     // const {loading:shopLoading,error:shopError,products}=useSelector(state => state.products)
  
     useEffect(() => {
@@ -36,29 +42,70 @@ if(shopId) {
     // this is for popper.js for menu placement
     let [referenceElement, setReferenceElement] = useState()
     let [popperElement, setPopperElement] = useState()
-    let { styles, attributes } = usePopper(referenceElement, popperElement,{placement:"left-start"})
+    // let { styles, attributes } = usePopper(referenceElement, popperElement,{placement:"left-start"})
  
     return (
         <>
-        {loading?("loading"):(
-        <>
-            {shop.name}
+        {/* {loading?("loading"):(
+        <> */}
+        <div className="flex justify-between bg-white drop-shadow-lg rounded-b-primary sticky top-0 z-20  py-3 px-3">
+            <Link href={`/`}>
+              <ChevronDoubleLeftIcon className="w-8 ml-1"/>
+              </Link>
+              <div className="flex  flex-col ">
+          <p className='text-lg font-bold'>{shop.name}</p>
+          <p className="text-center text-secondary-text-gray text-xs">LPU</p>
+        </div>
+       
+          <ProductSearch items={shop.products}/>
 
-<div className="w-full px-4 pt-16">
-      <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
+              </div>
+
+
+              <div className="flex justify-between mt-3">
+                <div className=" m-5">
+          <p className="text-2xl font-bold">  {shop.name}</p>
+          <div className="flex">
+            {shop?.categories?.map((cat,i)=>{
+              return(
+              <p key={i} className=" text-sm text-pri-text-gray">{cat} ,</p>
+              )
+            })}
+            </div>
+            <p className="mt-1 text-sm text-sec-text-gray">{shop?.description} </p>
+            </div>
+
+            <div className="flex h-16 self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
+              {/* <div className="rounded-full aspect-square flex flex-col justify-center h-full  bg-sec-orange">
+              <p className="text-sm justify-center flex text-pri-text-gray font-semibold">
+                {shop.ratings} <StarIcon className="w-4 fill-white"/> </p>
+              </div> */}
+              <ViewShopReviews/>
+            <div className="mx-2 self-center ">
+              <p className="text-success-green text-sm  font-bold"> Open now</p>
+              <p className="text-white text-xs "> 9am - 5pm</p>
+            </div>
+            </div>
+
+
+            </div>
+
+
+<div className="w-full px-0 pt-6 pb-11">
+      <div className="mx-auto w-full max-w-lg rounded-2xl bg-white p-0">
       {groupProducts.map((groupListItem)=>(
         <Disclosure defaultOpen="true" key={groupListItem.category} >
           {({ open }) => (
             <div id={`${groupListItem.category}`}>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-xl font-bold text-pri-text-light-gray  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <span>{groupListItem.category}</span>
                 <ChevronDownIcon
                   className={`${
                     open ? 'rotate-180 transform' : ''
-                  } h-5 w-5 text-purple-500`}
+                  }  w-8 text-pri-text-light-gray`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className=" pt-4 pb-2 ">
+              <Disclosure.Panel className=" pt-1 pb-2 ">
                   {groupListItem.products.map((product)=>
               <SingleProductCard key={product._id} product={product}/>
             )}
@@ -71,7 +118,7 @@ if(shopId) {
       </div>
     </div>
 
-
+{/* 
     <Popover className="fixed -right-3  z-10 -bottom-4" > 
       <Popover.Button ref={setReferenceElement} className=" bg-slate-700 rounded-full  text-white  px-6 py-8 ">Menu</Popover.Button>
 
@@ -85,10 +132,22 @@ if(shopId) {
         </div>
 
       </Popover.Panel>
-    </Popover>
+    </Popover> */}
+
+    <MenuModal categories={categories}/>
+    <div suppressHydrationWarning={true}>
+            {cartItems.length!==0&&
+              <Link href="/cart" >
             
-        </>
-        )}
+            <div  className="flex shadow-test rounded-b-primary justify-between rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow fixed bottom-0 w-full z-10 py-3 px-20">
+              <p className=" text-white font-semibold text-center" > Total - {cartTotal}</p>
+              <p className=" text-white font-semibold text-center" >Go to cart</p>
+             
+            </div>
+            </Link>
+            }
+            </div>
+      
         </>
     )
 }

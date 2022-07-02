@@ -1,14 +1,15 @@
 import '../styles/globals.css'
 import {wrapper} from "../store"
-import Layout from '../components/layout/Layout'
-import { useEffect} from 'react';
+// import Layout from '../components/layout/Layout'
+import { useEffect, useState} from 'react';
 import { useDispatch,useSelector} from 'react-redux'
 import {ToastContainer} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { loadUser } from '../actions/userAction'
-
+import { useRouter } from 'next/router';
+import LoadingBar from 'react-top-loading-bar'
 
 // function MyApp({ Component, pageProps }) {
 //   const [showChild, setShowChild] = useState(false);
@@ -32,17 +33,38 @@ import { loadUser } from '../actions/userAction'
 //   }
 // }
 function MyApp({ Component, pageProps }) {
-
+  const [progress, setProgress] = useState(0)
+  const router=useRouter()
  const {user,loading}=useSelector(state=>state.user)
  
   const dispatch=useDispatch();
   useEffect(()=>{
     dispatch(loadUser())
-  },[])
+    router.events.on('routeChangeStart', ()=>{
+      setProgress(40)
+    })
+    router.events.on('routeChangeComplete', ()=>{
+      setProgress(100)
+    })
+    
+  },[router])
+  // const dispatch=useDispatch();
+  // useEffect(()=>{
+  //   dispatch(loadUser())
+  // },[])
+
+
 
 
   return (
     <>
+
+<LoadingBar
+        color='#f11946'
+        progress={progress}
+        waitingTime={400}
+        onLoaderFinished={() => setProgress(0)}
+      />
 
    <GoogleOAuthProvider clientId="454780861603-r3tnk1o4oa7geftk4mpl49ps8okcmp55.apps.googleusercontent.com">
       <ToastContainer
@@ -56,11 +78,11 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 />
-{/* {loading?("loadin the user"):( */}
-<Layout >
+
+{/* <Layout > */}
         <Component {...pageProps} />
-        </Layout>
-        {/* )} */}
+        {/* </Layout> */}
+      
         </GoogleOAuthProvider>
      
 </>  )
