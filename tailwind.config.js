@@ -7,6 +7,7 @@ module.exports = {
     extend: {
     colors:{
       "sec-light-orange":"#FFEFF0",
+      "pri-blue":"#2BB4AB",
       "sec-orange":"#EFB3B6",
       "pri-orange":"#F3535B",
       "mid-orange":"#F36C61",
@@ -14,7 +15,8 @@ module.exports = {
       "sec-text-gray":"#565656",
       "pri-text-gray":"#2E2E2E",
       "pri-text-light-gray":"#4E4E4E",
-      "success-green":"#00FF0A",
+      "success-green":"#00D208",
+      // "success-green":"#00FF0A",
     },
     
     borderRadius: {
@@ -29,6 +31,7 @@ module.exports = {
   //  },
     dropShadow:{
       '2xl':" 3px 5px 0px  rgba(243,83,91,0.9)",
+      'pri-small':" 2px 3px 0px  rgba(243,83,91,0.9)",
       "cartBtn":"6px 15px 6px  rgba(243,83,91,0.9)"
     },
     boxShadow: {
@@ -38,4 +41,6 @@ module.exports = {
   },
   },
   plugins: [],
+  // plugins: [srequire('@tailwindcss/forms')],
 }
+ 

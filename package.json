@@ -14,7 +14,9 @@
     "@popperjs/core": "^2.11.5",
     "@react-oauth/google": "^0.2.6",
     "@reduxjs/toolkit": "^1.8.2",
+    "@tailwindcss/forms": "^0.5.2",
     "axios": "^0.27.2",
+    "date-and-time": "^2.4.0",
     "next": "^12.1.6",
     "next-redux-wrapper": "^7.0.5",
     "react": "^17.0.2",
@@ -25,7 +27,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-toastify": "^9.0.4",
     "react-top-loading-bar": "^2.1.0",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

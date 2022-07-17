@@ -5,6 +5,7 @@ let cartInitialState={
     cartShop:{},
     cartShopMid:{},
     cartShopName:{},
+    cartShopTimings:{},
     cartTotal:0,
     orderInfo:{}}
 if (typeof window !== 'undefined') {
@@ -17,6 +18,8 @@ if (typeof window !== 'undefined') {
     // orderInfo:{},
 
     cartShopMid:localStorage.getItem("cartShopMid")?JSON.parse(localStorage.getItem("cartShopMid")):{},
+
+    cartShopTimings:localStorage.getItem("cartShopTimings")?JSON.parse(localStorage.getItem("cartShopTimings")):{},
     // orderInfo:{},
 
     cartShopName:localStorage.getItem("cartShopName")?JSON.parse(localStorage.getItem("cartShopName")):{},
@@ -36,6 +39,8 @@ export const cartReducer=createReducer(cartInitialState,{
         state.cartShopMid=item.shop;
         state.cartShopMid=item.cartShopMid;
         state.cartShopName=item.cartShopName;
+        state.cartShopTimings.cartShopOpenTime=item.cartShopOpenTime;
+        state.cartShopTimings.cartShopCloseTime=item.cartShopCloseTime;
        if(isItemExist){
         //    return{
             //    state={...state},
@@ -54,6 +59,15 @@ export const cartReducer=createReducer(cartInitialState,{
 
     REMOVE_CART_ITEM:(state,action)=>{
         state.cartItems=state.cartItems.filter((i)=>i.product!==action.payload)
+    },
+    CLEAR_CART_LOCAL_STORAGE:(state,action)=>{
+        state.cartItems=[],
+        state.cartShop={},
+        state.cartShopMid={},
+        state.cartShopName={},
+        state.cartTotal=0,
+        state.orderInfo={}
+        state.cartShopTimings={}
     },
     SAVE_ORDER_INFO:(state,action)=>{
         // console.log(action.payload.data)

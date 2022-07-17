@@ -1,0 +1,232 @@
+import { Fragment, useEffect, useState } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { DotsVerticalIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon } from '@heroicons/react/solid'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { clearErrors, adminAllOrders, updateOrder, pushNewOrder, updateStartCookingOrders } from '../../../actions/orderAction'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import date from "date-and-time"
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import { Carousel } from 'react-responsive-carousel';
+
+import io from "socket.io-client"
+import NotYetAcceptedOrderCard from './NotYetAcceptedOrderCard'
+import SingleOrderCard from './SingleOrderCard'
+import NewOrderModal from './NewOrderModal'
+
+const ENDPOINT = "http://localhost:4000";
+var socket
+
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+  
+
+const Orders = () => {
+
+ 
+  const dispatch=useDispatch()
+  const router=useRouter()
+  const shopId=router.query.shopId
+
+  // const notificationSound=new Audio("/audio/notification.mp3/")
+
+const [socketConnected, setSocketConnected] = useState(false)
+const [open, setOpen] = useState(false)
+const [newOrder, setNewOrder] = useState()
+
+
+
+// socket.io implementation
+  useEffect(() => {  
+     
+   
+    socket=io(ENDPOINT);
+
+     
+    socket.emit("setup",shopId); 
+   
+    socket.on("connect",()=>{
+      
+    setSocketConnected(true)      
+    }
+  )
+  
+    socket.on("newOrder",(order)=>{
+       
+
+    setNewOrder(order)
+    setOpen(true);
+        
+     
+    dispatch(pushNewOrder(order))
+ 
+    })
+  
+  }, [])   
+
+  const {loading,error,startCookingOrders,futureOrders,notYetAcceptedOrders} = useSelector(state => state.adminAllOrders)
+
+  
+
+  // here set time out for running updated orders agin and again
+  // useEffect(() => {
+
+  //   // if(futureOrders.length!==0){  
+   
+
+  //   const interval = setInterval(() => {
+  //     console.log("runned setInterval in Order.js") 
+  //     const nowDate=new Date()
+  //     // console.log(futureOrders)
+  //    futureOrders.forEach((rev)=>{
+     
+  //       let wantAt= date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+rev.orderInfo.wantFoodAt, 'MMM DD YYYY HH:mm')
+  //       let timeDiff=date.subtract(wantAt,nowDate).toMinutes()
+       
+  //       if(rev.cookingTime>=timeDiff){
+  //         // console.log("aaaa aaaaa")
+  //         dispatch(updateStartCookingOrders(rev))
+  //       }
+      
+        
+  //   })   
+
+  //   }, 5000);
+
+  //   if(futureOrders.length===0){
+  //     // console.log("hh") 
+  //     clearInterval(interval)
+  //   }
+  // // }
+  
+  //   return () => clearInterval(interval);
+  
+
+
+
+
+  // }, [futureOrders]);
+
+    
+   
+    
+ 
+    const {loading:updateOrderLoading,error:updateOrderError,isUpdated} = useSelector(state => state.adminOrder)
+    const {user} = useSelector(state => state.user)      
+    
+     
+
+     
+  
+    useEffect(() => {
+    if(error){
+        toast.error(error);
+        dispatch(clearErrors())
+        // console.log("mmmmmm")
+    }
+    if(shopId){
+    dispatch(adminAllOrders(shopId))
+    }
+    }, [dispatch,toast,error,shopId])
+
+    useEffect(() => {
+        if(updateOrderError){
+            toast.error(updateOrderError);
+            dispatch(clearErrors())
+            // console.log("mmmmmm")
+        }
+        if(isUpdated){
+        dispatch(adminAllOrders(shopId))
+        dispatch({type:"UPDATE_ORDER_RESET"})
+
+        }
+    }, [dispatch,toast,updateOrderError,isUpdated])
+
+    const handleDelivered=(orderId)=>{
+        // e.preventDefault()
+        const orderData={
+            status:"delivered"
+        }
+        dispatch(updateOrder(orderData,shopId,orderId))
+    }
+    const handleCancel=(orderId)=>{
+        // e.preventDefault()
+        const orderData={
+            status:"initiated"
+        }
+        dispatch(updateOrder(orderData,shopId,orderId))
+    }
+
+
+    return (
+      // <div className="bg-white rounded-t-primary shadow-myOrderTop -mt-10">
+      <div className="pb-16  ">
+          <NewOrderModal open={open} setOpen={setOpen} order={newOrder} />   
+      
+            <div className="sticky top-0  bg-gradient-to-br pt-10 pb-24 from-pri-orange via-mid-orange to-pri-yellow">
+
+         
+  
+          {/* <div className="mt-4"> */}
+            <h2 className="sr-only">Recent orders</h2>
+            <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
+            <h1 className=" text-3xl my-4 ml-6  font-bold tracking-tight text-sec-light-orange ">New orders</h1>
+
+            <div className="max-w-2xl  mx-auto ">
+            <Carousel  showStatus={false} showThumbs={false}>
+        
+
+
+              {notYetAcceptedOrders&&notYetAcceptedOrders.map((order)=>(
+                <NotYetAcceptedOrderCard key={order._id} order={order}/>
+                ))}
+
+                </Carousel>
+
+            </div>
+
+ 
+ </div>
+ </div>
+ <div className="bg-white z-10 relative   rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-10">
+
+ <h1 className=" text-3xl px-7 py-10  font-bold tracking-tight text-pri-text-gray ">Start Cooking Now orders</h1>
+
+
+              <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
+                {startCookingOrders.map((order) => (
+      <SingleOrderCard  handleCancel={handleCancel} key={order._id} handleDelivered={handleDelivered} order={order}/>
+      ))}
+              </div>
+              
+
+
+          <div className="relative">    
+          <div className="bg-black/40 z-10 absolute w-full h-full top-0"></div>
+             
+            <h1 className=" text-3xl px-7 py-10  font-bold tracking-tight text-pri-text-gray ">Future Orders</h1>
+
+              <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
+                {futureOrders.map((order) => (
+      <SingleOrderCard handleCancel={handleCancel} key={order._id} handleDelivered={handleDelivered} order={order}/>
+      ))}
+              </div>
+         
+         
+            
+              </div>
+         
+              </div>
+            
+          </div>
+        // </div>
+    //   </div>
+    )
+}
+
+export default Orders

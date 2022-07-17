@@ -78,6 +78,13 @@ const MyOrders = () => {
         <div className="py-16 sm:py-24">
           <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
             <div className="max-w-2xl mx-auto px-9 lg:max-w-4xl lg:px-0">
+
+            <Link href="/newShop">
+        <button  className=" cursor-pointer border-dashed w-32 rounded-small py-1 mt-8 self-center border-[3px] border-black text-black flex justify-center">
+                NewShop 
+            </button>
+            </Link>
+
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 ">Order history</h1>
               {/* <p className="mt-2 text-sm text-gray-500">
                 Check the status of recent orders, manage returns, and discover similar products.

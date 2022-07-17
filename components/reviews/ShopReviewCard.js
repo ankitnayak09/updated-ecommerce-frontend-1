@@ -8,9 +8,9 @@ function classNames(...classes) {
 const ShopReviewCard = ({review,reviewIdx}) => {
     return (
         <div key={review._id} className="flex text-sm text-gray-500 space-x-4">
-        <div className="flex-none py-10">
-          <img src={review.user?.avatar} alt="" className="w-10 h-10 bg-gray-100 rounded-full" />
-          {/* <Image src={review.user.avatar} layout="fill" className="w-10 h-10 bg-gray-100 rounded-full"/> */}
+        <div className="flex-none py-10 ">
+          {/* <img src={review.user?.avatar} alt="" className="w-10 h-10 bg-gray-100 rounded-full" /> */}
+          <Image src={review.user.avatar} width="50px" height="50px" className="bg-gray-100 rounded-full"/>
         </div>
         <div className={classNames(reviewIdx === 0 ? '' : 'border-t border-gray-200', 'flex-1 py-10')}>
           <h3 className="font-medium text-gray-900">{review.user.name}</h3>

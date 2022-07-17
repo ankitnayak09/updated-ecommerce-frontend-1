@@ -55,11 +55,11 @@ const AdvSearch = ({items}) => {
         //   type="button"
           onClick={()=>{setOpen(true)}}
           className="cursor-pointer flex justify-between  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 
-          w-full text-center border-dashed border-[3px] border-pri-orange rounded-small p-3 m-3"
+          w-full text-center border-dashed border-[3px] border-pri-orange rounded-small py-3 px-3 mx-3 mb-8"
         >
-            <p className="text-lg font-bold text-pri-orange self-center">Search for shops,dishes...</p>
+            <p className="text-xl font-bold text-pri-orange self-center">Search for shops,dishes...</p>
             <span className="bg-sec-light-orange pri-button rounded-small px-10 py-2">
-          <SearchIcon className="w-8 fill-pri-orange   "/>
+          <SearchIcon className="w-6 fill-pri-orange   "/>
           </span>
         </div>
         

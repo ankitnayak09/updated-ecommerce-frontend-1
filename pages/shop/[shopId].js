@@ -14,13 +14,16 @@ import { SearchIcon } from '@heroicons/react/outline'
 import ProductSearch from "../../components/products/ProductSearch"
 import ViewShopReviews from "../../components/reviews/ViewShopReviews"
 import MenuModal from "../../components/allShops/MenuModal"
+import axios from "axios"
 
 const Shop = () => {
+  // console.log(props)
     const router=useRouter();
     const shopId=router.query.shopId
 
 
     const dispatch=useDispatch();
+    // const {loading,error}=useSelector(state => state.shopDetails)
     const {loading,error,shop,groupProducts,categories}=useSelector(state => state.shopDetails)
     const {cartItems,cartTotal} = useSelector(state => state.cart)
     // const {loading:shopLoading,error:shopError,products}=useSelector(state => state.products)
@@ -39,10 +42,7 @@ if(shopId) {
 
 
 
-    // this is for popper.js for menu placement
-    let [referenceElement, setReferenceElement] = useState()
-    let [popperElement, setPopperElement] = useState()
-    // let { styles, attributes } = usePopper(referenceElement, popperElement,{placement:"left-start"})
+  
  
     return (
         <>
@@ -151,5 +151,27 @@ if(shopId) {
         </>
     )
 }
+
+
+
+
+
+
+// export async function getServerSideProps(context) {
+//   // Fetch data from external API
+//   const shopId=context
+//   console.log(shopId)
+// //    {shopId&&
+// //   console.log(`http://localhost:4000/api/v1/shop/${shopId}`)
+// // }
+//   // const{data}=await axios.get(`http://localhost:4000/api/v1/shop/${shopId}`)
+
+//   return { props: {
+    
+//     // shop:data.shop,
+//     // groupProducts:data.groupProducts,
+//     // categories:data.categories,
+//      } }
+// }
 
 export default Shop

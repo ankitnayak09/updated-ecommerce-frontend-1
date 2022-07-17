@@ -2,7 +2,6 @@ import Image from "next/image"
 import { useSelector } from "react-redux"
 import { PencilIcon } from '@heroicons/react/solid'
 
-
 const MyProfile = () => {
     const {user,loading,isAuthenticated}=useSelector(state=>state.user)
     return (
@@ -32,6 +31,8 @@ const MyProfile = () => {
         <button  className=" cursor-pointer border-dashed w-32 rounded-small py-1 mt-8 self-center border-[3px] border-[#ECECEC] text-[#FFEFF0] flex justify-center">
                 Edit profile <PencilIcon className="w-5 self-center ml-2"/>
             </button>
+
+
 
         </div>
    

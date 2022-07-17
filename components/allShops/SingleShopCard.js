@@ -7,7 +7,7 @@ const SingleShopCard = ({shop}) => {
   // console.log(shop)
     return (
         <div key={shop._id} className="group relative flex md:flex-col sm:w-full lg:flex-col">
-        <div className="w-1/2 h-32  md:w-full md:h-72  aspect-w-1 aspect-h-1 rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative" >
+        <div className="w-1/2 h-40  md:w-full md:h-72  aspect-w-1 aspect-h-1 rounded-medium overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative" >
           {/* <img
             src={shop?.images[0]?.url}
             alt={shop?.name}

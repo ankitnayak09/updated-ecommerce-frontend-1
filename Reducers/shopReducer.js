@@ -112,6 +112,19 @@ export const shopDetailsReducer=createReducer({shop:{},groupProducts:[],categori
         state.loading=false;
         state.error=action.payload
     },
+
+    ADMIN_SHOP_DETAILS_REQUEST:(state)=>{
+        state.loading=true;
+        // state={...state};
+    },
+    ADMIN_SHOP_DETAILS_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.shop=action.payload.shop;
+    },
+    ADMIN_SHOP_DETAILS_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
     CLEAR_ERRORS:(state,action)=>{
         state={...state};
         state.error=null
@@ -143,4 +156,80 @@ export const newShopReviewReducer=createReducer({},{
 
 })
 
+
+export const newShopReducer=createReducer({shop:{}},{
+    NEW_SHOP_REQUEST:(state)=>{
+        state.loading=true;
+        // state={...state};
+    },
+    NEW_SHOP_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.success=action.payload.success;
+        state.shop=action.payload.product;
+    
+    },
+    NEW_SHOP_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
+    NEW_SHOP_RESET:(state,action)=>{
+        state.loading=false;
+        state.success=false
+    },
+    CLEAR_ERRORS:(state,action)=>{
+        // state={...state};
+        state.error=null
+    },
+
+})
+
+
+
+
+
+export const updateShopReducer=createReducer({},{
+    UPDATE_SHOP_REQUEST:(state)=>{
+        state.loading=true;
+        // state={...state};
+    },
+    UPDATE_SHOP_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.success=action.payload.success;
+        state.shop=action.payload.shop;
+    
+    },
+    UPDATE_SHOP_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
+    UPDATE_SHOP_RESET:(state,action)=>{
+        state.loading=false;
+        state.success=false
+    },
+
+
+    DELETE_SHOP_REQUEST:(state)=>{
+        state.loading=true;
+        // state={...state};
+    },
+    DELETE_SHOP_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.isDeleted=action.payload.success;
+      
+    },
+    DELETE_SHOP_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
+    DELETE_SHOP_RESET:(state,action)=>{
+        state.loading=false;
+        state.isDeleted=false
+    },
+  
+    CLEAR_ERRORS:(state,action)=>{
+        
+        state.error=null
+    },
+
+})
 

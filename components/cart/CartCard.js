@@ -1,7 +1,7 @@
 import { CheckIcon, ClockIcon, XIcon } from '@heroicons/react/solid'
 import {  useState,useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemsToCart, clearCartLocalStorage, removeItemsFromCart } from "../../actions/cartAction";
 import CartQtyBtn from '../button/CartQtyBtn';
 
 
@@ -9,15 +9,40 @@ import CartQtyBtn from '../button/CartQtyBtn';
 const CartCard = ({product}) => {
     const dispatch=useDispatch()
     const [quantity, setQuantity] = useState(1)
+    const {cartItems}= useSelector(state => state.cart)
+
     useEffect(() => {
        
         setQuantity(product.quantity)
     }, [])
-    useEffect(() => {
-     if(quantity==0) {
-        dispatch(removeItemsFromCart(product.product))
-     }
-    }, [quantity])
+
+
+    // useEffect(() => {
+    //  if(quantity==0) {
+    //    if(cartItems.length<=1){
+    //     //  console.log('haaa')
+    //     dispatch(clearCartLocalStorage())
+    //     return
+    //   }
+      
+    //   //  console.log("arre")
+    //     dispatch(removeItemsFromCart(product.product))
+        
+    //  }
+    // }, [quantity])
+
+
+    // useEffect(() => {
+    
+    //   console.log(cartItems)
+    //    if(cartItems.length==0){
+    //     dispatch(clearCartLocalStorage())
+    //     // return
+    //   }
+   
+     
+    // }, [cartItems])
+
   
     const increaseQuantity=(e)=>{
         e.preventDefault()
@@ -29,10 +54,27 @@ const CartCard = ({product}) => {
     }
     const decreaseQuantity=(e)=>{
         e.preventDefault()
+       
         if(product.quantity<1) return;
         let qty=product.quantity-1;
          setQuantity(qty);
+
+
+         if(qty==0) {
+          if(cartItems.length==1){
+              //  console.log('haaa')
+              dispatch(clearCartLocalStorage())
+              return
+            }
+
+          dispatch(removeItemsFromCart(product.product))
+          return};
+      
+
+
             dispatch(addItemsToCart(product.shop,product.product,qty))
+
+
     }
     return (
         <>

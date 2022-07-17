@@ -65,6 +65,15 @@ const BottomNav = () => {
         <span className="tab tab-home block text-xs">Account</span>
 			</a>
             </Link>
+
+
+
+            <Link href="/629c6a14ff4e0a1707f895ea/admin" >
+       <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+        <CakeIcon className="inline-block mb-1 w-8"/>
+        <span className="tab tab-home block text-xs">Dashboard</span>
+			</a>
+            </Link>
        </div>
             </section>
         </div>

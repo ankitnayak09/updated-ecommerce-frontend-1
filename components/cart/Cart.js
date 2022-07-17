@@ -13,6 +13,10 @@ import Head from "next/head"
 import Script from "next/script"
 import axios from "axios"
 import { toast } from "react-toastify"
+import date from 'date-and-time';
+import { useRouter } from 'next/router'
+import { GoogleLogin } from "@react-oauth/google"
+
 
 const timeOptionsLists = [
     { id: 1, title: 'For Now', description: 'Last message sent an hour ago', },
@@ -24,13 +28,22 @@ const timeOptionsLists = [
     return classes.filter(Boolean).join(' ')
   }
   const Cart = () => {
+    const router = useRouter()
       const dispatch=useDispatch()
       // const {orderInfo}=useSelector((state)=>state.cart)
     const [selectedTime, setSelectedTime] = useState(0)
     // const [selectedTime, setSelectedTime] = useState(timeOptionsLists[0])
+    const responseSuccessGoogle=(response)=>{
+      dispatch(googleSignIn(response.credential))
+    }
+    const responseErrorGoogle=(response)=>{
+      toast.error(response);
+  
+    }
 
     const [Hour,setHour]=useState(0)
     const [Minute,setMinute]=useState(0)
+    const [cookingTime,setCookingTime]=useState(0)
     const [finalTime,setfinalTime]=useState("0:0")
     const [Suggestion,setSuggestion]=useState("")
     const [WantAt,setWantAt]=useState("")
@@ -39,9 +52,28 @@ const timeOptionsLists = [
     const [SubTotal,setSubTotal]=useState(0)
     const [ConvenienceCharge,setConvenienceCharge]=useState(0.3)
     const [OrderTotal,setOrderTotal]=useState(0)
-    const {cartItems,cartShop,cartShopMid,cartShopName}= useSelector(state => state.cart)
+    const {cartItems,cartShop,cartShopTimings,cartShopMid,cartShopName}= useSelector(state => state.cart)
+
+    const {loading:userLoading,isAuthenticated}= useSelector(state => state.user)
+    // useEffect(() => {
+
+    //    if(isAuthenticated==false){
+    //     router.push("/")
+    //   }
+
+    // }, [])
+
     useEffect(() => {
+     
         let subttl=cartItems.reduce((acc,item)=>acc+item.quantity*item.price,0)
+
+        let cookingTimesArray=[]
+
+        cartItems.forEach(item => {
+          cookingTimesArray.push(item.cookingTime)
+        });
+    
+      setCookingTime(Math.max(...cookingTimesArray))
         setSubTotal(subttl)
         setOrderTotal(subttl+ConvenienceCharge)
      
@@ -54,8 +86,11 @@ const timeOptionsLists = [
       // if(id===1){
         setWantAt("now")
     }else{
+      // const now = new Date();
+      // let testDate=date.parse(date.format(now, 'MMM DD YYYY') +" "+finalTime, 'MMM DD YYYY hh:mm');
+        // setWantAt(testDate.toString())
         setWantAt(finalTime)
-
+        
     }
     //   if(id===1){
     //     setWantAt("now")
@@ -63,10 +98,15 @@ const timeOptionsLists = [
     //     setWantAt(time)
 
     // }
-    // console.log(finalTime)
+  
+    // console.log(testDate)
+
     }, [Hour,Minute,selectedTime,finalTime])
     useEffect(()=>{
-        if(WantAt!=="") dispatch(saveOrderInfo({WantAt,Suggestion}))
+      // console.log(isAuthenticated)
+        if(WantAt!==""){
+         dispatch(saveOrderInfo({WantAt,Suggestion}))
+        }
     },[WantAt,Suggestion])
 
 
@@ -75,6 +115,20 @@ const timeOptionsLists = [
     // initiate papyment
     const initiatePayment=async(e)=>{
       e.preventDefault()
+      const nowDate = new Date();
+      // console.log(nowDate)
+      const shopOpenDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+cartShopTimings.cartShopOpenTime, 'MMM DD YYYY HH:mm');
+      const shopCloseDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+cartShopTimings.cartShopCloseTime, 'MMM DD YYYY HH:mm');
+       
+    const openTimeDiff=  date.subtract(nowDate,shopOpenDate).toMinutes()
+    const closeTimeDiff=  date.subtract(shopCloseDate,nowDate).toMinutes()
+     if(openTimeDiff<0||closeTimeDiff<0){
+      toast.error("shop closed,but later")
+      return
+    }
+        
+      
+
       setCartBtnDisabled(true)
       // const data1={SubTotal,ConvenienceCharge,OrderTotal};
       // sessionStorage.setItem("orderInfo",JSON.stringify(data1));
@@ -90,7 +144,7 @@ const timeOptionsLists = [
       // const a=await axios.post(`http://localhost:4000/api/v1/payment/pretransaction`,{cartItems,OrderTotal,oid,email:"email"},conf)
 
 // const data={cartItems,OrderTotal,oid,cartShop,email:"email"};
-const data={cartItems,cartShopName,OrderTotal,oid,cartShop,email:"email",orderInfo:{wantFoodAt:WantAt,description:Suggestion},SubTotal,ConvenienceCharge,OrderTotal};
+const data={cartItems,cookingTime,cartShopName,OrderTotal,oid,cartShop,email:"email",orderInfo:{wantFoodAt:WantAt,description:Suggestion},SubTotal,ConvenienceCharge,OrderTotal};
 let a= await fetch("http://localhost:4000/api/v1/payment/pretransaction",{method:'POST',credentials: 'include',headers:{"Content-Type":"application/json"},
 body:JSON.stringify(data)
 }) 
@@ -127,7 +181,7 @@ body:JSON.stringify(data)
                 
                   const Deleteconf={headers:{"Content-Type":"application/json"},withCredentials: true}
 
-      await axios.delete(`http://localhost:4000/api/v1/${cartShop}/order/${oid}/beforePayment`,{withCredentials: true})
+      // await axios.delete(`http://localhost:4000/api/v1/${cartShop}/order/${oid}/beforePayment`,{withCredentials: true})
     }
 
     deleteFunction()
@@ -151,6 +205,7 @@ body:JSON.stringify(data)
   
             }else{
                 toast.error(txnRes.message);
+                setCartBtnDisabled(false)
             }
 
 
@@ -160,6 +215,7 @@ body:JSON.stringify(data)
     return (
       
         <>
+     
         {/* loading scripts of ppaytmPayment */}
         <Head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/></Head>
 
@@ -171,11 +227,12 @@ body:JSON.stringify(data)
 
 
         
-        {cartItems.length===0?( 
+        {cartItems.length===0?( <>
               <Link href={`/`}>
               <ChevronDoubleLeftIcon className="w-8"/>
               </Link>
-        ):(
+          
+       </> ):(
             <div className="bg-white">
               {/* <Link href={`/`}>
      
@@ -238,7 +295,7 @@ body:JSON.stringify(data)
             // value={mailingList}
             className={({ checked, active }) =>
               classNames(
-                checked ? 'border-transparent' : 'border-gray-300',
+                checked ? 'border-transparent' : 'border-dashed border-4 border-gray-300',
                 active ? 'border-pri-orange ring-2 ring-pri-orange' : '',
                 'relative bg-white border rounded-medium shadow-sm p-4 flex cursor-pointer focus:outline-none'
               )
@@ -283,7 +340,7 @@ body:JSON.stringify(data)
             value={1}
             className={({ checked, active }) =>
               classNames(
-                checked ? 'border-transparent' : 'border-gray-300',
+                checked ? 'border-transparent' : ' border-dashed border-4 border-gray-300',
                 active ? 'border-pri-orange ring-2 ring-pri-orange' : '',
                 'relative bg-white border rounded-medium shadow-sm p-4 flex cursor-pointer focus:outline-none'
               )
@@ -292,7 +349,7 @@ body:JSON.stringify(data)
             {({ checked, active }) => (
               <>
                 {/* <div className=" flex"> */}
-                  <div className="flex justify-center flex-col">
+                  <div className="flex justify-center self-center w-full flex-col">
                     <RadioGroup.Label as="span" className="block text-lg font-bold text-center text-pri-text-gray">
                       Want it later
                     </RadioGroup.Label>
@@ -385,18 +442,39 @@ body:JSON.stringify(data)
                 </button>
               </div> */}
 
-{CartBtnDisabled?(
-<button     className="flex cursor-pointer fixed bottom-0 left-0 shadow-test rounded-b-primary justify-center rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
-              <p className=" text-white text-lg font-semibold text-center" > just a sec, v r creating order </p>
+{!isAuthenticated?(
+<div     className="flex flex-col cursor-pointer fixed bottom-0 left-0 shadow-test rounded-b-primary justify-center rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
+  <div className=" w-full justify-center mt-2 flex">
+<GoogleLogin
+          
+          onSuccess={responseSuccessGoogle}
+          onFailure={responseErrorGoogle}
+          useOneTap
+          
         
-            </button>
+        />
+        </div>
+
+              <p className=" text-white text-lg mt-2 font-semibold text-center" > login to Place order </p>
+        
+            </div>
             ):(
 
-<button   onClick={initiatePayment}  className="flex cursor-pointer fixed bottom-0 left-0 shadow-test rounded-b-primary justify-center rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
+<button disabled={CartBtnDisabled}  onClick={initiatePayment}  className="flex cursor-pointer fixed bottom-0 left-0 shadow-test rounded-b-primary justify-center rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
+{CartBtnDisabled?(
+  <>
+  <span 
+        className="w-6 my-auto mr-3 aspect-square border-4 border-white border-dashed rounded-full animate-spin"></span>
+
+              <p className=" text-white text-lg font-semibold text-center" > just a sec, v r creating order </p>
+        
+  </>
+):(<>
               <p className=" text-white text-lg font-semibold text-center" > Pay - {OrderTotal} </p>
         
+              </>
+            )}
             </button>
-
             )}
 {/* <div  onClick={initiatePayment}  className="flex cursor-pointer fixed bottom-0 left-0 shadow-test rounded-b-primary justify-center rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
               <p className=" text-white text-lg font-semibold text-center" > Pay - {OrderTotal} </p>
@@ -411,9 +489,12 @@ body:JSON.stringify(data)
       </div>
         
         )}
+
         </>
     )
 }
+
+
 
 export default Cart
 

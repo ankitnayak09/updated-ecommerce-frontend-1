@@ -101,6 +101,29 @@ export const getShopDetails=(shopId)=>async(dispatch)=>{
     }
 
 }
+export const adminShopDetails=(shopId)=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:"ADMIN_SHOP_DETAILS_REQUEST",
+        });
+        // console.log(shopId)
+
+        const{data}=await axios.get(`http://localhost:4000/api/v1/shop/${shopId}/admin`,{withCredentials: true})
+  
+        dispatch({
+            type:"ADMIN_SHOP_DETAILS_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+
+        dispatch({
+            type:"ADMIN_SHOP_DETAILS_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
 export const createUpdateShopReview=(reviewData,shopId,orderId)=>async(dispatch)=>{
     try{
         dispatch({
@@ -127,6 +150,71 @@ export const createUpdateShopReview=(reviewData,shopId,orderId)=>async(dispatch)
     }
 
 }
+
+
+
+//create shop
+export const createShop=(shopData)=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:"NEW_SHOP_REQUEST",
+        });
+        // console.log(shopId)
+        const config={headers:{"Content-Type":"application/json"},withCredentials: true}
+
+        const{data}=await axios.post(`http://localhost:4000/api/v1/shop/new`,shopData,config)
+      
+
+  
+        dispatch({
+            type:"NEW_SHOP_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+
+        dispatch({
+            type:"NEW_SHOP_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
+
+
+
+
+
+//update product-admin
+export const updateShop=(shopData,shopId)=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:"UPDATE_SHOP_REQUEST",
+        });
+        // console.log(shopId+productData+productId)
+        const config={headers:{"Content-Type":"application/json"},withCredentials: true}
+
+
+        const{data}=await axios.put(`http://localhost:4000/api/v1/shop/${shopId}`,shopData,config)
+      
+
+  
+        dispatch({
+            type:"UPDATE_SHOP_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+
+        dispatch({
+            type:"UPDATE_SHOP_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
+
+
 
 
 export const clearSearch=()=>async(dispatch)=>{

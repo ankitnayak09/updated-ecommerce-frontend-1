@@ -75,12 +75,18 @@ const CategoryShopList = () => {
     return (
         <>
         <div className="bg-white">
-          <div className="w-full max-w-2xl aspect-square relative">
+          {/* <div className="w-full max-w-2xl aspect-square relative"> */}
             <Image src={`/categoryImg/${category}.png` }
            
-            layout="fill"/>
-          </div>
-        <div className="max-w-2xl mx-auto pb-16 pt-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            layout="responsive"
+            width="2000px"
+            height="2400px"
+            />
+          {/* </div> */}
+        {/* <div className="max-w-2xl mx-auto pb-16 pt-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"> */}
+
+<div className="bg-white z-10 relative  rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-8 pb-16 pt-4 px-4">
+
           {/* <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 ">Shops</h2> */}
   
       
@@ -93,6 +99,7 @@ const CategoryShopList = () => {
         <ShopList shops={shops}/>
         </InfiniteScroll>
         </div>
+      {/* </div> */}
       </div>
 
 

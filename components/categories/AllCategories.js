@@ -10,28 +10,28 @@ const categories = [
       id: 1,
       name: 'pizza',
       href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
+      imageSrc: '/categoriesPng/pizza.png',
 
     },
     {
       id: 2,
       name: 'burger',
       href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+      imageSrc: '/categoriesPng/burger.png',
     
     },
     {
       id: 3,
       name: 'dessert',
       href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+      imageSrc: '/categoriesPng/dessert.png',
    
     },
     {
       id: 4,
       name: 'juice',
       href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+      imageSrc: '/categoriesPng/juice.png',
    
     },
 
@@ -41,16 +41,16 @@ const categories = [
   const hiddenCategories=[
     {
       id: 5,
-      name: 'southIndian',
+      name: 'south Indian',
       href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+      imageSrc: '/categoriesPng/southIndian.png',
      
     },
     {
       id: 6,
       name: 'chinese',
       href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+      imageSrc: '/categoriesPng/chinese.png',
      
     },
   ]

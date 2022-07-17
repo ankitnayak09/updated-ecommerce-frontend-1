@@ -35,11 +35,30 @@ import LoadingBar from 'react-top-loading-bar'
 function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0)
   const router=useRouter()
- const {user,loading}=useSelector(state=>state.user)
+ const {user,loading,isAuthenticated}=useSelector(state=>state.user)
  
   const dispatch=useDispatch();
+
+  
   useEffect(()=>{
     dispatch(loadUser())
+  },[])
+
+
+  // if (pageProps.protected==true  ) {
+  // // console.log("here")
+  // if(loading==true){
+  //   return (
+  //     <div> Loading...</div>
+  //     // <Layout>Loading...</Layout>
+  //   )}
+  //   if(loading==false &&isAuthenticated==false ){
+  //   router.push("/")
+  //    &&isAuthenticated==false }
+  // }
+
+  useEffect(()=>{
+    // dispatch(loadUser())
     router.events.on('routeChangeStart', ()=>{
       setProgress(40)
     })
@@ -48,10 +67,7 @@ function MyApp({ Component, pageProps }) {
     })
     
   },[router])
-  // const dispatch=useDispatch();
-  // useEffect(()=>{
-  //   dispatch(loadUser())
-  // },[])
+ 
 
 
 
@@ -65,7 +81,7 @@ function MyApp({ Component, pageProps }) {
         waitingTime={400}
         onLoaderFinished={() => setProgress(0)}
       />
-
+{loading==false&&
    <GoogleOAuthProvider clientId="454780861603-r3tnk1o4oa7geftk4mpl49ps8okcmp55.apps.googleusercontent.com">
       <ToastContainer
 position="bottom-center"
@@ -84,7 +100,7 @@ pauseOnHover
         {/* </Layout> */}
       
         </GoogleOAuthProvider>
-     
+     } 
 </>  )
 }
 

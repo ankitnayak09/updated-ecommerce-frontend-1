@@ -7,29 +7,22 @@ const SingleCategoryCard = ({category}) => {
         <Link  href={`/shop/category/${category.name}`}>
             
                
-        <a  className="group bg-sec-light-orange rounded-full pb-3  ">
-          <div className="w-full aspect-square border-4 border-pri-orange rounded-full overflow-hidden xl:aspect-w-7 xl:aspect-h-8 block relative">
-            {/* <img
-              src={category.imageSrc}
-              alt={category.name}
-              className="w-full h-full object-center object-cover group-hover:opacity-75"
-            /> */}
-
-
+        <a  className="  ">
+          <div className="w-full aspect-square block relative">
+      
 <Image
    
       src={category.imageSrc}
       alt={category.name}
     layout="fill"
   
-  //   layout="responsive"
-  //  height="2px"
-  //  width="2px"
     />
 
 
           </div>
-          <h3 className="my-2  text-sm text-center font-medium text-sec-text-gray">{category.name}</h3>
+          <div className=" bg-gradient-to-br pb-3 pl-2 -z-10 -mt-11  pt-9 relative rounded-t-medium rounded-bl-medium rounded-br-[100px]  from-pri-orange via-mid-orange to-pri-yellow">
+          <p className="mb-2 px-1   text-left font-medium text-white">{category.name}</p>
+          </div>
      
         </a>
         </Link>
