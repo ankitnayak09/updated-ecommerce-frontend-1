@@ -29,7 +29,7 @@ const MenuModal = ({categories}) => {
         </button>
       </div>
         <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="fixed z-10 bottom-40 right-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
+        <Dialog as="div" className="fixed z-10 bottom-40 md:bottom-0 right-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child
               as={Fragment}
@@ -62,7 +62,7 @@ const MenuModal = ({categories}) => {
 
               <div className="flex  flex-col">
                     {categories.map((cat)=>(
-                        <div key={cat} className="flex  border-b-2 pr-16">
+                        <div key={cat} className="flex hover:bg-gray-100 border-b-2 pr-16">
                             {/* <Link href={"#"+`${cat}`}> */}
           <button  onClick={()=>{menuBtnClick("#"+`${cat}`)}} className="p-2 text-lg font-medium text-pri-text-light-gray" >{cat}</button>
           {/* <a onClick={ menuBtnClick(cat)} className="p-2" >{cat}</a> */}

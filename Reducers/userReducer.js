@@ -1,7 +1,25 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 
-export const userReducer=createReducer({user:{}},{
+let cartInitialState={
+    location:{},
+    user:{}
+  }
+if (typeof window !== 'undefined') {
+ cartInitialState={
+    location:localStorage.getItem("userLocation")?JSON.parse(localStorage.getItem("userLocation")):{},
+    user:{}
+
+}
+}
+
+
+export const userReducer=createReducer(cartInitialState,{
+    // LOAD_USER_LOCATION:(state,action)=>{
+    //     console.log(action.payload)
+    //     state.location=action.payload
+    // },
+
     GOOGLE_SIGNIN_REQUEST:(state)=>{
         state.loading=true;
         state.isAuthenticated=false
@@ -29,7 +47,8 @@ export const userReducer=createReducer({user:{}},{
   
         state.loading=false;
         state.isAuthenticated=true,
-        state.user=action.payload
+        state.user=action.payload.user
+        state.adminOf=action.payload.admin
     },
     LOAD_USER_FAIL:(state,action)=>{
     

@@ -93,8 +93,9 @@ export const adminOrderReducer=createReducer({},{
     },
     UPDATE_ORDER_SUCCESS:(state,action)=>{
         state.loading=false;
-        state.isUpdated=false;
-        state.isUpdated=action.payload;
+        // state.isUpdated=false;
+        state.isUpdated=action.payload.success;
+        state.orderStatus=action.payload.orderStatus;
     
     },
     UPDATE_ORDER_FAIL:(state,action)=>{

@@ -21,6 +21,8 @@ const EditShop = ({setIsOpen}) => {
     // const [stock, setStock] = useState();
     const [description, setDescription] = useState();
     const [location, setLocation] = useState();
+    const [latitude, setLatitude] = useState();
+    const [longitude, setLongitude] = useState();
     const [closeTime, setCloseTime] = useState();
     const [openTime, setOpenTime] = useState();
     const [paytmMid, setPaytmMid] = useState();
@@ -49,6 +51,12 @@ const EditShop = ({setIsOpen}) => {
         "sunday"
     ]
 
+    const {location:userLocation}=useSelector(state=>state.user)
+ 
+    useEffect(() => {
+      setLatitude(userLocation.latitude);
+      setLongitude(userLocation.longitude)
+    }, [userLocation])
 
 
     useEffect(() => {
@@ -88,6 +96,10 @@ const EditShop = ({setIsOpen}) => {
         paytmMkey
     }));}
   
+ {(latitude||longitude) &&   myForm.set("locationCoords",JSON.stringify({
+      latitude,
+      longitude
+  })) };
 
       { openTime&&  myForm.set("openTime",openTime)};
       { closeTime&&  myForm.set("closeTime",closeTime)};
@@ -255,6 +267,41 @@ const EditShop = ({setIsOpen}) => {
            </div>
          </div>
        </div>
+
+       <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                Shop latitude
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <div className="max-w-lg flex rounded-md shadow-sm">
+                
+                  <input
+                    type="text"   
+                    defaultValue={latitude}                 
+                    onChange={(e)=>{setLatitude(e.target.value)}}
+                    className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                Shop longitude
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <div className="max-w-lg flex rounded-md shadow-sm">
+                
+                  <input
+                    type="text"   
+                    defaultValue={longitude}                 
+                    onChange={(e)=>{setLongitude(e.target.value)}}
+                    className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                  />
+                </div>
+              </div>
+            </div>
+
 
        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
          <label htmlFor="location" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">

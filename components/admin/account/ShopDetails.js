@@ -48,8 +48,8 @@ const ShopDetails = () => {
 
     return (
        
-             <div className="sticky top-0  bg-gradient-to-br pb-16 from-pri-orange via-mid-orange to-pri-yellow">
-                 <div className="flex justify-between p-4">
+             <div className="sticky top-0  bg-gradient-to-br pb-16 from-pri-orange via-mid-orange md:pt-24 to-pri-yellow">
+                 <div className="flex  justify-between p-4">
 
             <EditShopModal/>
             <div className="flex"> <h1 className=" text-3xl  mr-4 font-bold tracking-tight text-sec-light-orange ">{shop.name}</h1>
@@ -72,12 +72,12 @@ const ShopDetails = () => {
 </div>
             </div>
 
-        <div className="flex w-96   mx-auto p-4 bg-sec-orange rounded-tr-medium rounded-bl-medium rounded-tl-small rounded-br-small justify-between my-8"> 
-        <span className="font-bold text-center text-3xl text-pri-text-light-gray flex flex-col">12 <p className="font-light text-base">Active Orders</p> </span>
+        <div className="flex w-96   mx-auto p-4 bg-pri-orange/40 rounded-tr-medium rounded-bl-medium rounded-tl-small rounded-br-small justify-between my-8 text-white"> 
+        <span className="font-bold text-center text-3xl  flex flex-col">12 <p className="font-light text-base">Active Orders</p> </span>
   
-        <span className=" border-x-2 px-7 font-bold text-center text-3xl text-pri-text-light-gray flex flex-col"><p className="flex"> {shop.ratings} <StarIcon className="w-9 fill-pri-orange"/> </p> <p className="font-light text-base">{shop?.reviews?.length} ratings</p> </span>
+        <span className=" border-x-2 px-7 font-bold text-center text-3xl  flex flex-col"><p className="flex"> {shop.ratings} <StarIcon className="w-9 "/> </p> <p className="font-light text-base">{shop?.reviews?.length} ratings</p> </span>
 
-        <span className="font-bold text-center text-3xl text-pri-text-light-gray flex flex-col">{orders.length} <p className="font-light text-base">Total orders</p> </span>
+        <span className="font-bold text-center text-3xl  flex flex-col">{orders.length} <p className="font-light text-base">Total orders</p> </span>
 
       
         </div>

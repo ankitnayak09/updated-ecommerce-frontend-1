@@ -8,7 +8,7 @@ import NotYetAcceptedOrderCard from './NotYetAcceptedOrderCard'
 const NewOrderModal = ({open,setOpen,order}) => {
     return (
         <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
+        <Dialog as="div" className="fixed z-50 inset-0 overflow-y-auto" onClose={setOpen}>
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child
               as={Fragment}
@@ -35,7 +35,7 @@ const NewOrderModal = ({open,setOpen,order}) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="relative inline-block align-bottom bg-white rounded-lg px-0 w-full pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="relative md:w-3xl inline-block align-bottom bg-white rounded-lg px-0 w-full pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                 <div className=" sm:block absolute top-0 right-0 pt-4 pr-4">
                   <button
                     type="button"
@@ -46,18 +46,18 @@ const NewOrderModal = ({open,setOpen,order}) => {
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-                <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                <div className="sm:flex flex-col sm:items-start">
+                  <div className="mx-auto   flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                     <ExclamationIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <div className="mt-3 w-full text-center sm:mt-0 sm:text-left">
                     {/* <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                       New Order
                     </Dialog.Title> */}
 
 <h1 className=" text-3xl my-4 ml-6  font-bold tracking-tight text-pri-text-gray ">New order</h1>
                   
-                    <NotYetAcceptedOrderCard  order={order}/>
+                    <NotYetAcceptedOrderCard setOpen={setOpen} order={order}/>
  
 
                   </div>

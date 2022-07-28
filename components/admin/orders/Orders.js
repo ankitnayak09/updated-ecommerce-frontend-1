@@ -17,6 +17,12 @@ import io from "socket.io-client"
 import NotYetAcceptedOrderCard from './NotYetAcceptedOrderCard'
 import SingleOrderCard from './SingleOrderCard'
 import NewOrderModal from './NewOrderModal'
+import QrModal from './QrModal'
+import OrdersSearchModal from './OrdersSearchModal'
+
+
+
+
 
 const ENDPOINT = "http://localhost:4000";
 var socket
@@ -37,6 +43,7 @@ const Orders = () => {
 
 const [socketConnected, setSocketConnected] = useState(false)
 const [open, setOpen] = useState(false)
+const [qrOpen, setQrOpen] = useState(false)
 const [newOrder, setNewOrder] = useState()
 
 
@@ -116,7 +123,7 @@ const [newOrder, setNewOrder] = useState()
    
     
  
-    const {loading:updateOrderLoading,error:updateOrderError,isUpdated} = useSelector(state => state.adminOrder)
+    const {loading:updateOrderLoading,error:updateOrderError,isUpdated,orderStatus} = useSelector(state => state.adminOrder)
     const {user} = useSelector(state => state.user)      
     
      
@@ -125,7 +132,7 @@ const [newOrder, setNewOrder] = useState()
   
     useEffect(() => {
     if(error){
-        toast.error(error);
+        toast.error(error); 
         dispatch(clearErrors())
         // console.log("mmmmmm")
     }
@@ -133,87 +140,97 @@ const [newOrder, setNewOrder] = useState()
     dispatch(adminAllOrders(shopId))
     }
     }, [dispatch,toast,error,shopId])
-
+ 
     useEffect(() => {
         if(updateOrderError){
             toast.error(updateOrderError);
             dispatch(clearErrors())
             // console.log("mmmmmm")
-        }
-        if(isUpdated){
-        dispatch(adminAllOrders(shopId))
-        dispatch({type:"UPDATE_ORDER_RESET"})
+        } 
+        if(isUpdated===true){   
+          toast.success("order status updated as "+orderStatus)
+          dispatch({type:"UPDATE_ORDER_RESET"}) 
+        dispatch(adminAllOrders(shopId)) 
 
         }
     }, [dispatch,toast,updateOrderError,isUpdated])
 
-    const handleDelivered=(orderId)=>{
-        // e.preventDefault()
-        const orderData={
-            status:"delivered"
-        }
-        dispatch(updateOrder(orderData,shopId,orderId))
-    }
-    const handleCancel=(orderId)=>{
-        // e.preventDefault()
-        const orderData={
-            status:"initiated"
-        }
-        dispatch(updateOrder(orderData,shopId,orderId))
-    }
+    // const handleDelivered=(orderId)=>{
+    //     // e.preventDefault()
+    //     const orderData={
+    //         status:"delivered"
+    //     }
+    //     dispatch(updateOrder(orderData,shopId,orderId))
+    // }
+    // const handleCancel=(orderId)=>{
+    //     // e.preventDefault()
+    //     const orderData={
+    //         status:"initiated"
+    //     }
+    //     dispatch(updateOrder(orderData,shopId,orderId))
+    // }
 
+ 
 
     return (
       // <div className="bg-white rounded-t-primary shadow-myOrderTop -mt-10">
-      <div className="pb-16  ">
+      <div className="pb-16 md:pb-0  ">
           <NewOrderModal open={open} setOpen={setOpen} order={newOrder} />   
       
-            <div className="sticky top-0  bg-gradient-to-br pt-10 pb-24 from-pri-orange via-mid-orange to-pri-yellow">
+            <div className="sticky top-0 md:pt-24 bg-gradient-to-br pt-10 pb-24 from-pri-orange via-mid-orange to-pri-yellow">
 
          
   
           {/* <div className="mt-4"> */}
             <h2 className="sr-only">Recent orders</h2>
             <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
+              <div className="flex justify-between pb-7">
             <h1 className=" text-3xl my-4 ml-6  font-bold tracking-tight text-sec-light-orange ">New orders</h1>
+            <div className="flex">
+              <OrdersSearchModal items={startCookingOrders}/>
+            <QrModal qrOpen={qrOpen} setQrOpen={setQrOpen} />
+            </div>
+            </div>
 
-            <div className="max-w-2xl  mx-auto ">
-            <Carousel  showStatus={false} showThumbs={false}>
+            <div className="max-w-lg  mx-auto ">
+            <Carousel  showStatus={false} showThumbs={false}> 
         
 
 
               {notYetAcceptedOrders&&notYetAcceptedOrders.map((order)=>(
                 <NotYetAcceptedOrderCard key={order._id} order={order}/>
                 ))}
+    
 
-                </Carousel>
+               </Carousel>
 
             </div>
 
  
  </div>
  </div>
- <div className="bg-white z-10 relative   rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-10">
+ <div className="bg-white z-10 relative pb-10  rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-10">
 
  <h1 className=" text-3xl px-7 py-10  font-bold tracking-tight text-pri-text-gray ">Start Cooking Now orders</h1>
 
 
-              <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
+              <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+              {/* <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0"> */}
                 {startCookingOrders.map((order) => (
-      <SingleOrderCard  handleCancel={handleCancel} key={order._id} handleDelivered={handleDelivered} order={order}/>
+      <SingleOrderCard   key={order._id}  order={order}/>
       ))}
               </div>
               
+              </div>
 
-
-          <div className="relative">    
-          <div className="bg-black/40 z-10 absolute w-full h-full top-0"></div>
+          <div className="relative bg-white pb-10">    
+          {/* <div className="bg-black/40 z-10 absolute w-full h-full top-0"></div> */}
              
             <h1 className=" text-3xl px-7 py-10  font-bold tracking-tight text-pri-text-gray ">Future Orders</h1>
 
-              <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
+              <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {futureOrders.map((order) => (
-      <SingleOrderCard handleCancel={handleCancel} key={order._id} handleDelivered={handleDelivered} order={order}/>
+      <SingleOrderCard  key={order._id}  order={order}/>
       ))}
               </div>
          
@@ -221,7 +238,7 @@ const [newOrder, setNewOrder] = useState()
             
               </div>
          
-              </div>
+            
             
           </div>
         // </div>

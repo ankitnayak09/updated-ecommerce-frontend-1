@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { loadUser } from '../actions/userAction'
 import { useRouter } from 'next/router';
 import LoadingBar from 'react-top-loading-bar'
+import { useGeolocated } from 'react-geolocated';
 
 // function MyApp({ Component, pageProps }) {
 //   const [showChild, setShowChild] = useState(false);
@@ -39,11 +40,31 @@ function MyApp({ Component, pageProps }) {
  
   const dispatch=useDispatch();
 
+  const { coords, isGeolocationAvailable, isGeolocationEnabled} =
+  useGeolocated({
+      positionOptions: { 
+          enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+  }); 
   
-  useEffect(()=>{
-    dispatch(loadUser())
+  useEffect(()=>{   
+  
+    dispatch(loadUser())   
   },[])
 
+  useEffect(()=>{   
+  
+    if(isGeolocationAvailable==true&&isGeolocationEnabled==true&&coords){
+   
+      localStorage.setItem("userLocation",JSON.stringify({
+        latitude:coords.latitude,
+        longitude:coords.longitude
+      }))
+    } 
+  },[isGeolocationAvailable,isGeolocationEnabled,coords])
+
+  
 
   // if (pageProps.protected==true  ) {
   // // console.log("here")
@@ -66,7 +87,7 @@ function MyApp({ Component, pageProps }) {
       setProgress(100)
     })
     
-  },[router])
+  },[router]) 
  
 
 

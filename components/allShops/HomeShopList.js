@@ -59,12 +59,13 @@ const HomeShopList = () => {
 
   const dispatch=useDispatch();
   // const {error}=useSelector(state => state.shops)
+  const {location}=useSelector(state => state.user)
   const {loading,error,shops,shopCount,page}=useSelector(state => state.shops)
 
   // const executedRef=useRef(false);
  
   // const [page,setpage]=useState(1);
-  const [pageSize,setpageSize]=useState(2)
+  const [pageSize,setpageSize]=useState(3)
   // const [shops,setshops]=useState([])
   // const [loading,setloading]=useState(false)
 
@@ -81,7 +82,7 @@ const HomeShopList = () => {
 
 
     if(page==1){
-      dispatch(getAllShops(page,pageSize))
+      dispatch(getAllShops(page,pageSize,location))
         }
 
   // executedRef.current=true;
@@ -91,7 +92,7 @@ const HomeShopList = () => {
  const fetchMoreData = () => {
     // setpage(page+1),
   
-    dispatch(getAllShops(page,pageSize))
+    dispatch(getAllShops(page,pageSize,location))
     
     loading
   };
@@ -107,11 +108,12 @@ const HomeShopList = () => {
     return (
       <>
         <div className="bg-white">
-        <div className="max-w-2xl mx-auto pt-12 pb-52 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="max-w-2xl mx-auto pt-12 pb-52 px-4 sm:py-24 sm:px-6
+        md:max-w-4xl lg:max-w-7xl lg:px-8">
           {/* <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Shops</h2> */}
   
             {/* {loading?(
-              <AllShopsLoader/>
+              <AllShopsLoader/> 
               ):(
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                
@@ -120,7 +122,7 @@ const HomeShopList = () => {
              
             ))}
           </div>
-        )} */}
+        )} */} 
            <InfiniteScroll
           dataLength={shops.length}
           next={fetchMoreData}

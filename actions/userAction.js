@@ -1,4 +1,5 @@
 import axios from "axios";
+import Router from "next/router";
 
 export const googleSignIn=(tokenId)=>async(dispatch)=>{
     try{
@@ -14,6 +15,7 @@ export const googleSignIn=(tokenId)=>async(dispatch)=>{
             type:"GOOGLE_SIGNIN_SUCCESS",
             payload:data.user
         });
+        Router.reload()
 
     }catch(error){
 // console.log(error) 
@@ -28,6 +30,9 @@ export const googleSignIn=(tokenId)=>async(dispatch)=>{
 
 // load user
 export const loadUser=()=>async(dispatch)=>{
+
+    // dispatch({type:"LOAD_USER_LOCATION",payload:coords});
+     
     try{
         dispatch({type:"LOAD_USER_REQUEST"});
         
@@ -36,7 +41,7 @@ export const loadUser=()=>async(dispatch)=>{
             `http://localhost:4000/api/v1/me`,{withCredentials: true}
           
         );
-        dispatch({type:"LOAD_USER_SUCCESS",payload:data.user});
+        dispatch({type:"LOAD_USER_SUCCESS",payload:data});
     }catch(error){
      
         dispatch({type:"LOAD_USER_FAIL",payload:error.response.data.message});
@@ -54,7 +59,7 @@ export const logout=()=>async(dispatch)=>{
             
             );
             dispatch({type:"LOGOUT_SUCCESS"});
-  
+            Router.reload()
     }catch(error){
      
         dispatch({type:"LOGOUT_FAIL",payload:error.response.data.message});

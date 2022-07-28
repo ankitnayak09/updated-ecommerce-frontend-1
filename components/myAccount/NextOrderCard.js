@@ -1,27 +1,43 @@
 import { ChevronRightIcon,BadgeCheckIcon, QrcodeIcon } from "@heroicons/react/solid"
-import Image from "next/image"
-import Shop from "../../pages/shop/[shopId]"
+import Link from "next/link";
+// import Image from "next/image"
+import QRCode from 'react-qr-code';
+
 const NextOrderCard = ({order}) => {
+    // const orderDetails={
+    //     orderId:order._id,
+    //     // testOrderId:order._id
+    // }
     return (
         <div className=" shadow-lg rounded-2xl   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-96 mx-auto mt-2  p-2">
 <div className="flex">
 <BadgeCheckIcon className="w-8 fill-success-green"/>
-<p className="self-center pl-1"> Paid - ₹ {order.totalPrice} </p>
+<p className="self-center pl-1"> Paid - ₹ {order.totalPrice} </p> 
 </div>
 
         {/* <img src="https://picsum.photos/200" alt="adidas" className="w-32 p-4 h-36 m-auto"/> */}
-        <div className="my-4"> 
-        <Image src="/QrCode/qrcode.svg" 
+        <div className="my-4 flex justify-center"> 
+        {/* <Image src="/QrCode/qrcode.svg" 
         height="140px"
         width="140px"
         
-        />
+        /> */}
+         <QRCode
+            title={"orderId"}
+            value={order._id}
+            // value={JSON.stringify(orderDetails)}
+          bgColor="#ffffff"
+          fgColor='#000000'
+          level="M"
+          size={150}
+
+          />
         </div>
 
         <div className="flex flex-col mx-16 justify-center">
             <span className="flex self-center w-full justify-between"> <p className="font-light">Shop</p>  <p className="font-bold">{order.shopName}</p>  </span>
 
-            <span className="flex self-center w-full justify-between"> <p className="font-light">orderId</p>  <p className="font-bold">{order.orderId}</p>  </span>
+            <span className="flex self-center w-full justify-between"> <p className="font-light">order Number</p>  <p className="font-bold">{order.orderNumber}</p>  </span>
 
             <span className="flex self-center w-full justify-between"> <p className="font-light">Pickup Time</p>  <p className="font-bold">{order.orderInfo.wantFoodAt}</p>  </span>
         </div>
@@ -53,9 +69,11 @@ const NextOrderCard = ({order}) => {
 
         </div>
         <div className="flex w-full">
+            <Link href="/myAccount">
         <button type="button" className="w-10 rounded-tr-md  rounded-bl-md  rounded-tl-[21px]  rounded-br-xl  h-10 text-base ml-auto font-medium   bg-sec-light-orange">
             <ChevronRightIcon className="w-8 fill-pri-yellow m-auto"/>
           </button>
+          </Link>
           </div>
     </div>
     )

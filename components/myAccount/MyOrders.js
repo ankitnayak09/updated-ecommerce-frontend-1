@@ -60,7 +60,7 @@ const MyOrders = () => {
     dispatch(myOrders())
     }, [dispatch,toast,error])
 
-
+ 
     useEffect(() => {
       if(reviewError){
         toast.error(reviewError)
@@ -74,56 +74,47 @@ const MyOrders = () => {
      
 
     return (
-        <div className="bg-white rounded-t-primary shadow-myOrderTop -mt-10">
-        <div className="py-16 sm:py-24">
+        <div className="bg-white rounded-t-primary z-10 relative shadow-myOrderTop -mt-10">
+        <div className="py-16 ">
           <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
-            <div className="max-w-2xl mx-auto px-9 lg:max-w-4xl lg:px-0">
+            <div className="max-w-2xl px-14">
 
-            <Link href="/newShop">
-        <button  className=" cursor-pointer border-dashed w-32 rounded-small py-1 mt-8 self-center border-[3px] border-black text-black flex justify-center">
-                NewShop 
-            </button>
-            </Link>
+     
 
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 ">Order history</h1>
-              {/* <p className="mt-2 text-sm text-gray-500">
-                Check the status of recent orders, manage returns, and discover similar products.
-              </p> */}
+           
             </div>
           </div>
   
           <div className="mt-4">
             <h2 className="sr-only">Recent orders</h2>
-            <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
-              <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
+            <div className="max-w-7xl  mx-auto ">
+              <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+              {/* <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0"> */}
                 {orders.map((order) => (
                   <div
                     key={order._id}
-                    className="bg-white border border-gray-200 drop-shadow-xl rounded-medium mx-5  sm:border"
+                    className="bg-white border border-gray-200 drop-shadow-xl rounded-medium mx-5 md:mx-3 sm:border"
                   >
                     <h3 className="sr-only">
                       Order placed on {order.createdAt}
                       {/* Order placed on <time dateTime={order.createdDatetime}>{order.createdDate}</time> */}
                     </h3>
   
-                    <div className="flex items-center px-6 py-6 mx-6 border-dashed border-b-[2px] border-sec-orange sm:p-6 sm:grid sm:grid-cols-4 sm:gap-x-6">
-                      <dl className="flex-1  grid grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
-                        <div>
-                          <dt className="font-bold text-pri-text-gray text-center">Shop Name</dt>
-                          <dd className="mt-1 text-pri-text-light-gray text-center">{order.shopName}</dd>
+                    <div className="flex items-center px-6 py-6 mx-6  sm:p-6 ">
+                      <div className="flex justify-between w-full ">
+                        <div >
+                          <p className="font-bold text-pri-text-gray text-center">Shop Name</p>
+                          <p className="mt-1 text-pri-text-light-gray text-center">{order.shopName}</p>
                         </div>
-                        {/* <div className="hidden sm:block">
-                          <dt className="font-medium text-gray-900">Date placed</dt>
-                          <dd className="mt-1 text-gray-500">{order.createdAt}
-                          </dd>
-                        </div> */}
+                   
                        
 
                         <div>
-                          <dt className="font-bold text-pri-text-gray text-center">Total amount</dt>
-                          <dd className="mt-1 font-medium text-pri-text-light-gray text-center">{order.totalPrice}</dd>
+                          <p className="font-bold text-pri-text-gray text-center">Total amount</p>
+                          <p className="mt-1 font-medium text-pri-text-light-gray text-center">₹{order.totalPrice}</p>
                         </div>
-                      </dl>
+                      </div>
 {/*   
                       <Menu as="div" className="relative flex justify-end lg:hidden">
                         <div className="flex items-center">
@@ -175,7 +166,7 @@ const MyOrders = () => {
                         </Transition>
                       </Menu>
    */}
-                      <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
+                      {/* <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
                         <a
                           href="#"
                           className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -190,26 +181,45 @@ const MyOrders = () => {
                           <span>View Invoice</span>
                           <span className="sr-only">for order {order.orderId}</span>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
   
                     {/* Products */}
                     <h4 className="sr-only">Items</h4>
-                    <ul role="list" className="divide-y divide-gray-200">
+                    <ul role="list" className="divide-y  divide-gray-200">
                     
                         <li className=" ">
-                          <div className="flex  sm:items-start">
-                            <div className="flex-shrink-0 w-28 h-20 -mt-1 bg-gray-200  overflow-hidden sm:w-40 sm:h-40 relative">
+                          <div className="flex border-dashed border-y-[2px] border-sec-orange  sm:items-start pb-4">
+                            <div >
+                            <div className="flex-shrink-0 w-28 h-20 -mt-1     relative">
                               {/* <img
                                 src="https://picsum.photos/200"
                             
                                 className="w-full h-full object-center object-cover"
                               /> */}
 
-<Image src="https://picsum.photos/200"
+<Image src={order.shop.images[0].url}
                       layout="fill"
+                      objectFit="cover"
                       className="rounded-br-medium "
                       />
+</div>
+<div className="flex ml-4 mt-3 items-center">
+                              {/* <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" /> */}
+                              <p className="ml-2  text-sm font-medium text-gray-500">
+                            
+                    Order status : <br/> <span 
+                    className={classNames(
+                      order.orderStatus=="delivered"&& 'text-success-green' ,
+                      order.orderStatus=="accepted"&& 'text-yellow-500' ,
+                      order.orderStatus=="initiated"&& 'text-pri-orange' ,
+                      '  font-bold'
+                    )}
+                    > {order.orderStatus}</span>
+
+                
+                              </p>
+                            </div>
                             </div>
                             {/* <div className="flex-1 ml-6 text-sm"> */}
                               {/* <div className="font-medium text-gray-900 sm:flex sm:justify-between">
@@ -227,6 +237,7 @@ const MyOrders = () => {
                                 </h5>
                                
                               </div> */}
+                              <div className="flex-grow">
                                   <Link href={
                                     {
                                       pathname: `/myAccount/orders/${order._id}`,
@@ -234,27 +245,23 @@ const MyOrders = () => {
                                     }
                                   }>
                                   <a >
-                              <p className=" text-pri-text-light-gray px-3 pt-3 sm:block sm:mt-2 inline-grid grid-cols-2 gap-1">
+                              <p className="w-full text-pri-text-light-gray px-3 pt-3  inline-grid grid-cols-2  gap-1">
                               {order.orderItems.map((product) => (
-                                  <span key={product._id} className="font-semibold text-black text-base">
+                                  <span key={product._id} className="font-semibold text-black text-sm">
                                 <span className="font-semibold  text-sec-text-gray"> {product.quantity}x&nbsp; </span>    {product.name}  
                                   </span>
                               ))}
                                   </p>
                                   </a>
                                   </Link>
+                                  </div>
                             {/* </div> */}
                           </div>
   
-                          <div className="mt-6 sm:flex sm:justify-between">
-                            <div className="flex ml-4 items-center">
-                              <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" />
-                              <p className="ml-2 text-sm font-medium text-gray-500">
-                                Delivered 
-                              </p>
-                            </div>
+                          {/* <div className="mt-6 sm:flex sm:justify-between"> */}
+                        
   
-                            <div className="mt-6 mx-4  border-dashed  border-t-[2px] border-sec-orange py-5 px-7 flex justify-between   sm:mt-0  ">
+                            <div className="  my-5 px-7 flex justify-between  w-full ">
                               <div className="flex ">
                               
                                 <ShopReview orderId={order._id} shopId={order.shop._id} yourReview={order.yourReview}/>
@@ -266,7 +273,7 @@ const MyOrders = () => {
                   </a></Link>
                               </div>
                             </div>
-                          </div>
+                          {/* </div> */}
                         </li>
                      
                     </ul>

@@ -17,7 +17,7 @@ const OrderHistoryCard = ({order}) => {
  
      <div className=" flex justify-center"><span className="bg-pri-blue  font-bold text-white px-3 rounded-b-small pb-1"> {order.orderNumber}</span></div>
 
-        <div className="flex items-center px-6 pb-6 mx-4 border-dashed border-b-[4px] border-sec-orange">
+        <div className="flex  items-center px-6 pb-6 mx-4 border-dashed border-b-[4px] border-sec-orange">
           <dl className="flex-1  grid grid-cols-2 gap-x-6 text-sm ">
           <div>
                     <dt className="font-bold text-2xl text-pri-text-light-gray text-center">{order.orderInfo.wantFoodAt=="now"?"now": date.transform(order.orderInfo.wantFoodAt, 'HH:mm', 'h:mm A')}</dt>

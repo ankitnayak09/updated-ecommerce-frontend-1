@@ -76,19 +76,22 @@ const CategoryShopList = () => {
         <>
         <div className="bg-white">
           {/* <div className="w-full max-w-2xl aspect-square relative"> */}
-            <Image src={`/categoryImg/${category}.png` }
+          <div className="md:hidden">
+            <Image src={`/categoryImg/${category.replace(/ /g, "")}.png` }
            
             layout="responsive"
             width="2000px"
             height="2400px"
+          
             />
+            </div>
           {/* </div> */}
         {/* <div className="max-w-2xl mx-auto pb-16 pt-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"> */}
 
 <div className="bg-white z-10 relative  rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-8 pb-16 pt-4 px-4">
 
           {/* <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 ">Shops</h2> */}
-  
+          <h1 className=" text-3xl px-6 py-9 font-bold tracking-tight text-pri-text-gray ">{category}</h1>
       
            <InfiniteScroll
           dataLength={shops.length}
@@ -96,6 +99,7 @@ const CategoryShopList = () => {
           hasMore={shops.length!==shopCount}
           loader={<AllShopsLoader/>}
         >
+          
         <ShopList shops={shops}/>
         </InfiniteScroll>
         </div>

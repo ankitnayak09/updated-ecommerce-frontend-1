@@ -25,6 +25,11 @@ a {
   @apply bg-sec-light-orange text-pri-orange font-extrabold text-base  rounded-small drop-shadow-2xl 
 }
 
+.chart-border{
+  @apply shadow-md m-2 border rounded-lg p-2 bg-white
+}
+
+
 .my-backdrop-blur{
   @apply bg-[#D7D7D7]/5 backdrop-blur-md
 }

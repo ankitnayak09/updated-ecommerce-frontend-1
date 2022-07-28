@@ -58,7 +58,7 @@ const categories = [
 const AllCategories = () => {
     return (
         // <div className="bg-white">
-        <div className="max-w-2xl mx-auto  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="max-w-2xl mx-auto  px-4  sm:px-6 lg:max-w-3xl lg:px-8">
         {/* <h2 className="text-2xl font-bold tracking-tight text-gray-900 my-10">What do u want...</h2> */}
   
   
@@ -93,7 +93,7 @@ const AllCategories = () => {
         <>
      
           
-     <div className="grid grid-cols-4 gap-y-10  gap-x-5 lg:grid-cols-5 xl:grid-cols-4 xl:gap-x-8">
+     <div className="grid grid-cols-4 gap-y-10  gap-x-5 ">
             {categories.map((category) => (
 
               //    <Link key={category.id} href={`/shop/category/${category.name}`}>
@@ -145,7 +145,7 @@ const AllCategories = () => {
        
 
              
-          <div className="grid grid-cols-4 gap-y-10 mt-6  gap-x-5 lg:grid-cols-5 xl:grid-cols-4 xl:gap-x-8">
+          <div className="grid grid-cols-4 gap-y-10 mt-6  gap-x-5">
             {hiddenCategories.map((category) => (
                  <SingleCategoryCard key={category.id} category={category}/>
             ))}

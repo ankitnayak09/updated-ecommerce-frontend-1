@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
 import Dashboard from "../../../components/admin/dashboard/Dashboard"
 import BottomNavBar from "../../../components/admin/layout/BottomNavBar"
+import TopNavBar from "../../../components/admin/layout/TopNavBar"
 
 const index = () => {
 
@@ -22,6 +23,7 @@ const index = () => {
 
     return (
         <div>
+            <TopNavBar/>
              <Dashboard/>
              <BottomNavBar/>
         </div>

@@ -9,7 +9,8 @@ const CartQtyBtn = ({increaseQuantity,decreaseQuantity,quantity}) => {
 
 
 <button className="flex-grow " onClick={decreaseQuantity}></button>
-<input  className="w-6 font-bold text-pri-orange text-lg bg-transparent text-center " type="number" readOnly value={quantity} />
+{/* <input  className="w-6 font-bold text-pri-orange text-lg bg-transparent text-center " type="number" readOnly value={quantity} /> */}
+<span className="font-bold self-center text-pri-orange text-lg">{quantity}</span>
 <button className="flex-grow" onClick={increaseQuantity}></button>
 
 

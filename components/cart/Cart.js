@@ -3,9 +3,9 @@
 import Link from "next/link"
 import { useSelector } from 'react-redux'
 import CartCard from "./CartCard"
-import { ChevronDoubleLeftIcon,CheckCircleIcon,QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { ChevronDoubleLeftIcon,CheckCircleIcon,QuestionMarkCircleIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { useEffect,useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
+import { Popover, RadioGroup } from '@headlessui/react'
 import Timepicker from './Timepicker'
 import { useDispatch } from "react-redux"
 import { saveOrderInfo } from "../../actions/cartAction"
@@ -64,7 +64,9 @@ const timeOptionsLists = [
     // }, [])
 
     useEffect(() => {
-     
+     if(router.query.paymentError){
+       toast.error(router.query.paymentError)
+     }
         let subttl=cartItems.reduce((acc,item)=>acc+item.quantity*item.price,0)
 
         let cookingTimesArray=[]
@@ -72,7 +74,7 @@ const timeOptionsLists = [
         cartItems.forEach(item => {
           cookingTimesArray.push(item.cookingTime)
         });
-    
+     
       setCookingTime(Math.max(...cookingTimesArray))
         setSubTotal(subttl)
         setOrderTotal(subttl+ConvenienceCharge)
@@ -179,7 +181,7 @@ body:JSON.stringify(data)
 
                 const deleteFunction=async()=>{
                 
-                  const Deleteconf={headers:{"Content-Type":"application/json"},withCredentials: true}
+                  // const Deleteconf={headers:{"Content-Type":"application/json"},withCredentials: true}
 
       // await axios.delete(`http://localhost:4000/api/v1/${cartShop}/order/${oid}/beforePayment`,{withCredentials: true})
     }
@@ -194,14 +196,21 @@ body:JSON.stringify(data)
         }
       };
 
-  
+     
               window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
                   // after successfully updating configuration, invoke JS Checkout
+                 
                   window.Paytm.CheckoutJS.invoke();
               
               }).catch(function onError(error){
                   console.log("error => ",error);
               });
+
+
+
+
+
+              
   
             }else{
                 toast.error(txnRes.message);
@@ -219,8 +228,22 @@ body:JSON.stringify(data)
         {/* loading scripts of ppaytmPayment */}
         <Head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/></Head>
 
-<Script type="application/javascript" crossorigin="anonymous" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${cartShopMid}.js`} /> 
-{/* <Script type="application/javascript" crossorigin="anonymous" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} />  */}
+{/* <Script type="application/javascript"   crossOrigin="anonymous" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${cartShopMid}.js`} />  */}
+
+{/* <Script
+  src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/NFnNhY65160607104830.js"
+  type="application/javascript"   crossorigin="anonymous" 
+ strategy="lazyOnload"
+  onLoad={()=>{
+    } }
+/> */}
+
+
+
+{/* <Script type="application/javascript"  crossorigin="anonymous" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${cartShopMid}.js`} />  */}
+
+
+<Script type="application/javascript" crossorigin="anonymous" strategy="lazyOnload" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} /> 
 
 
  
@@ -228,8 +251,10 @@ body:JSON.stringify(data)
 
         
         {cartItems.length===0?( <>
-              <Link href={`/`}>
-              <ChevronDoubleLeftIcon className="w-8"/>
+          <Link href={`/`}>
+                   <button className=" cursor-pointer  p-2 bg-sec-light-orange m-2 rounded-tr-[21px] rounded-bl-[21px] rounded-tl-small rounded-br-small drop-shadow-xl">
+              <ChevronLeftIcon className="w-8 fill-pri-text-gray"/>
+              </button>
               </Link>
           
        </> ):(
@@ -239,15 +264,17 @@ body:JSON.stringify(data)
             <ChevronDoubleLeftIcon className="w-8"/>
             </Link> */}
 
-            <div className="flex justify-between bg-white drop-shadow-lg rounded-b-primary sticky top-0 z-20  py-3 px-3">
+            <div className="flex justify-between bg-white drop-shadow-sm border-b-2 rounded-b-primary sticky top-0 z-20  py-1 px-3">
             <Link href={`/`}>
-              <ChevronDoubleLeftIcon className="w-8 ml-1"/>
+                   <button className=" cursor-pointer  p-2 bg-sec-light-orange m-2 rounded-tr-[21px] rounded-bl-[21px] rounded-tl-small rounded-br-small drop-shadow-xl">
+              <ChevronLeftIcon className="w-8 fill-pri-text-gray"/>
+              </button>
               </Link>
-              <div className="flex  flex-col ">
+              <div className="flex justify-center flex-col ">
           <p className='text-lg font-bold'>{cartShopName}</p>
           <p className="text-center text-secondary-text-gray text-xs">LPU</p>
         </div>
-        <div></div>
+        <div></div> 
        
               </div>
 
@@ -419,10 +446,17 @@ body:JSON.stringify(data)
                 <div className=" pt-4 flex items-center justify-between">
                   <dt className="flex text-sm font-medium text-sec-text-gray">
                     <span>Convenience charge</span>
-                    <a href="#" className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                      <span className="sr-only">Learn more about how tax is calculated</span>
+                    {/* <a href="#" className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
                       <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
-                    </a>
+                      <span className=" hover:hidden">Learn more about how tax is calculated</span>
+                    </a> */}
+                     <Popover className="relative">
+      <Popover.Button> <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" /></Popover.Button>
+
+      <Popover.Panel className="absolute w-52 bg-gray-100 rounded-md p-2 z-20">
+      <span className=" ">This is a tiny charge that we take to maintain this website.</span>
+      </Popover.Panel>
+    </Popover>
                   </dt>
                   <dd className="text-sm font-medium text-sec-text-gray">₹{ConvenienceCharge}</dd>
                 </div>
@@ -470,7 +504,7 @@ body:JSON.stringify(data)
         
   </>
 ):(<>
-              <p className=" text-white text-lg font-semibold text-center" > Pay - {OrderTotal} </p>
+              <p className=" text-white text-lg font-semibold text-center" > Pay - ₹{OrderTotal} </p>
         
               </>
             )}

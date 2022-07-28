@@ -79,7 +79,7 @@ export const adminOrdersHistory=(shopId)=>async(dispatch)=>{
 
 
 
-//update product-admin
+//update order-admin
 export const updateOrder=(orderData,shopId,orderId)=>async(dispatch)=>{
     try{
         dispatch({
@@ -95,7 +95,7 @@ export const updateOrder=(orderData,shopId,orderId)=>async(dispatch)=>{
   
         dispatch({
             type:"UPDATE_ORDER_SUCCESS",
-            payload:data.success
+            payload:data
         });
 
     }catch(error){

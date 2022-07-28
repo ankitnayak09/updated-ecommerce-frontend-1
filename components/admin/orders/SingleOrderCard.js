@@ -3,10 +3,26 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 
 import date from 'date-and-time';
-const SingleOrderCard = ({handleDelivered,order,handleCancel}) => {
+import { useRouter } from "next/router";
+import { updateOrder } from "../../../actions/orderAction";
+const SingleOrderCard = ({order,}) => {
     const dispatch = useDispatch()
-
- 
+  const router=useRouter()
+  const shopId=router.query.shopId
+    const handleDelivered=(orderId)=>{
+      // e.preventDefault()
+      const orderData={
+          status:"delivered"
+      }
+      dispatch(updateOrder(orderData,shopId,orderId))
+  }
+  const handleCancel=(orderId)=>{
+      // e.preventDefault()
+      const orderData={
+          status:"initiated"
+      }
+      dispatch(updateOrder(orderData,shopId,orderId))
+  }
 
     return (
       
@@ -14,7 +30,7 @@ const SingleOrderCard = ({handleDelivered,order,handleCancel}) => {
        
           <div
             
-            className="bg-white border   border-gray-200 drop-shadow-xl rounded-medium mx-5  sm:border"
+            className="bg-white border  flex-grow  border-gray-200 drop-shadow-xl rounded-medium mx-5  sm:border"
           >
             <div className=" flex justify-center"><span className="bg-pri-blue  font-bold text-white px-3 rounded-b-small pb-1"> {order.orderNumber}</span></div>
             <h3 className="sr-only">
@@ -80,7 +96,7 @@ const SingleOrderCard = ({handleDelivered,order,handleCancel}) => {
                       </p>
                     </div> */}
 
-                    <div className="mt-6 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-14 flex justify-between ">
+                    <div className="mt-6 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-8 flex justify-between ">
                       <div onClick={()=>handleCancel(order._id)} className="flex ">
                       
                         cancel

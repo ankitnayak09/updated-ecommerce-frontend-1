@@ -1,13 +1,20 @@
 import axios from "axios";
 
 
-export const getAllShops=(page,pageSize)=>async(dispatch)=>{
+export const getAllShops=(page,pageSize,location)=>async(dispatch)=>{
     try{
         dispatch({
             type:"ALL_SHOP_REQUEST",
         });
-      
-        const{data}=await axios.get(`http://localhost:4000/api/v1/shops?page=${page}&pageSize=${pageSize}`)
+        let url=`http://localhost:4000/api/v1/shops?page=${page}&pageSize=${pageSize}`
+        
+        if(location.latitude&&location.longitude){
+           
+             url=`http://localhost:4000/api/v1/shops?page=${page}&pageSize=${pageSize}&latitude=${location.latitude}&longitude=${location.longitude}`
+            
+        }
+
+        const{data}=await axios.get(url)
         // console.log(data)
         
  
@@ -21,6 +28,45 @@ export const getAllShops=(page,pageSize)=>async(dispatch)=>{
         console.log(error)      
         dispatch({ 
             type:"ALL_SHOP_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
+export const getSuperAdminShops=(page,pageSize,shopStatus)=>async(dispatch)=>{
+//    console.log(shopStatus)
+    try{
+        dispatch({
+            type:"SUPER_ADMIN_ALL_SHOP_REQUEST",
+        });
+         let url=`http://localhost:4000/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}`
+
+         if(shopStatus){
+        
+        if(shopStatus!=="All shops"){
+           
+             url=`http://localhost:4000/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}&shopStatus=${shopStatus}`
+            
+        }else{
+            url=`http://localhost:4000/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}`
+        }
+    }
+        // console.log(url)
+
+        const{data}=await axios.get(url,{withCredentials: true})
+        // console.log(data)
+        
+ 
+
+        dispatch({ 
+            type:"SUPER_ADMIN_ALL_SHOP_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+        console.log(error)      
+        dispatch({ 
+            type:"SUPER_ADMIN_ALL_SHOP_FAIL",
             payload:error.response.data.message
         });
     }
@@ -185,7 +231,7 @@ export const createShop=(shopData)=>async(dispatch)=>{
 
 
 
-//update product-admin
+//update shop-admin
 export const updateShop=(shopData,shopId)=>async(dispatch)=>{
     try{
         dispatch({
@@ -214,6 +260,35 @@ export const updateShop=(shopData,shopId)=>async(dispatch)=>{
 
 }
 
+
+//update shop- superAdmin
+export const updateShopSuperAdmin=(shopData,shopId)=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:"SUPER_ADMIN_UPDATE_SHOP_REQUEST",
+        });
+        // console.log(shopId+productData+productId)
+        const config={headers:{"Content-Type":"application/json"},withCredentials: true}
+
+
+        const{data}=await axios.put(`http://localhost:4000/api/v1/shop/${shopId}/superAdmin`,shopData,config)
+      
+
+  
+        dispatch({
+            type:"SUPER_ADMIN_UPDATE_SHOP_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+
+        dispatch({
+            type:"SUPER_ADMIN_UPDATE_SHOP_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
 
 
 

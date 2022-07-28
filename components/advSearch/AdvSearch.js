@@ -50,7 +50,7 @@ const AdvSearch = ({items}) => {
    
   
     return (<>
-     <div className=" flex items-center  justify-center">
+     <div className=" flex mx-auto md:max-w-2xl lg:max-w-3xl items-center  justify-center">
         <div
         //   type="button"
           onClick={()=>{setOpen(true)}}

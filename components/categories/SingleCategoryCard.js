@@ -20,7 +20,7 @@ const SingleCategoryCard = ({category}) => {
 
 
           </div>
-          <div className=" bg-gradient-to-br pb-3 pl-2 -z-10 -mt-11  pt-9 relative rounded-t-medium rounded-bl-medium rounded-br-[100px]  from-pri-orange via-mid-orange to-pri-yellow">
+          <div className=" bg-gradient-to-br pb-3 pl-1 -z-10 -mt-11 md:-mt-14 pt-9 relative rounded-t-medium rounded-bl-medium rounded-br-[100px]  from-pri-orange via-mid-orange to-pri-yellow">
           <p className="mb-2 px-1   text-left font-medium text-white">{category.name}</p>
           </div>
      

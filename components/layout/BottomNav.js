@@ -68,10 +68,10 @@ const BottomNav = () => {
 
 
 
-            <Link href="/629c6a14ff4e0a1707f895ea/admin" >
+            <Link href="/superAdmin/shops" >
        <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
         <CakeIcon className="inline-block mb-1 w-8"/>
-        <span className="tab tab-home block text-xs">Dashboard</span>
+        <span className="tab tab-home block text-xs">superAdmin</span>
 			</a>
             </Link>
        </div>

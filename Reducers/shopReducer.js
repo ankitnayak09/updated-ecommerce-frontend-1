@@ -32,6 +32,33 @@ export const shopReducer=createReducer({shops:[],shopCount:0,page:1},{
     },
 
 })
+export const superAdminShopReducer=createReducer({shops:[],shopCount:0,page:1},{
+// export const shopReducer=createReducer({shops:[]},{
+    SUPER_ADMIN_ALL_SHOP_REQUEST:(state)=>{
+        state.loading=true;
+        state=state
+    },
+    SUPER_ADMIN_ALL_SHOP_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.shops=state.shops.concat(action.payload.shops)
+        state.shopCount=action.payload.shopCount
+        state.page=state.page+1
+    },
+    SUPER_ADMIN_ALL_SHOP_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
+    CLEAR_SUPER_ADMIN_SHOP:(state,action)=>{
+        state.shopCount=0
+        state.shops=[]
+        state.page=1
+    },
+    CLEAR_ERRORS:(state,action)=>{
+        state={...state};
+        state.error=null
+    },
+
+})
 // export const categoryShopReducer=createReducer({shops:[],shopCount:0,page:1},{
 // // export const shopReducer=createReducer({shops:[]},{
 //     CATEGORY_SHOP_REQUEST:(state)=>{
@@ -225,6 +252,35 @@ export const updateShopReducer=createReducer({},{
         state.loading=false;
         state.isDeleted=false
     },
+  
+    CLEAR_ERRORS:(state,action)=>{
+        
+        state.error=null
+    },
+
+})
+
+
+export const updateShopSuperAdminReducer=createReducer({},{
+    SUPER_ADMIN_UPDATE_SHOP_REQUEST:(state)=>{
+        state.loading=true;
+    },
+    SUPER_ADMIN_UPDATE_SHOP_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.success=action.payload.success;
+        state.shop=action.payload.shop;
+    
+    },
+    SUPER_ADMIN_UPDATE_SHOP_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
+    SUPER_ADMIN_UPDATE_SHOP_RESET:(state,action)=>{
+        state.loading=false;
+        state.success=false
+    },
+
+
   
     CLEAR_ERRORS:(state,action)=>{
         

@@ -15,9 +15,12 @@ const NewShop = () => {
     const shopId=router.query.shopId
     
     const {loading,error,success}= useSelector(state => state.newShop);
+    const {location:userLocation}= useSelector(state => state.user);
 
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
+    const [latitude, setLatitude] = useState(userLocation.latitude);
+    const [longitude, setLongitude] = useState(userLocation.longitude);
     const [description, setDescription] = useState("");
     const [paytmMid, setPaytmMid] = useState("");
     const [paytmMkey, setPaytmMkey] = useState("");
@@ -57,6 +60,7 @@ const NewShop = () => {
 
         myForm.set("name",name);
         myForm.set("location",location);
+        
         myForm.set("description",description);
         
         // myForm.set("categories",selectedCategories);
@@ -74,6 +78,10 @@ const NewShop = () => {
         myForm.set("paymentMethods",JSON.stringify({
             paytmMid,
             paytmMkey
+        }));
+        myForm.set("locationCoords",JSON.stringify({
+            latitude,
+            longitude
         }));
         
         dispatch(createShop(myForm))
@@ -123,7 +131,7 @@ const NewShop = () => {
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
           <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Profile</h3>
+            <h3 className="text-lg leading-6  font-bold text-gray-900">New Shop</h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">
               This information will be displayed publicly so be careful what you share.
             </p>
@@ -152,7 +160,7 @@ const NewShop = () => {
             </div>
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                Shop location
+                Shop address
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
@@ -165,6 +173,41 @@ const NewShop = () => {
                 </div>
               </div>
             </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                Shop latitude
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <div className="max-w-lg flex rounded-md shadow-sm">
+                
+                  <input
+                    type="text"   
+                    defaultValue={userLocation.latitude}                 
+                    onChange={(e)=>{setLatitude(e.target.value)}}
+                    className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                Shop longitude
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <div className="max-w-lg flex rounded-md shadow-sm">
+                
+                  <input
+                    type="text"   
+                    defaultValue={userLocation.longitude}                 
+                    onChange={(e)=>{setLongitude(e.target.value)}}
+                    className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                 Shop Paytm Mid 
@@ -195,6 +238,8 @@ const NewShop = () => {
                 </div>
               </div>
             </div>
+
+           
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="about" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">

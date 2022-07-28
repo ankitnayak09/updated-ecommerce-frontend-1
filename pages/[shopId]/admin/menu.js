@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
 import BottomNavBar from "../../../components/admin/layout/BottomNavBar"
+import TopNavBar from "../../../components/admin/layout/TopNavBar"
 import Menu from "../../../components/admin/menu/Menu"
 
 
@@ -22,11 +23,15 @@ const menu = () => {
     }
 
     return (
-        <div>
+        <div >
+               {/* <div className="absolute w-full h-full z-30 bg-black/80 flex justify-center">
+                <h1 className="text-white text-4xl self-center font-bold p-3">This page will be active after your shop is approved </h1>
+            </div> */}
+         <TopNavBar/>
             <Menu/>
             <BottomNavBar/>
         </div>
-    )
+    ) 
 }
 
 export default menu

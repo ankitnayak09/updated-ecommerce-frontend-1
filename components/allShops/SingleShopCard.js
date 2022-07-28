@@ -26,7 +26,7 @@ const SingleShopCard = ({shop}) => {
  />
 
         </div>
-        <div className=" w-full pl-4 flex flex-col md:flex justify-center  ">
+        <div className=" w-full pl-4 md:pl-0 md:pt-2 flex flex-col md:flex justify-center  ">
           <div className="flex justify-between">
             <div>
             <p className="text-base font-semibold text-primary-text-gray">
@@ -50,9 +50,9 @@ const SingleShopCard = ({shop}) => {
          
 
             </div>
-          <div className="bg-sec-light-orange h-16 px-2 rounded-full flex flex-col self-center justify-between">
-            <BookmarkIcon className="w-4 my-2 text-sec-orange"/>
-            <ShareIcon className="w-4 my-2 text-sec-orange"/>
+          <div className="bg-sec-light-orange  h-16 px-2 rounded-full flex flex-col self-center justify-between">
+            <BookmarkIcon className="w-4 my-2 cursor-pointer text-sec-orange"/>
+            <ShareIcon className="w-4 my-2 cursor-pointer text-sec-orange"/>
             </div>
           </div>
         </div>

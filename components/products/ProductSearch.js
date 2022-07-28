@@ -2,17 +2,9 @@ import { Fragment, useState } from 'react'
 import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import {
-  CalendarIcon,
-  CodeIcon,
-  DocumentIcon,
+
   ExclamationCircleIcon,
-  LinkIcon,
-  PencilAltIcon,
-  PhotographIcon,
-  TableIcon,
-  VideoCameraIcon,
-  ViewBoardsIcon,
-  ViewListIcon,
+
 } from '@heroicons/react/outline'
 import SingleProductCard from './SingleProductCard'
 
@@ -46,17 +38,24 @@ const ProductSearch = ({items}) => {
   
     return (<>
      <div className=" flex items-center justify-center">
-        <button
+        {/* <button
           type="button"
           onClick={()=>{setOpen(true)}}
           className="cursor-pointer  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           <SearchIcon className="w-6 mr-2"/>
-        </button>
+        </button> */}
+
+        <button  onClick={()=>{setOpen(true)}} className=" mx-1  py-2 px-4 rounded-full text-pri-text-light-gray cursor-pointer hover:bg-gray-100  md:flex "> 
+                    <SearchIcon className="h-6 w-6 mr-1" />
+                    <span className="hidden md:block">
+                    Search
+                    </span>
+                </button>
         
       </div>
       <Transition.Root show={open} as={Fragment} afterLeave={() => setQuery('')}>
-        <Dialog as="div" className="fixed inset-0 z-30 overflow-y-auto p-4 sm:p-6 md:p-20" onClose={setOpen}>
+        <Dialog as="div" className="fixed inset-0 z-30 overflow-y-auto p-4 sm:p-6 md:pt-7" onClose={setOpen}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

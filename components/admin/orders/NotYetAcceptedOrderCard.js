@@ -6,7 +6,7 @@ import { updateOrder } from "../../../actions/orderAction"
 
 import date from 'date-and-time';
 
-const NotYetAcceptedOrderCard = ({order}) => {
+const NotYetAcceptedOrderCard = ({order,setOpen}) => {
 
 const dispatch = useDispatch()
 
@@ -30,7 +30,20 @@ const dispatch = useDispatch()
         status:"accepted"
     }
     dispatch(updateOrder(orderData,order.shop,orderId))
+    if(setOpen){
+      setOpen(false)
+    }
     
+}
+  const handleRejectOrder=(orderId)=>{
+    // e.preventDefault()
+    const orderData={
+        status:"rejected"
+    }
+    dispatch(updateOrder(orderData,order.shop,orderId))
+    if(setOpen){
+      setOpen(false)
+    }
 }
 
 
@@ -38,7 +51,7 @@ const dispatch = useDispatch()
       
             <div
             
-              className="bg-white border border-gray-200 drop-shadow-xl rounded-medium mx-5  sm:border"
+              className="bg-white border border-gray-200 drop-shadow-xl rounded-medium mx-5  sm:border "
             >
               <h3 className="sr-only">
                 Order placed on {order.createdAt}
@@ -100,11 +113,14 @@ const dispatch = useDispatch()
                     <div className="mt-6 ">
            
 
-                      <div className="mt-6 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-12 flex justify-between   ">
-                        <div className="flex self-center text-pri-orange font-bold cursor-pointer">
+                      <div className="mt-6 mx-4 p-4 border-dashed  border-t-[4px] border-sec-orange  flex justify-between   ">
+                        <button onClick={(e)=>{
+                               e.preventDefault()
+                               handleRejectOrder(order._id)
+                               }} className=" self-center rounded-md  text-center py-2 w-36  bg-sec-light-orange text-pri-orange font-bold cursor-pointer">
                         
                           Reject
-                        </div>
+                        </button>
                         <div className=" flex justify-center">
                           
                            <button onClick={(e)=>{

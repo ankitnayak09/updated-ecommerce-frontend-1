@@ -31,7 +31,7 @@ const NewProductModal = () => {
 <button onClick={openModal} className="bg-sec-light-orange text-pri-orange font-extrabold text-4xl  rounded-full aspect-square drop-shadow-pri-small w-10 flex justify-center mx-2"><PlusIcon className="w-6 self-center "/></button>
 
 <Transition appear show={isOpen} as={Fragment}>
-<Dialog as="div" className="relative z-10" onClose={closeModal}>
+<Dialog as="div" className="relative z-50" onClose={closeModal}>
   <Transition.Child
     as={Fragment}
     enter="ease-out duration-300"

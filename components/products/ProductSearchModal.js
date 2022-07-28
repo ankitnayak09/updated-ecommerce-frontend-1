@@ -25,7 +25,7 @@ const ProductSearchModal = () => {
         </button>
         
       </div>
-
+ 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-20" onClose={closeModal}>
           <Transition.Child

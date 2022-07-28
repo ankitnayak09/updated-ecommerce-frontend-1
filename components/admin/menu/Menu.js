@@ -64,7 +64,7 @@ const Menu = () => {
 
         <div>
 
-<div className="flex justify-between  p-4">
+<div className="flex justify-between md:pt-24 p-4">
     <h1 className="text-3xl font-bold">Your menu</h1>
 
     {editState?(
@@ -82,7 +82,7 @@ const Menu = () => {
 }} className="bg-sec-light-orange text-pri-orange font-extrabold text-4xl  rounded-full aspect-square drop-shadow-pri-small w-10 flex justify-center mx-2"> <PencilIcon className="w-6 self-center "/></button>
     </div>
      )}
-</div> 
+</div>  
 
       
 
@@ -92,10 +92,10 @@ const Menu = () => {
 
 <div className="flex flex-wrap p-2">
 
-<p className={classNames("mx-1 my-2 py-2 px-5 bg-sec-light-orange  font-bold rounded-full",category=="ALL_PRODUCTS"?"bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow text-white":"text-pri-orange")} onClick={()=>{setcategory("ALL_PRODUCTS")}}>All products</p>
+<p className={classNames("mx-1 my-2 py-2 px-5 bg-sec-light-orange  font-bold rounded-full cursor-pointer",category=="ALL_PRODUCTS"?"bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow text-white":"text-pri-orange")} onClick={()=>{setcategory("ALL_PRODUCTS")}}>All products</p>
 
 {categories&& categories.map((cat) => (
-                <p className={classNames("mx-1 my-2 py-2 px-5 bg-sec-light-orange  font-bold rounded-full",cat==category?"bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow text-white":"text-pri-orange")} onClick={()=>{setcategory(cat)}} key={cat}>{cat}</p>
+                <p className={classNames("mx-1 my-2 py-2 px-5 bg-sec-light-orange  font-bold rounded-full cursor-pointer",cat==category?"bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow text-white":"text-pri-orange")} onClick={()=>{setcategory(cat)}} key={cat}>{cat}</p>
             ))}
 </div>
 

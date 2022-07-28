@@ -7,7 +7,7 @@ import { clearErrors, getShopDetails } from "../../actions/shopAction"
 // import { getShopProducts } from "../../actions/productActions"
 import SingleProductCard from "../../components/products/SingleProductCard"
 import { Disclosure,Popover } from '@headlessui/react'
-import { ChevronDoubleLeftIcon, ChevronDownIcon, StarIcon } from '@heroicons/react/solid'
+import { ChevronDoubleLeftIcon, ChevronDownIcon, ChevronLeftIcon, StarIcon } from '@heroicons/react/solid'
 import { SearchIcon } from '@heroicons/react/outline'
 // import { usePopper } from 'react-popper';
 
@@ -15,6 +15,7 @@ import ProductSearch from "../../components/products/ProductSearch"
 import ViewShopReviews from "../../components/reviews/ViewShopReviews"
 import MenuModal from "../../components/allShops/MenuModal"
 import axios from "axios"
+import date from 'date-and-time';
 
 const Shop = () => {
   // console.log(props)
@@ -48,9 +49,11 @@ if(shopId) {
         <>
         {/* {loading?("loading"):(
         <> */}
-        <div className="flex justify-between bg-white drop-shadow-lg rounded-b-primary sticky top-0 z-20  py-3 px-3">
-            <Link href={`/`}>
-              <ChevronDoubleLeftIcon className="w-8 ml-1"/>
+        <div className="flex justify-between bg-white  rounded-b-primary sticky top-0 border-b-2 drop-shadow-sm z-30  py-3 px-3">
+        <Link href={`/`}>
+                   <button className=" cursor-pointer  p-2 bg-sec-light-orange  rounded-tr-[21px] rounded-bl-[21px] rounded-tl-small rounded-br-small drop-shadow-xl">
+              <ChevronLeftIcon className="w-8 fill-pri-text-gray"/>
+              </button>
               </Link>
               <div className="flex  flex-col ">
           <p className='text-lg font-bold'>{shop.name}</p>
@@ -58,7 +61,7 @@ if(shopId) {
         </div>
        
           <ProductSearch items={shop.products}/>
-
+ 
               </div>
 
 
@@ -83,7 +86,7 @@ if(shopId) {
               <ViewShopReviews/>
             <div className="mx-2 self-center ">
               <p className="text-success-green text-sm  font-bold"> Open now</p>
-              <p className="text-white text-xs "> 9am - 5pm</p>
+              <p className="text-white text-xs "> {shop.openTime&&date.transform(shop.openTime, 'HH:mm', 'h:mm A')} - {shop.closeTime&&date.transform(shop.closeTime, 'HH:mm', 'h:mm A')}</p>
             </div>
             </div>
 
@@ -139,7 +142,7 @@ if(shopId) {
             {cartItems.length!==0&&
               <Link href="/cart" >
             
-            <div  className="flex shadow-test rounded-b-primary justify-between rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow fixed bottom-0 w-full z-10 py-3 px-20">
+            <div  className="flex cursor-pointer shadow-test rounded-b-primary justify-between rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow fixed bottom-0 w-full z-10 py-3 px-20">
               <p className=" text-white font-semibold text-center" > Total - {cartTotal}</p>
               <p className=" text-white font-semibold text-center" >Go to cart</p>
              
