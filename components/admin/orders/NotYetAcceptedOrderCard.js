@@ -111,9 +111,9 @@ const dispatch = useDispatch()
                     </div>
 
                     <div className="mt-6 ">
-           
-
-                      <div className="mt-6 mx-4 p-4 border-dashed  border-t-[4px] border-sec-orange  flex justify-between   ">
+                    {order.orderInfo.description?(  
+<p className="text-left px-4 text-sec-text-gray"> <span className="font-bold ">Suggestion:</span> {order.orderInfo.description}</p>):("")}   
+                      <div className="mt-1 mx-4 p-4 border-dashed  border-t-[4px] border-sec-orange  flex justify-between   ">
                         <button onClick={(e)=>{
                                e.preventDefault()
                                handleRejectOrder(order._id)

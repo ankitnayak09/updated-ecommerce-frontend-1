@@ -66,12 +66,12 @@ const NewProductModal = () => {
           <XIcon className="h-6 w-6" aria-hidden="true" />
         </button>
       </div>
-          <Dialog.Title
+          {/* <Dialog.Title
             as="h3"
             className="text-lg font-medium leading-6 text-gray-900"
           >
             newProduct 
-          </Dialog.Title>
+          </Dialog.Title> */}
         
       <NewProduct setIsOpen={setIsOpen}/>
     

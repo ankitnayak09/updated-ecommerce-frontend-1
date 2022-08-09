@@ -72,7 +72,7 @@ const TopNavbar = () => {
       {({ open }) => (
 
         <>
-          <div className="max-w-7xl mx-auto px-3  lg:px-3">
+          <div className="max-w-7xl mx-auto px-1  lg:px-3">
             <div className="relative flex items-center  h-16">
       
               {/* <div className=" flex items-center  justify-start  sm:justify-start"> */}

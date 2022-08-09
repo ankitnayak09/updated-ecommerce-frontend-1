@@ -89,6 +89,8 @@ const SingleOrderCard = ({order,}) => {
                   </div>
 
                   <div className="mt-6 ">
+                  {order.orderInfo.description?(  
+<p className="text-left px-4"> <span className="font-bold ">Suggestion:</span> {order.orderInfo.description}</p>):("")}  
                     {/* <div className="flex ml-4 items-center">
                       <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" />
                       <p className="ml-2 text-sm font-medium text-gray-500">
@@ -96,7 +98,7 @@ const SingleOrderCard = ({order,}) => {
                       </p>
                     </div> */}
 
-                    <div className="mt-6 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-8 flex justify-between ">
+                    <div className="mt-1 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-4 flex justify-between ">
                       <div onClick={()=>handleCancel(order._id)} className="flex ">
                       
                         cancel

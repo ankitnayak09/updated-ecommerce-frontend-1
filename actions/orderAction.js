@@ -49,15 +49,22 @@ console.log(error)
     }
 
 }
-export const adminOrdersHistory=(shopId)=>async(dispatch)=>{
+export const adminOrdersHistory=(shopId,numOfDays)=>async(dispatch)=>{
     try{
         dispatch({
             type:"ADMIN_ORDERS_HISTORY_REQUEST",
         });
         const config={withCredentials: true}
+let url;
+// console.log(numOfDays)
+if(numOfDays){
+    url=`http://localhost:4000/api/v1/${shopId}/ordersHistory?numOfDays=${numOfDays}`
+}else{
+    url=`http://localhost:4000/api/v1/${shopId}/ordersHistory/`
+}
 
 
-        const{data}=await axios.get(`http://localhost:4000/api/v1/${shopId}/ordersHistory/`,config)
+        const{data}=await axios.get(url,config)
   
         dispatch({
             type:"ADMIN_ORDERS_HISTORY_SUCCESS",

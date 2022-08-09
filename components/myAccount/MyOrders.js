@@ -75,7 +75,7 @@ const MyOrders = () => {
 
     return (
         <div className="bg-white rounded-t-primary z-10 relative shadow-myOrderTop -mt-10">
-        <div className="py-16 ">
+        <div className="pt-16  pb-36">
           <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
             <div className="max-w-2xl px-14">
 
@@ -85,7 +85,7 @@ const MyOrders = () => {
            
             </div>
           </div>
-  
+    
           <div className="mt-4">
             <h2 className="sr-only">Recent orders</h2>
             <div className="max-w-7xl  mx-auto ">

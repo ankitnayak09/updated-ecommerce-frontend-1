@@ -1,8 +1,9 @@
 import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux"
-import { PencilIcon,ArrowRightIcon,PlusIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon,PlusIcon } from '@heroicons/react/solid'
 import Link from "next/link"
 import { logout } from "../../actions/userAction"
+import { HeartIcon } from "@heroicons/react/outline"
 
 
 const MyProfile = () => {
@@ -11,16 +12,17 @@ const MyProfile = () => {
     return ( 
         <>
         {loading===false&&
-        <div className="pt-24 md:pt-24 pb-24 sticky top-0   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow flex flex-col  ">
+        <div className="pt-28  pb-24 sticky top-0   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow flex flex-col  ">
 
 <div className="flex justify-between px-4 pb-8">
 
 <button onClick={()=>{dispatch(logout())}} className=" cursor-pointer border-dashed  rounded-small px-4 py-1   border-[3px] border-[#ECECEC] text-[#FFEFF0] flex justify-center">
                Log out
             </button>
-<button  className=" cursor-pointer border-dashed w-32 rounded-small py-1   border-[3px] border-[#ECECEC] text-[#FFEFF0] flex justify-center">
-                Edit profile <PencilIcon className="w-5 self-center ml-2"/>
-            </button>
+            <Link href="/myAccount/myFavourites">
+<button  className=" cursor-pointer border-dashed px-2 rounded-small py-1   border-[3px] border-[#ECECEC] text-[#FFEFF0] flex justify-center">
+                Favourites <HeartIcon className="w-5 self-center fill-white ml-2"/> 
+            </button></Link>
             </div>
             <div className=" md:flex-row-reverse md:flex w-full">
         <div className="flex bg-sec-light-orange h-44 rounded-l-full ml-4 py-3 pl-3 flex-grow self-center ">
@@ -53,7 +55,7 @@ const MyProfile = () => {
 
             <div className="divide-y-2  divide-white/40 flex-grow  pl-5 ">
                 {adminOf.map((rev)=>
-                 <Link key={rev._id} href={`/${rev._id}/admin/shopAccount`}>
+                 <Link key={rev._id} href={`/${rev._id}/admin/orders`}>
                 <div className="py-2 cursor-pointer flex justify-between">{rev.name} <ArrowRightIcon className="w-6 ml-2 mr-4"/> </div> 
                 </Link>
                 )}

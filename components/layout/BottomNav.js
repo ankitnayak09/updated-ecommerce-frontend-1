@@ -1,5 +1,8 @@
-import { SearchIcon,UserIcon,CakeIcon } from "@heroicons/react/outline"
+import { SearchIcon,UserCircleIcon, CakeIcon,LibraryIcon } from "@heroicons/react/outline"
+
+
 import Link from 'next/link'
+import { useRouter } from "next/router"
 
 import { useSelector } from "react-redux"
 
@@ -7,11 +10,18 @@ import { useSelector } from "react-redux"
 
 const BottomNav = () => {
     const {cartItems,cartTotal,cartShopName} = useSelector(state => state.cart)
+
+    const router=useRouter()
+
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(' ')
+    }
  
     return (
        
         <div className="w-full md:hidden ">
             <section className="block fixed inset-x-0 bottom-0 z-10 ">
+    
           {/* <div suppressHydrationWarning={true} className="text-center bg-slate-200">
           {cartItems.length!==0&&
           <Link href="/cart" >
@@ -44,24 +54,30 @@ const BottomNav = () => {
             }
             </div>
 
-       <div className="backdrop-blur-xl py-1 flex justify-between"> 
+       <div className="backdrop-blur-3xl bg-white/50 border-t-2 py-3 flex justify-between"> 
 <Link href="/" >
-       <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+       <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
         <CakeIcon className="inline-block mb-1 w-8"/>
+        {/* <CakeIcon className="inline-block mb-1 w-8 "/> */}
         <span className="tab tab-home block text-xs">Food</span>
 			</a>
             </Link>
 
             <Link href="/search" >
-       <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
-        <SearchIcon className="inline-block mb-1 w-8"/>
+       <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
+        <SearchIcon className={classNames(
+                    router.pathname.includes("/search")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                  )}/>
         <span className="tab tab-home block text-xs">Search</span>
 			</a>
             </Link>
 
+              
             <Link href="/myAccount">
-       <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
-        <UserIcon className="inline-block mb-1 w-8"/>
+       <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
+        <UserCircleIcon className={classNames(
+                    router.pathname.includes("/myAccount")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                  )}/>
         <span className="tab tab-home block text-xs">Account</span>
 			</a>
             </Link>
@@ -69,8 +85,8 @@ const BottomNav = () => {
 
 
             <Link href="/superAdmin/shops" >
-       <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
-        <CakeIcon className="inline-block mb-1 w-8"/>
+       <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center self-center ">
+        <LibraryIcon className="inline-block mb-1 w-8"/>
         <span className="tab tab-home block text-xs">superAdmin</span>
 			</a>
             </Link>

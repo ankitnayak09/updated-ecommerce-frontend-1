@@ -19,6 +19,7 @@ import SingleOrderCard from './SingleOrderCard'
 import NewOrderModal from './NewOrderModal'
 import QrModal from './QrModal'
 import OrdersSearchModal from './OrdersSearchModal'
+import AllShopsLoader from '../../loading/AllShopsLoader'
 
 
 
@@ -197,9 +198,12 @@ const [newOrder, setNewOrder] = useState()
         
 
 
-              {notYetAcceptedOrders&&notYetAcceptedOrders.map((order)=>(
+              {loading===false?(notYetAcceptedOrders.map((order)=>(
                 <NotYetAcceptedOrderCard key={order._id} order={order}/>
-                ))}
+              ))):(<AllShopsLoader/>)}
+              {/* {notYetAcceptedOrders&&notYetAcceptedOrders.map((order)=>(
+                <NotYetAcceptedOrderCard key={order._id} order={order}/>
+                ))} */}
     
 
                </Carousel>
@@ -216,9 +220,12 @@ const [newOrder, setNewOrder] = useState()
 
               <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
               {/* <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0"> */}
-                {startCookingOrders.map((order) => (
-      <SingleOrderCard   key={order._id}  order={order}/>
-      ))}
+
+           
+
+                {loading===false?(startCookingOrders.map((order) => (
+      <SingleOrderCard   key={order._id}  order={order}/>)
+      )):(<AllShopsLoader/>)}
               </div>
               
               </div>

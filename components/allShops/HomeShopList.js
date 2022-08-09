@@ -108,8 +108,8 @@ const HomeShopList = () => {
     return (
       <>
         <div className="bg-white">
-        <div className="max-w-2xl mx-auto pt-12 pb-52 px-4 sm:py-24 sm:px-6
-        md:max-w-4xl lg:max-w-7xl lg:px-8">
+        <div className="max-w-2xl mx-auto pt-6 pb-52 px-4 
+        md:max-w-4xl lg:max-w-7xl ">
           {/* <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Shops</h2> */}
   
             {/* {loading?(

@@ -63,10 +63,9 @@ export const updateProduct=(productData,shopId,productId)=>async(dispatch)=>{
         // console.log(shopId+productData+productId)
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
-
+     
         const{data}=await axios.put(`http://localhost:4000/api/v1/${shopId}/product/${productId}`,productData,config)
-      
-
+     
   
         dispatch({
             type:"UPDATE_PRODUCT_SUCCESS",

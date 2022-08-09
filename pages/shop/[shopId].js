@@ -8,7 +8,7 @@ import { clearErrors, getShopDetails } from "../../actions/shopAction"
 import SingleProductCard from "../../components/products/SingleProductCard"
 import { Disclosure,Popover } from '@headlessui/react'
 import { ChevronDoubleLeftIcon, ChevronDownIcon, ChevronLeftIcon, StarIcon } from '@heroicons/react/solid'
-import { SearchIcon } from '@heroicons/react/outline'
+import { HeartIcon, SearchIcon } from '@heroicons/react/outline'
 // import { usePopper } from 'react-popper';
 
 import ProductSearch from "../../components/products/ProductSearch"
@@ -16,17 +16,24 @@ import ViewShopReviews from "../../components/reviews/ViewShopReviews"
 import MenuModal from "../../components/allShops/MenuModal"
 import axios from "axios"
 import date from 'date-and-time';
+import { updateFavourites } from "../../actions/userAction"
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const Shop = () => {
   // console.log(props)
     const router=useRouter();
     const shopId=router.query.shopId
+    // const [isShopOpen, setisShopOpen] = useState()
 
 
     const dispatch=useDispatch();
     // const {loading,error}=useSelector(state => state.shopDetails)
-    const {loading,error,shop,groupProducts,categories}=useSelector(state => state.shopDetails)
+    const {loading,error,shop,groupProducts,categories,isShopOpen}=useSelector(state => state.shopDetails)
     const {cartItems,cartTotal} = useSelector(state => state.cart)
+    const {user} = useSelector(state => state.user)
     // const {loading:shopLoading,error:shopError,products}=useSelector(state => state.products)
  
     useEffect(() => {
@@ -42,6 +49,24 @@ if(shopId) {
     }, [dispatch,error,shopId])
 
 
+    // useEffect(() => {
+    //   if(shop.closeTime&&shop.openTime){
+    //     const nowDate = new Date();
+    //     // console.log(nowDate)
+    //     const shopOpenDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+shop.openTime, 'MMM DD YYYY HH:mm');
+    //     const shopCloseDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+shop.closeTime, 'MMM DD YYYY HH:mm');
+         
+    //   const openTimeDiff=  date.subtract(nowDate,shopOpenDate).toMinutes()
+    //   const closeTimeDiff=  date.subtract(shopCloseDate,nowDate).toMinutes()
+    
+    //    if(openTimeDiff<0||closeTimeDiff<0){
+    //     setisShopOpen(false)
+      
+    //   }else{
+    //     setisShopOpen(true)
+    //   }
+    //   }
+    // }, [shop])
 
   
  
@@ -56,7 +81,9 @@ if(shopId) {
               </button>
               </Link>
               <div className="flex  flex-col ">
-          <p className='text-lg font-bold'>{shop.name}</p>
+          <p className='text-lg font-bold flex'>{shop.name} <HeartIcon onClick={()=>{dispatch(updateFavourites(shop._id))}} className={classNames(
+                    user?.favourites.includes(shop._id)&&"fill-pri-orange ","w-8 ml-2 cursor-pointer text-sec-orange"
+                  )}/></p>
           <p className="text-center text-secondary-text-gray text-xs">LPU</p>
         </div>
        
@@ -85,10 +112,12 @@ if(shopId) {
               </div> */}
               <ViewShopReviews/>
             <div className="mx-2 self-center ">
+              {isShopOpen===true?(
               <p className="text-success-green text-sm  font-bold"> Open now</p>
+              ):( <p className="text-gray-300 text-sm  font-bold"> Closed now</p>)}
               <p className="text-white text-xs "> {shop.openTime&&date.transform(shop.openTime, 'HH:mm', 'h:mm A')} - {shop.closeTime&&date.transform(shop.closeTime, 'HH:mm', 'h:mm A')}</p>
             </div>
-            </div>
+            </div> 
 
 
             </div>
@@ -101,7 +130,7 @@ if(shopId) {
           {({ open }) => (
             <div id={`${groupListItem.category}`}>
               <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-xl font-bold text-pri-text-light-gray  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                <span>{groupListItem.category}</span>
+                <span className="text-2xl">{groupListItem.category}</span>
                 <ChevronDownIcon
                   className={`${
                     open ? 'rotate-180 transform' : ''
@@ -110,7 +139,7 @@ if(shopId) {
               </Disclosure.Button>
               <Disclosure.Panel className=" pt-1 pb-2 ">
                   {groupListItem.products.map((product)=>
-              <SingleProductCard key={product._id} product={product}/>
+              <SingleProductCard isShopOpen={isShopOpen} key={product._id} product={product}/>
             )}
           
               </Disclosure.Panel>

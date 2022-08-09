@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useSelector } from 'react-redux'
 import CartCard from "./CartCard"
-import { ChevronDoubleLeftIcon,CheckCircleIcon,QuestionMarkCircleIcon, ChevronLeftIcon } from '@heroicons/react/solid'
+import { ChevronDoubleLeftIcon,CheckCircleIcon,QuestionMarkCircleIcon, ChevronLeftIcon, CreditCardIcon } from '@heroicons/react/solid'
 import { useEffect,useState } from 'react'
 import { Popover, RadioGroup } from '@headlessui/react'
 import Timepicker from './Timepicker'
@@ -44,13 +44,17 @@ const timeOptionsLists = [
     const [Hour,setHour]=useState(0)
     const [Minute,setMinute]=useState(0)
     const [cookingTime,setCookingTime]=useState(0)
-    const [finalTime,setfinalTime]=useState("0:0")
+    
+    const [finalTime,setfinalTime]=useState()
+    // console.log(cookingTime)
+    
+    // const [finalTime,setfinalTime]=useState("0:0")
     const [Suggestion,setSuggestion]=useState("")
     const [WantAt,setWantAt]=useState("")
     const [CartBtnDisabled,setCartBtnDisabled]=useState(false)
 
     const [SubTotal,setSubTotal]=useState(0)
-    const [ConvenienceCharge,setConvenienceCharge]=useState(0.3)
+    const [ConvenienceCharge,setConvenienceCharge]=useState(Number(process.env.NEXT_PUBLIC_CHARGE_PER_HOUR))
     const [OrderTotal,setOrderTotal]=useState(0)
     const {cartItems,cartShop,cartShopTimings,cartShopMid,cartShopName}= useSelector(state => state.cart)
 
@@ -78,8 +82,8 @@ const timeOptionsLists = [
       setCookingTime(Math.max(...cookingTimesArray))
         setSubTotal(subttl)
         setOrderTotal(subttl+ConvenienceCharge)
-     
-    }, [cartItems])
+  
+    }, [cartItems,ConvenienceCharge])
     useEffect(() => {
       let time=Hour+":"+Minute
       let id= selectedTime
@@ -92,7 +96,14 @@ const timeOptionsLists = [
       // let testDate=date.parse(date.format(now, 'MMM DD YYYY') +" "+finalTime, 'MMM DD YYYY hh:mm');
         // setWantAt(testDate.toString())
         setWantAt(finalTime)
-        
+        if(finalTime){
+        const nowDate=new Date()
+        const finalTimeDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+finalTime, 'MMM DD YYYY HH:mm');
+   
+        const wantAtTimeDiff=  date.subtract(finalTimeDate,nowDate).toHours()
+        // console.log(wantAtTimeDiff)
+        setConvenienceCharge(Math.abs(Number(Math.ceil(wantAtTimeDiff)*process.env.NEXT_PUBLIC_CHARGE_PER_HOUR)))
+        }
     }
     //   if(id===1){
     //     setWantAt("now")
@@ -118,15 +129,35 @@ const timeOptionsLists = [
     const initiatePayment=async(e)=>{
       e.preventDefault()
       const nowDate = new Date();
-      // console.log(nowDate)
+      
       const shopOpenDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+cartShopTimings.cartShopOpenTime, 'MMM DD YYYY HH:mm');
       const shopCloseDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+cartShopTimings.cartShopCloseTime, 'MMM DD YYYY HH:mm');
+
+      if(WantAt!=="now"){
+
+        // console.log(WantAt)
+        if(!WantAt){
+          toast.error("please pick a time")
+          return
+        }
+
+        const wantAtDate=date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+WantAt, 'MMM DD YYYY HH:mm');
+   
+        const wantAtTimeDiff=  date.subtract(wantAtDate,date.addMinutes(nowDate, cookingTime)).toMinutes()
+        if(wantAtTimeDiff<0){
+          toast.error(`pick time between ${date.format(date.addMinutes(nowDate, cookingTime), 'hh:mm A ') } - ${
+            date.transform(cartShopTimings.cartShopCloseTime, 'HH:mm', 'hh:mm A')
+          }`)
+          return
+        }
+      }
        
     const openTimeDiff=  date.subtract(nowDate,shopOpenDate).toMinutes()
     const closeTimeDiff=  date.subtract(shopCloseDate,nowDate).toMinutes()
+    const today=date.format(nowDate, 'dddd').toLowerCase()
      if(openTimeDiff<0||closeTimeDiff<0){
-      toast.error("shop closed,but later")
-      return
+      toast.error("shop closed,please buy later")
+      return 
     }
         
       
@@ -147,7 +178,7 @@ const timeOptionsLists = [
 
 // const data={cartItems,OrderTotal,oid,cartShop,email:"email"};
 const data={cartItems,cookingTime,cartShopName,OrderTotal,oid,cartShop,email:"email",orderInfo:{wantFoodAt:WantAt,description:Suggestion},SubTotal,ConvenienceCharge,OrderTotal};
-let a= await fetch("http://localhost:4000/api/v1/payment/pretransaction",{method:'POST',credentials: 'include',headers:{"Content-Type":"application/json"},
+let a= await fetch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/payment/pretransaction`,{method:'POST',credentials: 'include',headers:{"Content-Type":"application/json"},
 body:JSON.stringify(data)
 }) 
 
@@ -331,13 +362,13 @@ body:JSON.stringify(data)
             {({ checked, active }) => (
               <>
                 {/* <div className=" flex"> */}
-                  <div className="flex justify-center w-full flex-col">
+                  <div className="flex  w-full flex-col">
                     <RadioGroup.Label as="span" className="block text-lg font-bold text-center text-pri-text-gray">
-                      for now
+                      For now
                     </RadioGroup.Label>
                  
-                <div className="flex justify-center w-full">
-                  <p className="text-pri-text-light-gray self-center text-7xl font-bold"> 35</p>
+                <div className="flex mt-2 justify-center w-full">
+                  <p className="text-pri-text-light-gray self-center text-7xl font-bold"> {cookingTime}</p>
                   <p className="text-pri-text-light-gray self-center text-base font-medium"> min <br /> (Aprox.)</p>
 
                 </div>
@@ -377,11 +408,14 @@ body:JSON.stringify(data)
               <>
                 {/* <div className=" flex"> */}
                   <div className="flex justify-center self-center w-full flex-col">
-                    <RadioGroup.Label as="span" className="block text-lg font-bold text-center text-pri-text-gray">
-                      Want it later
+                    <RadioGroup.Label as="span" className=" text-lg font-bold text-center text-pri-text-gray flex flex-col">
+                      PreBook time
+                      <span className="font-normal text-base">({date.format(date.addMinutes(new Date(), cookingTime), 'hh:mm A ') } - {
+            date.transform(cartShopTimings.cartShopCloseTime, 'HH:mm', 'hh:mm A')
+          })</span>
                     </RadioGroup.Label>
                   
-               <Timepicker setfinalTime={setfinalTime} setHour={setHour} setMinute={setMinute}/>
+               <Timepicker  setfinalTime={setfinalTime} setHour={setHour} setMinute={setMinute}/>
                    
                  
 
@@ -417,6 +451,7 @@ body:JSON.stringify(data)
       <div className="mt-4">
         <textarea
           rows={1}
+          maxLength="40"
           placeholder="Any suggestionss..."
           name="comment"
           id="comment"
@@ -504,7 +539,7 @@ body:JSON.stringify(data)
         
   </>
 ):(<>
-              <p className=" text-white text-lg font-semibold text-center" > Pay - ₹{OrderTotal} </p>
+              <p className=" text-white flex text-lg font-bold text-center" > <CreditCardIcon className="w-6 mx-1"/> Pay - ₹{OrderTotal} </p>
         
               </>
             )}

@@ -1,9 +1,12 @@
+import { Switch } from "@headlessui/react";
 import  { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify";
 
 import { clearErrors, getAdminProducts, updateProduct } from "../../../actions/productActions";
+
+import imageCompression from 'browser-image-compression';
 
 
 const EditProduct = ({setIsOpen,product}) => {
@@ -21,6 +24,7 @@ const EditProduct = ({setIsOpen,product}) => {
     const [selectedCategories, setSelectedCategories] = useState(product.categories);
     const [image, setImage] = useState();
     const [imagePreview, setImagePreview] = useState(product.image.url);
+    const [enabled, setEnabled] = useState(product.enableStockRenew)
     const [isPureVeg, setIsPureVeg] = useState();
     
     const categories=[
@@ -55,29 +59,47 @@ const EditProduct = ({setIsOpen,product}) => {
         
 
         const myForm=new FormData();
+    //     let productData={}
 
+    //  {name&&  (productData.name=name)}
+    //   { price&&  (productData.price=price)};
+    //   { stock&&  (productData.Stock=stock)};
+    //    { description&&  (productData.description=description)};
+        
+    //    productData.categories=selectedCategories
+    //     {image&&
+    //       (productData.image=image);
+    //     }
+    //     (productData.enableStockRenew=enabled);
+    //   {isPureVeg &&   (productData.isVegetarian=isPureVeg)};
+    //   (productData.shop=router.query.shopId);
      {name&&  myForm.set("name",name)}
       { price&&  myForm.set("price",price)};
       { stock&&  myForm.set("Stock",stock)};
        { description&&  myForm.set("description",description)};
         
-        // myForm.set("categories",selectedCategories);
         selectedCategories.forEach((category)=>{
             myForm.append("categories",category)
         })
-
         {image&&
-        // if(image!==""){
         myForm.set("image",image);
         }
+        myForm.set("enableStockRenew",enabled);
       {isPureVeg &&   myForm.set("isVegetarian",isPureVeg)};
         myForm.set("shop",router.query.shopId);
         
         dispatch(updateProduct(myForm,shopId,product._id))
     }
 
-    const createProductImageChange=(e)=>{
+    const createProductImageChange=async(e)=>{
         const file=e.target.files[0];
+
+        const options = {
+          maxSizeMB: 0.7,
+          useWebWorker: true
+        }
+        const compressedFile = await imageCompression(file, options);
+      
 
         setImage();
         setImagePreview();
@@ -86,11 +108,17 @@ const EditProduct = ({setIsOpen,product}) => {
 
         reader.onload=()=>{
             if(reader.readyState===2){
+         
+                // setImagePreview(compressedFile);
+                // setImage(compressedFile)
+                // setImage(compressedFile.name)
+               
                 setImagePreview(reader.result);
                 setImage(reader.result)
-            }
+             }
         }
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(compressedFile)
+        // reader.readAsDataURL(file)
 
     }
 
@@ -173,6 +201,27 @@ const EditProduct = ({setIsOpen,product}) => {
                    
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
+
+              <div className="flex flex-col">
+                <span className="text-sm text-pri-text-light-gray italic">auto renew stock daily?</span>
+              <Switch
+        checked={enabled}
+        // checked={enabled}
+        
+        onChange={setEnabled}
+        className={`${enabled ? 'bg-success-green' : 'bg-slate-300'}
+          relative self-center inline-flex h-[28px] w-[64px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+      >
+       
+        <span
+          aria-hidden="true"
+          className={`${enabled ? 'translate-x-9' : 'translate-x-0'}
+            pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+        />
+      </Switch>
+              </div>
+
+                  
                 </div>
               </div>
             </div>
@@ -195,24 +244,13 @@ const EditProduct = ({setIsOpen,product}) => {
             </div>
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-              <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
-                Photo
-              </label>
+              
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="flex items-center">
-                  <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  </span>
+              
 
-              <img src={imagePreview} alt="nothing" />
-                  <button
-                    type="button"
-                    className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Change
-                  </button>
+            {imagePreview&&  <img src={imagePreview} alt="nothing" />}
+                
                 </div>
               </div>
             </div>
@@ -364,7 +402,7 @@ const EditProduct = ({setIsOpen,product}) => {
             type="submit"
             disabled={loading?true:false}
             onClick={updateProductSubmitHandler}
-            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="ml-3 w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow"
           >
               {loading?(     <>    <span 
         className="w-6 my-auto mr-3 aspect-square border-4 border-white border-dashed rounded-full animate-spin"></span>

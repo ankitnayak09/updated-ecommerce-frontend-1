@@ -12,6 +12,8 @@ import { useRouter } from 'next/router';
 import LoadingBar from 'react-top-loading-bar'
 import { useGeolocated } from 'react-geolocated';
 
+
+
 // function MyApp({ Component, pageProps }) {
 //   const [showChild, setShowChild] = useState(false);
 //   useEffect(() => {
@@ -35,6 +37,7 @@ import { useGeolocated } from 'react-geolocated';
 // }
 function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0)
+  // const [location, setLocation] = useState()
   const router=useRouter()
  const {user,loading,isAuthenticated}=useSelector(state=>state.user)
  
@@ -43,25 +46,49 @@ function MyApp({ Component, pageProps }) {
   const { coords, isGeolocationAvailable, isGeolocationEnabled} =
   useGeolocated({
       positionOptions: { 
-          enableHighAccuracy: false,
+          enableHighAccuracy: true,
+          timeout: Infinity,
       },
       userDecisionTimeout: 5000,
   }); 
   
-  useEffect(()=>{   
+  // useEffect(()=>{  
+  //   // console.log(location)
+  //   if(location){
+    
+  //     // const location={
+  //     //   latitude:coords.latitude,
+  //     //   longitude:coords.longitude
+  //     // }
+    
+  //     dispatch(loadUser(location))   
+  //   }else{
+  //     // console.log("hi")
+  //     dispatch(loadUser())   
+  //   }
   
-    dispatch(loadUser())   
-  },[])
+  // },[location])
 
   useEffect(()=>{   
-  
+
+ 
     if(isGeolocationAvailable==true&&isGeolocationEnabled==true&&coords){
-   
+      console.log("_app.js",coords)
+      const location={ 
+        latitude:coords.latitude,
+        longitude:coords.longitude
+      }
+    
+      dispatch(loadUser(location))  
+
       localStorage.setItem("userLocation",JSON.stringify({
         latitude:coords.latitude,
         longitude:coords.longitude
       }))
     } 
+    if(isGeolocationAvailable==false||isGeolocationEnabled==false){
+      dispatch(loadUser()) 
+    }
   },[isGeolocationAvailable,isGeolocationEnabled,coords])
 
   

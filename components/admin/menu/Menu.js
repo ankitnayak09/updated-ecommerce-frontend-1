@@ -6,7 +6,7 @@ import { PencilIcon,PlusIcon } from "@heroicons/react/solid"
 
 
 
-import { getAdminProducts } from "../../../actions/productActions"
+import { clearErrors, getAdminProducts } from "../../../actions/productActions"
 import MenuSingleItemCard from "./MenuSingleItemCard"
 import NewProduct from "../editProducts/NewProductModal"
 import { toast } from "react-toastify"
@@ -24,16 +24,30 @@ const Menu = () => {
     const [categoryProducts, setcategoryProducts] = useState([])
 
     const dispatch=useDispatch();
-
+const {isDeleted} = useSelector(state => state.updateProduct)
     
     useEffect(() => {
+
        
         if(shopId){
-            
             dispatch(getAdminProducts(shopId))
            } 
       
     }, [])
+
+
+
+    useEffect(() => {
+      
+        if(isDeleted){
+            dispatch({type:"DELETE_PRODUCT_RESET"}),
+  toast.success("product deleted") 
+            dispatch(getAdminProducts(shopId))
+        }
+       }, [dispatch,isDeleted])
+
+
+
 
     useEffect(() => {
     

@@ -97,7 +97,7 @@ if(shopId) {
             //   </div>
             // </div>
          
-            <div  className="flex justify-between my-4"> 
+            <div key={item._id} className="flex justify-between my-4"> 
               <p className="">{item.name} &nbsp;  &nbsp;  <span className="text-sec-text-gray font-bold"> x{item.quantity}</span> </p>
 
               <p className="font-bold">₹{item.price}</p>
@@ -113,9 +113,10 @@ if(shopId) {
               <div>
                 <dt className="font-bold text-gray-900">Ordered for(time)</dt>
                 <dd className="mt-2 text-gray-700">
-                  {/* <p>{order.orderInfo?.wantFoodAt&& order?.orderInfo?.wantFoodAt==="now"?"now": date.transform(order?.orderInfo?.wantFoodAt, 'HH:mm', 'h:mm A')}</p> */}
+                  <p>{order.orderInfo?.wantFoodAt&&( order.orderInfo?.wantFoodAt==="now"?"now": date.transform(order.orderInfo.wantFoodAt, 'HH:mm', 'h:mm A'))}</p>
                  <p>
-                   {order.orderInfo?.wantFoodAt}
+                   {/* {order.orderInfo?.wantFoodAt&&date.transform(order.orderInfo.wantFoodAt, 'HH:mm', 'hh:mm A')} */}
+                   {/* {order.orderInfo?.wantFoodAt} */}
                  </p>
                 </dd>
               </div> 
@@ -123,13 +124,14 @@ if(shopId) {
                 <dt className="font-bold text-gray-900">Order placed at</dt>
                 <dd className="mt-2 text-gray-700">
                   <p>
+                {/* {order.createdAt&&date.transform(order.createdAt, 'YYYY-MM-DDTHH:mm:ss.[GMT]Z', 'h:mm A')} */}
                 {order.createdAt}
                   </p>
                 
                 </dd>
               </div>
             </dl>
-       
+        
             </>
     )}
 

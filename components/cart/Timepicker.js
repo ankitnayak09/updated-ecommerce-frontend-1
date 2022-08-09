@@ -1,7 +1,7 @@
 const Timepicker = ({setfinalTime,setHour,setMinute}) => {
     return (
         <>
-            <div className="mt-2 p-5  bg-white rounded-lg ">
+            <div className="mt-2 py-4 px-1 bg-white rounded-lg ">
   {/* <div className="flex">
 
     <select name="hours" className="bg-transparent text-xl appearance-none outline-none" onChange={(e)=>{setHour(e.target.value)}}>
@@ -23,10 +23,11 @@ const Timepicker = ({setfinalTime,setHour,setMinute}) => {
    
   </div> */}
 
-<input type="time" onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
+<input type="time" 
+onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-pri-orange placeholder-gray-400 rounded-lg text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
 </div>
         </>
     )
 }
-
+ 
 export default Timepicker

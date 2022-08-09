@@ -38,11 +38,22 @@ const CategoryShopList = () => {
   
     // }, [dispatch,error,router])
   
+    const {location}=useSelector(state => state.user)
   
    const fetchMoreData = async() => {
     // dispatch(getCategoryShops(page,pageSize,category))
     setpage(page+1)
-    let url=`http://localhost:4000/api/v1/shops?page=${page+1}&category=${category}&pageSize=${pageSize}`
+    // let url=`http://localhost:4000/api/v1/shops?page=${page+1}&category=${category}&pageSize=${pageSize}`
+
+
+    let url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page+1}&category=${category}&pageSize=${pageSize}`
+        
+    if(location.latitude&&location.longitude){
+       
+         url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page+1}&category=${category}&pageSize=${pageSize}&latitude=${location.latitude}&longitude=${location.longitude}`
+        
+    }
+
     setloading(true);
     const {data}=await axios.get(url)
     // console.log(shops.length+",,"+shopCount)
@@ -55,10 +66,17 @@ const CategoryShopList = () => {
 
     useEffect(() => {
        const runfunction=async()=>{
-
+       
            
            
-           let url=`http://localhost:4000/api/v1/shops?page=${page}&category=${category}&pageSize=${pageSize}`
+          //  let url=`http://localhost:4000/api/v1/shops?page=${page}&category=${category}&pageSize=${pageSize}`
+          let url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page}&category=${category}&pageSize=${pageSize}`
+        
+          if(location.latitude&&location.longitude){
+             
+               url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page}&category=${category}&pageSize=${pageSize}&latitude=${location.latitude}&longitude=${location.longitude}`
+              
+          } 
            setloading(true);
            const {data}=await axios.get(url)
            setshops(data.shops)

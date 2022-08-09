@@ -3,7 +3,7 @@ import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import {
 
-  ExclamationCircleIcon,
+  ExclamationCircleIcon, PhotographIcon,
 
 } from '@heroicons/react/outline'
 import { useDispatch, useSelector } from 'react-redux'
@@ -201,13 +201,13 @@ const AdvSearch = ({items}) => {
                   <>
                     <div className="flex items-center">
                       {/* <img src={product.image?.url} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" /> */}
-                      <div className="w-16 h-12 relative ">
-                      <Image
+                      <div className="w-16 h-12 relative flex justify-center ">
+                     {product.image?.url ? (<Image
                       src={product.image?.url}
                       layout="fill"
                       objectFit="cover"
                       className="rounded-br-medium"
-                      />
+                      />):(<PhotographIcon className="w-8 text-gray-300 self-center "/>)}
                       </div>
                       <div className="flex flex-col">
                       <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{product.name}</span>
@@ -241,7 +241,7 @@ const AdvSearch = ({items}) => {
                     className="mx-auto h-6 w-6 text-gray-400"
                   />
                   <p className="mt-4 font-semibold text-gray-900">No results found</p>
-                  <p className="mt-2 text-gray-500">No components found for this search term. Please try again.</p>
+                  <p className="mt-2 text-gray-500">No products/shops found for this search term. Please try again.</p>
                 </div>
               )}
             </Combobox>

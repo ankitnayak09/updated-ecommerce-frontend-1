@@ -134,6 +134,7 @@ export const shopDetailsReducer=createReducer({shop:{},groupProducts:[],categori
         state.shop=action.payload.shop;
         state.groupProducts=action.payload.groupProducts;
         state.categories=action.payload.categories;
+        state.isShopOpen=action.payload.isShopOpen;
     },
     SHOP_DETAILS_FAIL:(state,action)=>{
         state.loading=false;
@@ -192,7 +193,7 @@ export const newShopReducer=createReducer({shop:{}},{
     NEW_SHOP_SUCCESS:(state,action)=>{
         state.loading=false;
         state.success=action.payload.success;
-        state.shop=action.payload.product;
+        state.shop=action.payload.shop;
     
     },
     NEW_SHOP_FAIL:(state,action)=>{

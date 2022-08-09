@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify";
 import { clearErrors, createShop } from "../../../actions/shopAction";
-
+import Image from "next/image";
+import imageCompression from 'browser-image-compression';
 
 
 const NewShop = () => {
@@ -14,7 +15,7 @@ const NewShop = () => {
     const router=useRouter()
     const shopId=router.query.shopId
     
-    const {loading,error,success}= useSelector(state => state.newShop);
+    const {loading,error,success,shop}= useSelector(state => state.newShop);
     const {location:userLocation}= useSelector(state => state.user);
 
     const [name, setName] = useState("");
@@ -46,7 +47,8 @@ const NewShop = () => {
      }
      if(success){
          toast.success("shop created")
-        //  router.push("/orders")
+         
+         router.push(`/myAccount`),
          dispatch({type:"NEW_SHOP_RESET"})
      }
     }, [dispatch,toast,error,router,success])
@@ -54,8 +56,15 @@ const NewShop = () => {
 
     const createShopSubmitHandler=(e)=>{
         e.preventDefault();
-       
-
+        if(!latitude||!longitude){
+          toast.error("please enable location in browser")
+          return
+        }
+        if(images.length===0){
+          toast.error("please upload atleast one image")
+          return
+        }
+ 
         const myForm=new FormData();
 
         myForm.set("name",name);
@@ -79,10 +88,11 @@ const NewShop = () => {
             paytmMid,
             paytmMkey
         }));
-        myForm.set("locationCoords",JSON.stringify({
+      myForm.set("locationCoords",JSON.stringify({
             latitude,
             longitude
-        }));
+        }))
+      ;
         
         dispatch(createShop(myForm))
     }
@@ -104,17 +114,38 @@ const NewShop = () => {
       }
     };
 
-    const createShopImagesChange=(e)=>{
+    const createShopImagesChange=async(e)=>{
         const files = Array.from(e.target.files);
     
+        if(files.length>4){
+          toast.error("you can upload maximum of 4 images")
+          return
+        }
+        
+        const options = {
+          maxSizeMB: 0.7,
+          useWebWorker: true
+        }
+        let compressedFiles =[]
+      //   const printFiles=async()=> {
+        for(const file of files){
+          let tempImg=await imageCompression(file, options)
+          compressedFiles.push( tempImg);
+       
+        }
+      // }
+      // printFiles()
+      
+
         setImages([]);
         setImagesPreview([]);
     
-        files.forEach((file) => {
+        compressedFiles.forEach((file) => {
           const reader = new FileReader();
     
           reader.onload = () => {
             if (reader.readyState === 2) {
+            
               setImagesPreview((old) => [...old, reader.result]);
               setImages((old) => [...old, reader.result]);
             }
@@ -258,27 +289,16 @@ const NewShop = () => {
             </div>
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-              <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
-                Photos
-              </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <div className="flex items-center">
-                  <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  </span>
+            
+              {/* <div className="mt-1 sm:mt-0 sm:col-span-2"> */}
+                <div className="flex items-center flex-wrap w-full">
+               
 
-              {imagesPreview.length!==0 && imagesPreview.map((img)=>  <img key={img} src={img} alt="nothing" />
+              {imagesPreview.length!==0 && imagesPreview.map((img)=> <div key={img} className="p-2"> <Image  src={img} width={80} height={80} objectFit="cover" className="rounded-full" /></div>
               )} 
-                  <button
-                    type="button"
-                    className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Change
-                  </button>
+               
                 </div> 
-              </div>
+              {/* </div> */}
             </div>
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -417,17 +437,12 @@ const NewShop = () => {
 
       <div className="pt-5">
         <div className="flex justify-end">
-          <button
-            type="button"
-            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Cancel
-          </button>
+      
           <button
             type="submit"
             disabled={loading?true:false}
             onClick={createShopSubmitHandler}
-            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className=" bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow w-full py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
               
      {loading?(     <>    <span 

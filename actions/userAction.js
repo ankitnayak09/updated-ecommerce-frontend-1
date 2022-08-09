@@ -29,7 +29,7 @@ export const googleSignIn=(tokenId)=>async(dispatch)=>{
 
 
 // load user
-export const loadUser=()=>async(dispatch)=>{
+export const loadUser=(location)=>async(dispatch)=>{
 
     // dispatch({type:"LOAD_USER_LOCATION",payload:coords});
      
@@ -37,14 +37,56 @@ export const loadUser=()=>async(dispatch)=>{
         dispatch({type:"LOAD_USER_REQUEST"});
         
 
-        const {data}=await axios.get(
+        let {data}=await axios.get(
             `http://localhost:4000/api/v1/me`,{withCredentials: true}
           
         );
+        data.location=location
+        // console.log(location)
         dispatch({type:"LOAD_USER_SUCCESS",payload:data});
     }catch(error){
      
         dispatch({type:"LOAD_USER_FAIL",payload:error.response.data.message});
+    }
+}
+// update user favourites
+export const updateFavourites=(shopId)=>async(dispatch)=>{
+
+    // dispatch({type:"LOAD_USER_LOCATION",payload:coords});
+     
+    try{
+        dispatch({type:"USER_FAVOURITES_REQUEST"});
+        
+
+        let {data}=await axios.put(
+            `http://localhost:4000/api/v1/me/favourites/update`,{shopId},{withCredentials: true}
+          
+        );
+      
+        dispatch({type:"USER_FAVOURITES_SUCCESS",payload:data});
+    }catch(error){
+     
+        dispatch({type:"USER_FAVOURITES_FAIL",payload:error.response.data.message});
+    }
+}
+// user favourites
+export const allFavourites=()=>async(dispatch)=>{
+
+    // dispatch({type:"LOAD_USER_LOCATION",payload:coords});
+     
+    try{
+     
+
+        let {data}=await axios.get(
+            `http://localhost:4000/api/v1/me/favourites/`,{withCredentials: true}
+          
+        );
+    
+      
+        dispatch({type:"ALL_FAVOURITES_SUCCESS",payload:data});
+    }catch(error){
+     
+        dispatch({type:"ALL_FAVOURITES_FAIL",payload:error.response.data.message});
     }
 }
 

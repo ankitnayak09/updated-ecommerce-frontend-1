@@ -52,7 +52,7 @@ const ShopDetails = () => {
                  <div className="flex  justify-between p-4">
 
             <EditShopModal/>
-            <div className="flex"> <h1 className=" text-3xl  mr-4 font-bold tracking-tight text-sec-light-orange ">{shop.name}</h1>
+            <div className="flex"> <h1 className=" text-xl self-center  mr-4 font-bold  text-sec-light-orange ">{shop.name}</h1>
 
             <Switch
         checked={enabled}
