@@ -8,7 +8,7 @@ export const getAdminProducts=(shopId)=>async(dispatch)=>{
         });
         // console.log(shopId)
 
-        const {data}=await axios.get(`http://localhost:4000/api/v1/${shopId}/admin/products`,{withCredentials:true})
+        const {data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/admin/products`,{withCredentials:true})
   
         dispatch({
             type:"ADMIN_PRODUCTS_SUCCESS",
@@ -34,7 +34,7 @@ export const createProduct=(productData,shopId)=>async(dispatch)=>{
         // console.log(shopId)
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
-        const{data}=await axios.post(`http://localhost:4000/api/v1/${shopId}/product/new`,productData,config)
+        const{data}=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/product/new`,productData,config)
       
 
   
@@ -64,7 +64,7 @@ export const updateProduct=(productData,shopId,productId)=>async(dispatch)=>{
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
      
-        const{data}=await axios.put(`http://localhost:4000/api/v1/${shopId}/product/${productId}`,productData,config)
+        const{data}=await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/product/${productId}`,productData,config)
      
   
         dispatch({
@@ -91,7 +91,7 @@ export const deleteProduct=(shopId,productId)=>async(dispatch)=>{
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
 
-        const{data}=await axios.delete(`http://localhost:4000/api/v1/${shopId}/product/${productId}`,config)
+        const{data}=await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/product/${productId}`,config)
       
 
   

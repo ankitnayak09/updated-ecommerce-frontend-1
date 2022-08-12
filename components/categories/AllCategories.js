@@ -4,56 +4,43 @@ import Link from "next/link"
 import { Disclosure, Transition } from '@headlessui/react'
 import { BellIcon,SearchIcon, ChevronDoubleDownIcon,ChevronDoubleUpIcon,ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline'
 import SingleCategoryCard from "./SingleCategoryCard"
+import categoriesJson from "../../json/categories.json"
 
-const categories = [
-    {
-      id: 1,
-      name: 'pizza',
-      href: '#',
-      imageSrc: '/categoriesPng/pizza.png',
+const categories = categoriesJson.categoriesList
 
-    },
-    {
-      id: 2,
-      name: 'burger',
-      href: '#',
-      imageSrc: '/categoriesPng/burger.png',
+// const categories = [
+//     {
+//       id: 1,
+//       name: 'pizza',
+//       href: '#',
+//       imageSrc: '/categoriesPng/pizza.png',
+
+//     },
+//     {
+//       id: 2,
+//       name: 'burger',
+//       href: '#',
+//       imageSrc: '/categoriesPng/burger.png',
     
-    },
-    {
-      id: 3,
-      name: 'dessert',
-      href: '#',
-      imageSrc: '/categoriesPng/dessert.png',
+//     },
+//     {
+//       id: 3,
+//       name: 'dessert',
+//       href: '#',
+//       imageSrc: '/categoriesPng/dessert.png',
    
-    },
-    {
-      id: 4,
-      name: 'juice',
-      href: '#',
-      imageSrc: '/categoriesPng/juice.png',
+//     },
+//     {
+//       id: 4,
+//       name: 'juice',
+//       href: '#',
+//       imageSrc: '/categoriesPng/juice.png',
    
-    },
+//     },
 
-    // More products...
-  ]
+//   ]
 
-  const hiddenCategories=[
-    {
-      id: 5,
-      name: 'south Indian',
-      href: '#',
-      imageSrc: '/categoriesPng/southIndian.png',
-     
-    },
-    {
-      id: 6,
-      name: 'chinese',
-      href: '#',
-      imageSrc: '/categoriesPng/chinese.png',
-     
-    },
-  ]
+  const hiddenCategories=categoriesJson.hiddenCategoriesList
 
 const AllCategories = () => {
     return (

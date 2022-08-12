@@ -81,44 +81,45 @@ const [newOrder, setNewOrder] = useState()
 
   
 
+ 
   // here set time out for running updated orders agin and again
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   // if(futureOrders.length!==0){  
+    // if(futureOrders.length!==0){  
    
 
-  //   const interval = setInterval(() => {
-  //     console.log("runned setInterval in Order.js") 
-  //     const nowDate=new Date()
-  //     // console.log(futureOrders)
-  //    futureOrders.forEach((rev)=>{
+    const interval = setInterval(() => {
+      console.log("runned setInterval to update orders in Order.js") 
+      const nowDate=new Date()
+      // console.log(futureOrders)
+     futureOrders.forEach((rev)=>{
      
-  //       let wantAt= date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+rev.orderInfo.wantFoodAt, 'MMM DD YYYY HH:mm')
-  //       let timeDiff=date.subtract(wantAt,nowDate).toMinutes()
+        let wantAt= date.parse(date.format(nowDate, 'MMM DD YYYY') +" "+rev.orderInfo.wantFoodAt, 'MMM DD YYYY HH:mm')
+        let timeDiff=date.subtract(wantAt,nowDate).toMinutes()
        
-  //       if(rev.cookingTime>=timeDiff){
-  //         // console.log("aaaa aaaaa")
-  //         dispatch(updateStartCookingOrders(rev))
-  //       }
+        if(rev.cookingTime>=timeDiff){
+          // console.log("aaaa aaaaa")
+          dispatch(updateStartCookingOrders(rev))
+        }
       
         
-  //   })   
+    })   
 
-  //   }, 5000);
+    }, 120000);
 
-  //   if(futureOrders.length===0){
-  //     // console.log("hh") 
-  //     clearInterval(interval)
-  //   }
-  // // }
+    if(futureOrders.length===0){
+      // console.log("hh") 
+      clearInterval(interval)
+    }
+  // }
   
-  //   return () => clearInterval(interval);
+    return () => clearInterval(interval);
   
 
 
 
 
-  // }, [futureOrders]);
+  }, [futureOrders]);
 
     
    
@@ -183,10 +184,11 @@ const [newOrder, setNewOrder] = useState()
          
   
           {/* <div className="mt-4"> */}
-            <h2 className="sr-only">Recent orders</h2>
+            <h2 className="sr-only">Recent order</h2>
             <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
               <div className="flex justify-between pb-7">
-            <h1 className=" text-3xl my-4 ml-6  font-bold tracking-tight text-sec-light-orange ">New orders</h1>
+                {notYetAcceptedOrders.length===0?(<h1 className=" text-3xl my-4 ml-6  font-bold tracking-tight text-sec-light-orange ">No new orders</h1>):(
+            <h1 className=" text-3xl my-4 ml-6  font-bold tracking-tight text-sec-light-orange ">New orders</h1>)}
             <div className="flex">
               <OrdersSearchModal items={startCookingOrders}/>
             <QrModal qrOpen={qrOpen} setQrOpen={setQrOpen} />
@@ -194,13 +196,13 @@ const [newOrder, setNewOrder] = useState()
             </div>
 
             <div className="max-w-lg  mx-auto ">
-            <Carousel  showStatus={false} showThumbs={false}> 
+            <Carousel infiniteLoop={true} showStatus={false} showThumbs={false}> 
         
 
 
-              {loading===false?(notYetAcceptedOrders.map((order)=>(
+              {loading?(<div className="w-full px-6"> <AllShopsLoader/></div>):(notYetAcceptedOrders.map((order)=>(
                 <NotYetAcceptedOrderCard key={order._id} order={order}/>
-              ))):(<AllShopsLoader/>)}
+              )))}
               {/* {notYetAcceptedOrders&&notYetAcceptedOrders.map((order)=>(
                 <NotYetAcceptedOrderCard key={order._id} order={order}/>
                 ))} */}
@@ -223,21 +225,24 @@ const [newOrder, setNewOrder] = useState()
 
            
 
-                {loading===false?(startCookingOrders.map((order) => (
+                {loading?(<div className="w-full h-96 px-6"> <AllShopsLoader/></div>):(startCookingOrders.map((order) => (
       <SingleOrderCard   key={order._id}  order={order}/>)
-      )):(<AllShopsLoader/>)}
+      ))}
               </div>
               
               </div>
 
           <div className="relative bg-white pb-10">    
-          {/* <div className="bg-black/40 z-10 absolute w-full h-full top-0"></div> */}
+          <div className="bg-black/40 z-10 absolute w-full h-full top-0"></div>
              
             <h1 className=" text-3xl px-7 py-10  font-bold tracking-tight text-pri-text-gray ">Future Orders</h1>
 
               <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {futureOrders.map((order) => (
+                {/* {futureOrders.map((order) => (
       <SingleOrderCard  key={order._id}  order={order}/>
+      ))} */}
+          {loading?(<div className="w-full px-6"> <AllShopsLoader/></div>):(futureOrders.map((order) => (
+      <SingleOrderCard   key={order._id}  order={order}/>)
       ))}
               </div>
          

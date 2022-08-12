@@ -19,7 +19,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const AdvSearch = ({items}) => {
+const AdvSearch = () => {
     const [query, setQuery] = useState('')
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
@@ -35,6 +35,7 @@ const AdvSearch = ({items}) => {
           dispatch(clearErrors());
            }
       if(query.length>1){
+      
           dispatch( getSearchedShops(page,pageSize,query))
       }
       if(query.length<1){
@@ -48,6 +49,10 @@ const AdvSearch = ({items}) => {
     // })
     // console.log(filteredItems)
    
+    // const boldSearchString=(str, substr)=>{
+    //   var strRegExp = new RegExp(substr, 'g');
+    //   return str.replace(strRegExp, '<b>'+substr+'</b>');
+    // }
   
     return (<>
      <div className=" flex mx-auto md:max-w-2xl lg:max-w-3xl items-center  justify-center">
@@ -160,7 +165,8 @@ const AdvSearch = ({items}) => {
                       />
                       </div>
                       <div className="flex flex-col">
-                      <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{shop.name}</span>
+                      <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>
+                       {shop.name}</span>
                       <span className="font-thin ml-3">shop</span>
                       </div>
                     </div>

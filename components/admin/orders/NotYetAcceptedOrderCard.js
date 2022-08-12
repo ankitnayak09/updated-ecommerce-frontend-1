@@ -108,7 +108,7 @@ const dispatch = useDispatch()
                             {/* </a>
                             </Link> */}
                       {/* </div> */}
-                    </div>
+                    </div> 
 
                     <div className="mt-6 ">
                     {order.orderInfo.description?(  
@@ -118,7 +118,7 @@ const dispatch = useDispatch()
                                e.preventDefault()
                                handleRejectOrder(order._id)
                                }} className=" self-center rounded-md  text-center py-2 w-36  bg-sec-light-orange text-pri-orange font-bold cursor-pointer">
-                        
+                          
                           Reject
                         </button>
                         <div className=" flex justify-center">

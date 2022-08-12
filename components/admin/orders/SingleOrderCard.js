@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 
 import date from 'date-and-time';
@@ -8,6 +8,7 @@ import { updateOrder } from "../../../actions/orderAction";
 const SingleOrderCard = ({order,}) => {
     const dispatch = useDispatch()
   const router=useRouter()
+  const [clickConfirmed,setClickConfirmed]=useState(false)
   const shopId=router.query.shopId
     const handleDelivered=(orderId)=>{
       // e.preventDefault()
@@ -104,12 +105,17 @@ const SingleOrderCard = ({order,}) => {
                         cancel
                       </div>
                       <div className=" flex justify-center">
-                        
+                        {clickConfirmed?(
                          <button onClick={(e)=>{
                              e.preventDefault()
                              handleDelivered(order._id)}} className="pri-button w-36 text-center self-center py-2 "> 
-          Delivered
-          </button>
+          Click Again
+          </button>):(
+               <button onClick={()=>{
+                setClickConfirmed(true)}} className="pri-button w-36 text-center self-center py-2 "> 
+Delivered
+</button>
+          )}
                       </div>
                     </div>
                   </div>

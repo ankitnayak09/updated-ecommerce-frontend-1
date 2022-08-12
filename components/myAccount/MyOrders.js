@@ -1,13 +1,15 @@
-import { Fragment, useEffect } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { DotsVerticalIcon } from '@heroicons/react/outline'
-import { CheckCircleIcon } from '@heroicons/react/solid'
+import { Fragment, useEffect, useState } from 'react'
+// import { Menu, Transition } from '@headlessui/react'
+// import { DotsVerticalIcon } from '@heroicons/react/outline'
+// import { CheckCircleIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { clearErrors, myOrders } from '../../actions/orderAction'
 import Link from 'next/link'
 import ShopReview from '../reviews/ShopReview'
 import Image from 'next/image'
+import AllShopsLoader from '../loading/AllShopsLoader'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 // const orders = [
 //   {
@@ -46,10 +48,10 @@ function classNames(...classes) {
 const MyOrders = () => {
     const dispatch=useDispatch()
     
-    const {loading,error,orders} = useSelector(state => state.myOrders)
+    const {loading,error,orders,ordersCount,page} = useSelector(state => state.myOrders)
     const {user} = useSelector(state => state.user)
     const {error:reviewError,success}=useSelector(state => state.newShopReview)
-
+    const [pageSize,setpageSize]=useState(6)
 
     useEffect(() => {
     if(error){
@@ -57,9 +59,18 @@ const MyOrders = () => {
         dispatch(clearErrors())
         // console.log("mmmmmm")
     }
-    dispatch(myOrders())
+    if(page===1){
+    dispatch(myOrders(page,pageSize))
+    }
     }, [dispatch,toast,error])
 
+    const fetchMoreData = () => {
+      // setpage(page+1),
+    
+      dispatch(myOrders(page,pageSize))
+      
+      loading
+    };
  
     useEffect(() => {
       if(reviewError){
@@ -89,9 +100,15 @@ const MyOrders = () => {
           <div className="mt-4">
             <h2 className="sr-only">Recent orders</h2>
             <div className="max-w-7xl  mx-auto ">
-              <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
               {/* <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0"> */}
-                {orders.map((order) => (
+              <InfiniteScroll
+          dataLength={orders.length}
+          next={fetchMoreData}
+          hasMore={orders.length!==ordersCount}
+          loader={<AllShopsLoader/>}
+        >
+              <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+                {orders&&orders.map((order) => (
                   <div
                     key={order._id}
                     className="bg-white border border-gray-200 drop-shadow-xl rounded-medium mx-5 md:mx-3 sm:border"
@@ -279,7 +296,9 @@ const MyOrders = () => {
                     </ul>
                   </div>
                 ))}
+
               </div>
+</InfiniteScroll>
             </div>
           </div>
         </div>

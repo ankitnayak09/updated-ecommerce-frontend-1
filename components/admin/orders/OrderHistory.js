@@ -9,6 +9,7 @@ import { CheckIcon,FilterIcon } from '@heroicons/react/solid'
 
 import OrderHistoryCard from "./OrderHistoryCard"
 import AllShopsLoader from "../../loading/AllShopsLoader"
+import InfiniteScroll from "react-infinite-scroll-component"
 
 const filters = [
     { name: 'last 24 hrs',days:"1" },
@@ -25,8 +26,9 @@ const OrderHistory = () => {
     const shopId=router.query.shopId
 
     const [selected, setSelected] = useState()
+    const [pageSize,setpageSize]=useState(6)
 
-    const {loading,error,orders} = useSelector(state => state.adminOrdersHistory)
+    const {loading,error,orders,page,ordersCount} = useSelector(state => state.adminOrdersHistory)
 
     useEffect(() => {
         if(error){
@@ -34,10 +36,26 @@ const OrderHistory = () => {
             dispatch(clearErrors())
         
         }
-        if(shopId){
-     dispatch(adminOrdersHistory(shopId,selected?.days))
+        if(shopId&&page==1){
+     dispatch(adminOrdersHistory(page,pageSize,shopId,selected?.days))
         }
     }, [dispatch,toast,error,shopId,selected])
+
+    useEffect(() => {
+      if(selected){
+      dispatch({type:"CLEAR_ADMIN_ORDERS_HISTORY"})
+   
+      dispatch(adminOrdersHistory(page=1,pageSize,shopId,selected?.days))
+      }
+    }, [selected])
+
+    const fetchMoreData = () => {
+      // setpage(page+1),
+    
+      dispatch(adminOrdersHistory(page,pageSize,shopId,selected?.days))
+      
+      loading
+    };
     return (
         
              <div className="bg-white z-10 relative   rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-10">
@@ -109,13 +127,26 @@ const OrderHistory = () => {
 
 
                  </div>
-               <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+                 <InfiniteScroll
+          dataLength={orders.length}
+          next={fetchMoreData}
+          hasMore={orders.length!==ordersCount}
+          loader={<AllShopsLoader/>}
+        >
+               <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-28 ">
                {/* <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0"> */}
-              {loading===false?(orders.map((order)=>(
+              {/* {loading===false?(orders.map((order)=>(
                 <OrderHistoryCard key={order._id} order={order}/>
-              ))):(<AllShopsLoader/>)}
+              ))):(<AllShopsLoader/>)} */}
+                {orders.map((order) => (
+     <OrderHistoryCard key={order._id} order={order}/>)
+      )}
+                  {/* {loading?(<div className="w-full px-6"> <AllShopsLoader/></div>):(orders.map((order) => (
+     <OrderHistoryCard key={order._id} order={order}/>)
+      ))} */}
 
             </div>
+            </InfiniteScroll>
         </div>
     )
 }

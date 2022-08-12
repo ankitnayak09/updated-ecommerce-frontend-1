@@ -21,11 +21,11 @@ const Analytics = () => {
             </div>
             
           
-            <div className="flex w-full ">
-            <div className="w-3/4 chart-border ">
+            <div className="md:flex w-full ">
+            <div className="md:w-3/4  chart-border ">
             <Chart height={'600px'}   chartId={'62d8e61e-2e57-4f15-8e92-7c6e1087f52c'}/>
             </div>
-            <div className="w-1/4 divide-y-2 chart-border">
+            <div className="md:w-1/4  divide-y-2 chart-border">
             <Chart height={'200px'}   chartId={'789ebc5c-63e6-48cb-a19d-2879137863cb'}/>
             <Chart height={'200px'}   chartId={'62d827e4-f1eb-4bac-81dc-568118ca71af'}/>
             <Chart height={'200px'}   chartId={'62d90f49-8bfb-4fed-89ab-1bcddf2fb380'}/>

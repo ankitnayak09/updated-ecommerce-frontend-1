@@ -9,7 +9,7 @@ export const googleSignIn=(tokenId)=>async(dispatch)=>{
         // console.log(tokenId)
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
-        const{data}=await axios.post(`http://localhost:4000/api/v1/googleSignIn`,{tokenId},config)
+        const{data}=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/googleSignIn`,{tokenId},config)
    
         dispatch({
             type:"GOOGLE_SIGNIN_SUCCESS",
@@ -38,11 +38,11 @@ export const loadUser=(location)=>async(dispatch)=>{
         
 
         let {data}=await axios.get(
-            `http://localhost:4000/api/v1/me`,{withCredentials: true}
+            `${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/me`,{withCredentials: true}
           
-        );
+        );  
         data.location=location
-        // console.log(location)
+        // console.log(location)  
         dispatch({type:"LOAD_USER_SUCCESS",payload:data});
     }catch(error){
      
@@ -59,7 +59,7 @@ export const updateFavourites=(shopId)=>async(dispatch)=>{
         
 
         let {data}=await axios.put(
-            `http://localhost:4000/api/v1/me/favourites/update`,{shopId},{withCredentials: true}
+            `${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/me/favourites/update`,{shopId},{withCredentials: true}
           
         );
       
@@ -78,7 +78,7 @@ export const allFavourites=()=>async(dispatch)=>{
      
 
         let {data}=await axios.get(
-            `http://localhost:4000/api/v1/me/favourites/`,{withCredentials: true}
+            `${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/me/favourites/`,{withCredentials: true}
           
         );
     
@@ -97,7 +97,7 @@ export const logout=()=>async(dispatch)=>{
         
         
         await axios.get(
-            `http://localhost:4000/api/v1/logout`,{withCredentials: true}
+            `${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/logout`,{withCredentials: true}
             
             );
             dispatch({type:"LOGOUT_SUCCESS"});

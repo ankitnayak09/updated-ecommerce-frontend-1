@@ -91,9 +91,9 @@ const TopNavbar = () => {
         <div className="flex flex-col mx-auto md:ml-9">
         {isAuthenticated===true&&<>
 
-          <p className='text-lg'>hello <span className="font-bold"> Mohith</span>👋</p>
+          <p className='text-lg'>hello <span className="font-bold"> { user.name.split(' ')[0]}</span>👋</p>
           <p className="text-center flex text-secondary-text-gray text-sm">
-          <LocationMarkerIcon className="w-4 fill-pri-orange mr-1"/>  {isGeolocationEnabled?("current location"):("enable location access ")}
+          <LocationMarkerIcon className="w-4 fill-pri-orange mr-1"/>  {isGeolocationEnabled?("current location"):("please enable location access ")}
             </p>
     </>  }
         </div>

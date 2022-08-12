@@ -71,9 +71,9 @@ const ShopDetails = () => {
       </Switch>
 </div>
             </div>
-
-        <div className="flex w-96   mx-auto p-4 bg-pri-orange/40 rounded-tr-medium rounded-bl-medium rounded-tl-small rounded-br-small justify-between my-8 text-white"> 
-        <span className="font-bold text-center text-3xl  flex flex-col">12 <p className="font-light text-base">Active Orders</p> </span>
+ 
+        <div className="flex w-96   mx-auto p-6 bg-pri-orange/40 rounded-tr-medium rounded-bl-medium rounded-tl-small rounded-br-small justify-between my-8 text-white"> 
+        <span className="font-bold text-center text-3xl  flex flex-col">{shop.products?.length} <p className="font-light text-base">Total products</p> </span>
   
         <span className=" border-x-2 px-7 font-bold text-center text-3xl  flex flex-col"><p className="flex"> {shop.ratings} <StarIcon className="w-9 "/> </p> <p className="font-light text-base">{shop?.reviews?.length} ratings</p> </span>
 

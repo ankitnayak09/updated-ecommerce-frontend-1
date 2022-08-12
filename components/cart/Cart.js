@@ -52,6 +52,7 @@ const timeOptionsLists = [
     const [Suggestion,setSuggestion]=useState("")
     const [WantAt,setWantAt]=useState("")
     const [CartBtnDisabled,setCartBtnDisabled]=useState(false)
+    const [scriptLoaded,setScriptLoaded]=useState(false)
 
     const [SubTotal,setSubTotal]=useState(0)
     const [ConvenienceCharge,setConvenienceCharge]=useState(Number(process.env.NEXT_PUBLIC_CHARGE_PER_HOUR))
@@ -123,7 +124,12 @@ const timeOptionsLists = [
     },[WantAt,Suggestion])
 
 
+useEffect(() => {
+ if(window.Paytm && window.Paytm.CheckoutJS){
 
+   setScriptLoaded(true)
+ }
+}, [window.Paytm ])
     
     // initiate papyment
     const initiatePayment=async(e)=>{
@@ -227,7 +233,8 @@ body:JSON.stringify(data)
         }
       };
 
-     
+      //  if(window.Paytm && window.Paytm.CheckoutJS){
+      //     window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
               window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
                   // after successfully updating configuration, invoke JS Checkout
                  
@@ -238,7 +245,7 @@ body:JSON.stringify(data)
               });
 
 
-
+          // })}
 
 
               
@@ -274,7 +281,7 @@ body:JSON.stringify(data)
 {/* <Script type="application/javascript"  crossorigin="anonymous" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${cartShopMid}.js`} />  */}
 
 
-<Script type="application/javascript" crossorigin="anonymous" strategy="lazyOnload" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} /> 
+<Script type="application/javascript" crossorigin="anonymous" strategy="lazyOnload" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} onLoad={()=>{setScriptLoaded(true)}}   /> 
 
 
  
@@ -302,7 +309,9 @@ body:JSON.stringify(data)
               </button>
               </Link>
               <div className="flex justify-center flex-col ">
+              <Link href={`/shop/${cartShop}`}>
           <p className='text-lg font-bold'>{cartShopName}</p>
+          </Link>
           <p className="text-center text-secondary-text-gray text-xs">LPU</p>
         </div>
         <div></div> 
@@ -528,6 +537,7 @@ body:JSON.stringify(data)
         
             </div>
             ):(
+              scriptLoaded&&
 
 <button disabled={CartBtnDisabled}  onClick={initiatePayment}  className="flex cursor-pointer fixed bottom-0 left-0 shadow-test rounded-b-primary justify-center rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
 {CartBtnDisabled?(

@@ -1,7 +1,7 @@
 
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
+import { PlusIcon, XIcon } from '@heroicons/react/outline'
 import NotYetAcceptedOrderCard from './NotYetAcceptedOrderCard'
 
 
@@ -19,7 +19,7 @@ const NewOrderModal = ({open,setOpen,order}) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur transition-opacity" />
             </Transition.Child>
   
             {/* This element is to trick the browser into centering the modal contents. */}
@@ -35,20 +35,20 @@ const NewOrderModal = ({open,setOpen,order}) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="relative md:w-3xl inline-block align-bottom bg-white rounded-lg px-0 w-full pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="relative md:w-3xl inline-block align-bottom bg-white rounded-3xl px-0 w-full pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                 <div className=" sm:block absolute top-0 right-0 pt-4 pr-4">
                   <button
                     type="button"
-                    className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="bg-white  text-gray-400 hover:text-gray-500 "
                     onClick={() => setOpen(false)}
-                  >
+                  > 
                     <span className="sr-only">Close</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
                 <div className="sm:flex flex-col sm:items-start">
                   <div className="mx-auto   flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <ExclamationIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
+                    <PlusIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
                   <div className="mt-3 w-full text-center sm:mt-0 sm:text-left">
                     {/* <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">

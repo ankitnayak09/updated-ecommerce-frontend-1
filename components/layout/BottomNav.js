@@ -10,6 +10,7 @@ import { useSelector } from "react-redux"
 
 const BottomNav = () => {
     const {cartItems,cartTotal,cartShopName} = useSelector(state => state.cart)
+    const {user} = useSelector(state => state.user)
 
     const router=useRouter()
 
@@ -46,8 +47,8 @@ const BottomNav = () => {
               <Link href="/cart" >
             
             <div  className="flex shadow-test rounded-b-primary justify-between rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
-              <p className=" text-white font-semibold text-center" > Total - {cartTotal} <span className="text-sm"> ({cartShopName})</span></p>
-              <p className=" text-white font-semibold text-center" >Go to cart</p>
+              <p className=" text-white font-semibold text-center" > Total - ₹{cartTotal} <span className="text-sm"> ({cartShopName})</span></p>
+              <p className=" text-white underline-offset-0 font-semibold text-center" >Go to cart</p>
              
             </div>
             </Link>
@@ -57,7 +58,9 @@ const BottomNav = () => {
        <div className="backdrop-blur-3xl bg-white/50 border-t-2 py-3 flex justify-between"> 
 <Link href="/" >
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
-        <CakeIcon className="inline-block mb-1 w-8"/>
+        <CakeIcon className={classNames(
+                    router.pathname==="/"?"text-pri-orange ":"","inline-block mb-1 w-8"
+                  )}/>
         {/* <CakeIcon className="inline-block mb-1 w-8 "/> */}
         <span className="tab tab-home block text-xs">Food</span>
 			</a>
@@ -83,13 +86,14 @@ const BottomNav = () => {
             </Link>
 
 
-
+            {user?.isSuperAdmin&&
             <Link href="/superAdmin/shops" >
        <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center self-center ">
         <LibraryIcon className="inline-block mb-1 w-8"/>
         <span className="tab tab-home block text-xs">superAdmin</span>
 			</a>
             </Link>
+}
        </div>
             </section>
         </div>

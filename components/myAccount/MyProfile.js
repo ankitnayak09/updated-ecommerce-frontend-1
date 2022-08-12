@@ -2,13 +2,60 @@ import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux"
 import { ArrowRightIcon,PlusIcon } from '@heroicons/react/solid'
 import Link from "next/link"
-import { logout } from "../../actions/userAction"
+import { loadUser, logout } from "../../actions/userAction"
 import { HeartIcon } from "@heroicons/react/outline"
+import { useGeolocated } from "react-geolocated"
+import { useEffect } from "react"
+import { toast } from "react-toastify"
 
 
 const MyProfile = () => {
     const {user,adminOf,loading,isAuthenticated}=useSelector(state=>state.user)
+    const {isDeleted}=useSelector(state=>state.updateShop)
+    const {error,success}= useSelector(state => state.newShop);
      const dispatch = useDispatch()
+
+     const { coords, isGeolocationAvailable, isGeolocationEnabled} =
+     useGeolocated({
+         positionOptions: { 
+             enableHighAccuracy: true,
+             timeout: Infinity,
+         },
+         userDecisionTimeout: 5000,
+     }); 
+
+     useEffect(() => {
+      // console.log(success)
+        if(isDeleted||success){
+            if(isDeleted){
+                toast.success("Shop deleted, please reload"),
+                dispatch({type:"DELETE_SHOP_RESET"});
+            }
+            if(success){
+                toast.success("shop created");
+            dispatch({type:"NEW_SHOP_RESET"});
+            }
+            if(isGeolocationAvailable==true&&isGeolocationEnabled==true&&coords){
+                console.log("_app.js",coords)
+                const location={ 
+                  latitude:coords.latitude,
+                  longitude:coords.longitude
+                }
+              
+                dispatch(loadUser(location))  
+          
+                localStorage.setItem("userLocation",JSON.stringify({
+                  latitude:coords.latitude,
+                  longitude:coords.longitude
+                }))
+              } 
+            //   if(isGeolocationAvailable==false||isGeolocationEnabled==false){
+                else{
+                dispatch(loadUser()) 
+              }
+        }
+       }, [dispatch,isDeleted,success])
+
     return ( 
         <>
         {loading===false&&
@@ -54,11 +101,11 @@ const MyProfile = () => {
             </div>
 
             <div className="divide-y-2  divide-white/40 flex-grow  pl-5 ">
-                {adminOf.map((rev)=>
+                 {adminOf.length!==0 ?(adminOf.map((rev)=>
                  <Link key={rev._id} href={`/${rev._id}/admin/orders`}>
                 <div className="py-2 cursor-pointer flex justify-between">{rev.name} <ArrowRightIcon className="w-6 ml-2 mr-4"/> </div> 
                 </Link>
-                )}
+                )):( <p className=" mt-2 italic  self-center">~no shops yet</p> )}
             </div>
             <Link href={`/newShop`}>
             <button className="bg-sec-light-orange m-2 rounded-tl-md rounded-br-md rounded-bl-medium rounded-tr-medium p-2 absolute bottom-0 left-0 text-pri-text-light-gray"><PlusIcon className="w-6  "/></button>

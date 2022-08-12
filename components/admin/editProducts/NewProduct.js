@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { clearErrors, createProduct, getAdminProducts } from "../../../actions/productActions";
 import imageCompression from 'browser-image-compression';
 
+import categoriesJson from "../../../json/categories.json"
 
 const NewProduct = ({setIsOpen}) => {
 
@@ -25,15 +26,8 @@ const NewProduct = ({setIsOpen}) => {
     const [imagePreview, setImagePreview] = useState("");
     const [isPureVeg, setIsPureVeg] = useState();
     
-    const categories=[
-        "burger",
-        "juice",
-        "pizza",
-        "dessert",
-        "chinese",
-        "southIndian"
-    ]
 
+    const categories=categoriesJson.categoriesOptions
 
     useEffect(() => {
      if(error){
@@ -192,7 +186,7 @@ const NewProduct = ({setIsOpen}) => {
                   />
 
               <div className="flex flex-col">
-                <span className="text-sm text-pri-text-light-gray italic">auto renew stock daily?</span>
+              
               <Switch
         checked={enabled}
         // checked={enabled}
@@ -208,6 +202,7 @@ const NewProduct = ({setIsOpen}) => {
             pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
         />
       </Switch>
+      <span className="text-sm text-pri-text-light-gray italic">auto renew stock daily?</span>
               </div>
 
                   

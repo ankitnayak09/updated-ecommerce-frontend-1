@@ -6,32 +6,26 @@ import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
 import { toast } from 'react-toastify'
 import { TrashIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteProduct, getAdminProducts } from '../../../actions/productActions'
+import { deleteShop } from '../../../actions/shopAction'
+import { useRouter } from 'next/router'
 
-
-const DeleteProductModal = ({name,shopId,productId}) => {
-
+const DeleteShopModal = ({shopId,name}) => {
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
-
-//      const {isDeleted}= useSelector(state => state.updateProduct);
-
-
-//         useEffect(() => {
-     
-//       if(isDeleted){
-            
-    
-//         dispatch({type:"DELETE_PRODUCT_RESET"})
-//     dispatch(getAdminProducts(shopId))
-//  }
-//     }, [dispatch,toast,isDeleted])
-
+    const router=useRouter()
     return (
+        
 <>
-<TrashIcon onClick={()=>{
-    setOpen(true)
-  }} className="w-8 cursor-pointer fill-pri-orange "/>
+<button
+       type="button"
+       onClick={(e)=>(
+        setOpen(true)
+       )
+       }
+       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-bold text-pri-orange hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+     >
+       Delete 
+     </button>
 
 
         <Transition.Root show={open} as={Fragment}>
@@ -79,11 +73,11 @@ const DeleteProductModal = ({name,shopId,productId}) => {
                 </div>
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    Delete this product <span className="font-bold"> "{name}"</span>
+                    Delete this shop <span className="font-bold"> "{name}"</span>
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this product? This action cannot be undone.
+                    <p className=" text-pri-text-light-gray">
+                      Are you sure you want to delete this shop and its products? This action cannot be undone.
                     </p>
                   </div>
                 </div>
@@ -93,8 +87,9 @@ const DeleteProductModal = ({name,shopId,productId}) => {
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => {
-                        dispatch(deleteProduct(shopId,productId)),
-                       
+                        dispatch(deleteShop(shopId)),
+                        // toast.success("Shop deleted, please reload"),
+                        router.push('/myAccount')
                     setOpen(false)}}
                 >
                   Delete
@@ -116,4 +111,4 @@ const DeleteProductModal = ({name,shopId,productId}) => {
     )
 }
 
-export default DeleteProductModal
+export default DeleteShopModal

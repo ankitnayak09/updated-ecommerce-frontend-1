@@ -8,6 +8,7 @@ import { clearErrors, getAdminProducts, updateProduct } from "../../../actions/p
 
 import imageCompression from 'browser-image-compression';
 
+import categoriesJson from "../../../json/categories.json"
 
 const EditProduct = ({setIsOpen,product}) => {
 
@@ -27,15 +28,7 @@ const EditProduct = ({setIsOpen,product}) => {
     const [enabled, setEnabled] = useState(product.enableStockRenew)
     const [isPureVeg, setIsPureVeg] = useState();
     
-    const categories=[
-        "burger",
-        "juice",
-        "pizza",
-        "dessert",
-        "chinese",
-        "southIndian"
-    ]
-
+    const categories=categoriesJson.categoriesOptions
 
     useEffect(() => {
      if(error){
@@ -203,7 +196,7 @@ const EditProduct = ({setIsOpen,product}) => {
                   />
 
               <div className="flex flex-col">
-                <span className="text-sm text-pri-text-light-gray italic">auto renew stock daily?</span>
+               
               <Switch
         checked={enabled}
         // checked={enabled}
@@ -219,12 +212,13 @@ const EditProduct = ({setIsOpen,product}) => {
             pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
         />
       </Switch>
+      <span className="text-sm text-pri-text-light-gray italic">auto renew stock daily?</span>
               </div>
 
                   
                 </div>
               </div>
-            </div>
+            </div> 
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="about" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">

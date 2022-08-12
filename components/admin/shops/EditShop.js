@@ -3,7 +3,9 @@ import  { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify";
-import { adminShopDetails, clearErrors, updateShop } from "../../../actions/shopAction";
+import { adminShopDetails, clearErrors, deleteShop, updateShop } from "../../../actions/shopAction";
+import categoriesJson from "../../../json/categories.json"
+import DeleteShopModal from "./DeleteShopModal";
 
 const EditShop = ({setIsOpen}) => {
 
@@ -33,14 +35,16 @@ const EditShop = ({setIsOpen}) => {
     const [imagesPreview, setImagesPreview] = useState();
     const [isPureVeg, setIsPureVeg] = useState();
     
-    const categories=[
-        "burger",
-        "juice",
-        "pizza",
-        "dessert",
-        "chinese",
-        "southIndian"
-    ]
+    // const categories=[
+    //     "burger",
+    //     "juice",
+    //     "pizza",
+    //     "dessert",
+    //     "chinese",
+    //     "southIndian"
+    // ]
+    const categories=categoriesJson.categoriesOptions
+    
     const workingDays=[
         "monday",
         "tuesday",
@@ -217,7 +221,7 @@ const EditShop = ({setIsOpen}) => {
              <input
                type="text"
                name="name"
-              placeholder={shop.paymentMethods.paytmMid}
+              placeholder={shop.paymentMethods?.paytmMid}
                // value={name}
                onChange={(e)=>{setPaytmMid(e.target.value)}}
               
@@ -237,7 +241,7 @@ const EditShop = ({setIsOpen}) => {
              <input
                type="text"
                name="name"
-              placeholder={shop.paymentMethods.paytmMkey}
+              placeholder={shop.paymentMethods?.paytmMkey}
                // value={name}
                onChange={(e)=>{setPaytmMkey(e.target.value)}}
               
@@ -517,7 +521,7 @@ const EditShop = ({setIsOpen}) => {
                        name="isVegitarian"
                        type="radio"
                        value={false}
-                      
+                       defaultChecked={!shop.isPureVeg}
                        onChange={(e)=>{setIsPureVeg(e.target.value)}}
                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                      />
@@ -552,21 +556,25 @@ const EditShop = ({setIsOpen}) => {
 
  <div className="pt-5">
    <div className="flex justify-end">
-     <button
+     {/* <button
        type="button"
-       onClick={(e)=>(e.preventDefault(), 
-        setIsOpen(false)
+       onClick={(e)=>(
+        //  e.preventDefault(), 
+        // setIsOpen(false)
+        dispatch(deleteShop(shop._id)),
+        router.push('/')
        )
        }
-       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-bold text-pri-orange hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
      >
-       Cancel
-     </button>
+       Delete 
+     </button> */}
+     <DeleteShopModal shopId={shop._id} name={shop.name}/>
      <button
        type="submit"
        disabled={loading?true:false}
        onClick={updateShopSubmitHandler}
-       className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+       className="bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow w-full ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
      >
          {loading?(     <>    <span 
         className="w-6 my-auto mr-3 aspect-square border-4 border-white border-dashed rounded-full animate-spin"></span>

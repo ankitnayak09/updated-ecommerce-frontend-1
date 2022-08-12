@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import LoadingBar from 'react-top-loading-bar'
 import { useGeolocated } from 'react-geolocated';
 
-
+import Image from 'next/image';
 
 // function MyApp({ Component, pageProps }) {
 //   const [showChild, setShowChild] = useState(false);
@@ -129,7 +129,7 @@ function MyApp({ Component, pageProps }) {
         waitingTime={400}
         onLoaderFinished={() => setProgress(0)}
       />
-{loading==false&&
+{loading==false?
    <GoogleOAuthProvider clientId="454780861603-r3tnk1o4oa7geftk4mpl49ps8okcmp55.apps.googleusercontent.com">
       <ToastContainer
 position="bottom-center"
@@ -148,7 +148,14 @@ pauseOnHover
         {/* </Layout> */}
       
         </GoogleOAuthProvider>
-     } 
+   :(
+     <div className="flex flex-col h-screen bg-white w-full justify-center ">
+     <div className="block  self-center ">
+         <Image  src="/loading/dotsLoading.gif" alt="loading" width={"280px"} height={"280px"} />
+     </div>
+     <h1 className='text-center text-lg italic'>Loading, please wait</h1>
+     </div>
+   )  } 
 </>  )
 }
 

@@ -62,7 +62,7 @@ export const adminAllOrdersReducer=createReducer({futureOrders:[],startCookingOr
     },
 
 })
-export const adminOrdersHistoryReducer=createReducer({orders:[]},{
+export const adminOrdersHistoryReducer=createReducer({orders:[],ordersCount:0,page:1},{
     ADMIN_ORDERS_HISTORY_REQUEST:(state)=>{
         state.loading=true;
   
@@ -70,13 +70,21 @@ export const adminOrdersHistoryReducer=createReducer({orders:[]},{
     ADMIN_ORDERS_HISTORY_SUCCESS:(state,action)=>{
         state.loading=false;
         // state.acceptedOrders=action.payload.acceptedOrders;
-        state.orders=action.payload.ordersHistory;
-     
+        // state.orders=action.payload.ordersHistory;
+
+        state.orders=state.orders.concat(action.payload.ordersHistory)
+        state.ordersCount=action.payload.ordersHistoryCount
+        state.page=state.page+1
   
     },
     ADMIN_ORDERS_HISTORY_FAIL:(state,action)=>{
         state.loading=false;
         state.error=action.payload 
+    },
+    CLEAR_ADMIN_ORDERS_HISTORY:(state,action)=>{
+        state.ordersCount=0
+        state.orders=[]
+        state.page=1
     },
  
     CLEAR_ERRORS:(state,action)=>{
@@ -141,14 +149,19 @@ export const adminOrderReducer=createReducer({},{
 
 
 
-export const myOrdersReducer=createReducer({orders:[]},{
+export const myOrdersReducer=createReducer({orders:[],ordersCount:0,page:1},{
     MY_ORDERS_REQUEST:(state)=>{
         state.loading=true;
+        state=state
         
     },
     MY_ORDERS_SUCCESS:(state,action)=>{
         state.loading=false;
-        state.orders=action.payload;
+        // state.orders=action.payload;
+
+        state.orders=state.orders.concat(action.payload.orders)
+        state.ordersCount=action.payload.ordersCount
+        state.page=state.page+1
   
     },
     MY_ORDERS_FAIL:(state,action)=>{

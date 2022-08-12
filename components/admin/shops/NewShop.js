@@ -1,4 +1,4 @@
-import  { useRouter } from "next/router";
+import   { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify";
@@ -6,6 +6,7 @@ import { clearErrors, createShop } from "../../../actions/shopAction";
 import Image from "next/image";
 import imageCompression from 'browser-image-compression';
 
+import categoriesJson from "../../../json/categories.json"
 
 const NewShop = () => {
 
@@ -28,16 +29,17 @@ const NewShop = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
-    const [isPureVeg, setIsPureVeg] = useState(false);
+    const [isPureVeg, setIsPureVeg] = useState();
     
-    const categories=[
-        "burger",
-        "juice",
-        "pizza",
-        "dessert",
-        "chinese",
-        "southIndian"
-    ]
+    const categories=categoriesJson.categoriesOptions
+    // const categories=[
+    //     "burger",
+    //     "juice",
+    //     "pizza",
+    //     "dessert",
+    //     "chinese",
+    //     "southIndian"
+    // ]
 
 
     useEffect(() => {
@@ -46,10 +48,10 @@ const NewShop = () => {
          dispatch(clearErrors())
      }
      if(success){
-         toast.success("shop created")
-         
-         router.push(`/myAccount`),
-         dispatch({type:"NEW_SHOP_RESET"})
+        //  toast.success("shop created");
+    
+         router.push(`/myAccount`)
+        //  dispatch({type:"NEW_SHOP_RESET"})
      }
     }, [dispatch,toast,error,router,success])
 
@@ -83,7 +85,7 @@ const NewShop = () => {
             myForm.append("images",img)
         })
         }
-        myForm.set("isPureVeg",isPureVeg);
+       { isPureVeg&& myForm.set("isPureVeg",isPureVeg)}
         myForm.set("paymentMethods",JSON.stringify({
             paytmMid,
             paytmMkey
@@ -402,7 +404,7 @@ const NewShop = () => {
                             id="nonVeg"
                             name="isVegitarian"
                             type="radio"
-                            checked
+                            
                             value={false}
                             onChange={(e)=>{setIsPureVeg(e.target.value)}}
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
@@ -445,11 +447,12 @@ const NewShop = () => {
             className=" bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow w-full py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
               
-     {loading?(     <>    <span 
+     {loading?(     <div className="flex w-full justify-center">    <span 
         className="w-6 my-auto mr-3 aspect-square border-4 border-white border-dashed rounded-full animate-spin"></span>
 
               <p className=" text-white text-lg font-semibold text-center" > just a sec, v r creating Shop </p>
-              </>):("Create Shop")}
+              </div>
+              ):("Create Shop")}
           </button>
         </div>
       </div>

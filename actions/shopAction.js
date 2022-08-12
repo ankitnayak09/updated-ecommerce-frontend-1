@@ -1,4 +1,5 @@
 import axios from "axios";
+// import Router from "next/router";
 
 
 export const getAllShops=(page,pageSize,location)=>async(dispatch)=>{
@@ -6,11 +7,11 @@ export const getAllShops=(page,pageSize,location)=>async(dispatch)=>{
         dispatch({
             type:"ALL_SHOP_REQUEST",
         });
-        let url=`http://localhost:4000/api/v1/shops?page=${page}&pageSize=${pageSize}`
+        let url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page}&pageSize=${pageSize}`
         
         if(location.latitude&&location.longitude){
            
-             url=`http://localhost:4000/api/v1/shops?page=${page}&pageSize=${pageSize}&latitude=${location.latitude}&longitude=${location.longitude}`
+             url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page}&pageSize=${pageSize}&latitude=${location.latitude}&longitude=${location.longitude}`
             
         }
 
@@ -39,16 +40,16 @@ export const getSuperAdminShops=(page,pageSize,shopStatus)=>async(dispatch)=>{
         dispatch({
             type:"SUPER_ADMIN_ALL_SHOP_REQUEST",
         });
-         let url=`http://localhost:4000/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}`
+         let url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}`
 
          if(shopStatus){
         
         if(shopStatus!=="All shops"){
            
-             url=`http://localhost:4000/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}&shopStatus=${shopStatus}`
+             url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}&shopStatus=${shopStatus}`
             
         }else{
-            url=`http://localhost:4000/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}`
+            url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops/superAdmin?page=${page}&pageSize=${pageSize}`
         }
     }
         // console.log(url)
@@ -78,7 +79,7 @@ export const getSuperAdminShops=(page,pageSize,shopStatus)=>async(dispatch)=>{
 //             type:"CATEGORY_SHOP_REQUEST",
 //         });
         
-//         const {data}=await axios.get(`http://localhost:4000/api/v1/shops?page=${page}&category=${category}&pageSize=${pageSize}`)
+//         const {data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops?page=${page}&category=${category}&pageSize=${pageSize}`)
 //         // console.log(data)
         
         
@@ -105,7 +106,7 @@ export const getSearchedShops=(page,pageSize,query)=>async(dispatch)=>{
             type:"SEARCH_SHOP_REQUEST",
         });
       
-        const{data}=await axios.get(`http://localhost:4000/api/v1/shops/advSearch?page=${page}&keyword=${query}&pageSize=${pageSize}`)
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shops/advSearch?page=${page}&keyword=${query}&pageSize=${pageSize}`)
         // console.log(data)
         
  
@@ -131,7 +132,7 @@ export const getShopDetails=(shopId)=>async(dispatch)=>{
         });
         // console.log(shopId)
 
-        const{data}=await axios.get(`http://localhost:4000/api/v1/shop/${shopId}`)
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/${shopId}`)
   
         dispatch({
             type:"SHOP_DETAILS_SUCCESS",
@@ -154,7 +155,7 @@ export const adminShopDetails=(shopId)=>async(dispatch)=>{
         });
         // console.log(shopId)
 
-        const{data}=await axios.get(`http://localhost:4000/api/v1/shop/${shopId}/admin`,{withCredentials: true})
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/${shopId}/admin`,{withCredentials: true})
   
         dispatch({
             type:"ADMIN_SHOP_DETAILS_SUCCESS",
@@ -178,8 +179,8 @@ export const createUpdateShopReview=(reviewData,shopId,orderId)=>async(dispatch)
         // console.log(shopId)
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
-        const{data}=await axios.put(`http://localhost:4000/api/v1/shop/${shopId}/review`,reviewData,config)
-        const{orderdata}=await axios.put(`http://localhost:4000/api/v1/order/${orderId}/review`,reviewData,config)
+        const{data}=await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/${shopId}/review`,reviewData,config)
+        const{orderdata}=await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/order/${orderId}/review`,reviewData,config)
 
   
         dispatch({
@@ -208,7 +209,7 @@ export const createShop=(shopData)=>async(dispatch)=>{
         // console.log(shopId)
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
-        const{data}=await axios.post(`http://localhost:4000/api/v1/shop/new`,shopData,config)
+        const{data}=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/new`,shopData,config)
       
 
   
@@ -216,6 +217,7 @@ export const createShop=(shopData)=>async(dispatch)=>{
             type:"NEW_SHOP_SUCCESS",
             payload:data
         });
+      
 
     }catch(error){
 
@@ -241,7 +243,7 @@ export const updateShop=(shopData,shopId)=>async(dispatch)=>{
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
 
-        const{data}=await axios.put(`http://localhost:4000/api/v1/shop/${shopId}`,shopData,config)
+        const{data}=await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/${shopId}`,shopData,config)
       
 
   
@@ -261,6 +263,37 @@ export const updateShop=(shopData,shopId)=>async(dispatch)=>{
 }
 
 
+
+//delete shop-admin
+export const deleteShop=(shopId)=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:"DELETE_SHOP_REQUEST",
+        });
+        // console.log(shopId+productData+productId)
+        const config={headers:{"Content-Type":"application/json"},withCredentials: true}
+
+
+        const{data}=await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/${shopId}`,config)
+      
+
+  
+        dispatch({
+            type:"DELETE_SHOP_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+
+        dispatch({
+            type:"DELETE_SHOP_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
+
+
 //update shop- superAdmin
 export const updateShopSuperAdmin=(shopData,shopId)=>async(dispatch)=>{
     try{
@@ -271,7 +304,7 @@ export const updateShopSuperAdmin=(shopData,shopId)=>async(dispatch)=>{
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
 
-        const{data}=await axios.put(`http://localhost:4000/api/v1/shop/${shopId}/superAdmin`,shopData,config)
+        const{data}=await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/shop/${shopId}/superAdmin`,shopData,config)
       
 
   

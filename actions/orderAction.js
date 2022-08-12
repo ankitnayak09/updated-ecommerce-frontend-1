@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const myOrders=()=>async(dispatch)=>{
+export const myOrders=(page,pageSize)=>async(dispatch)=>{
     try{
         dispatch({
             type:"MY_ORDERS_REQUEST",
@@ -8,11 +8,11 @@ export const myOrders=()=>async(dispatch)=>{
         const config={withCredentials: true}
 
 
-        const{data}=await axios.get(`http://localhost:4000/api/v1/orders/me`,config)
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/orders/me?page=${page}&pageSize=${pageSize}`,config)
   
         dispatch({
             type:"MY_ORDERS_SUCCESS",
-            payload:data.orders
+            payload:data
         });
 
     }catch(error){
@@ -32,7 +32,7 @@ export const adminAllOrders=(shopId)=>async(dispatch)=>{
         const config={withCredentials: true}
 
 
-        const{data}=await axios.get(`http://localhost:4000/api/v1/${shopId}/orders/`,config)
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/orders/`,config)
   
         dispatch({
             type:"ADMIN_ORDERS_SUCCESS",
@@ -49,7 +49,7 @@ console.log(error)
     }
 
 }
-export const adminOrdersHistory=(shopId,numOfDays)=>async(dispatch)=>{
+export const adminOrdersHistory=(page,pageSize,shopId,numOfDays)=>async(dispatch)=>{
     try{
         dispatch({
             type:"ADMIN_ORDERS_HISTORY_REQUEST",
@@ -58,9 +58,9 @@ export const adminOrdersHistory=(shopId,numOfDays)=>async(dispatch)=>{
 let url;
 // console.log(numOfDays)
 if(numOfDays){
-    url=`http://localhost:4000/api/v1/${shopId}/ordersHistory?numOfDays=${numOfDays}`
+    url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/ordersHistory?numOfDays=${numOfDays}&page=${page}&pageSize=${pageSize}`
 }else{
-    url=`http://localhost:4000/api/v1/${shopId}/ordersHistory/`
+    url=`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/ordersHistory?page=${page}&pageSize=${pageSize}`
 }
 
 
@@ -96,7 +96,7 @@ export const updateOrder=(orderData,shopId,orderId)=>async(dispatch)=>{
         const config={headers:{"Content-Type":"application/json"},withCredentials: true}
 
 
-        const{data}=await axios.put(`http://localhost:4000/api/v1/${shopId}/order/${orderId}`,orderData,config)
+        const{data}=await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/order/${orderId}`,orderData,config)
       
 
   
@@ -124,7 +124,7 @@ export const deleteOrders=(shopId,orderId)=>async(dispatch)=>{
         const config={withCredentials: true}
 
 
-        const{data}=await axios.delete(`http://localhost:4000/api/v1/${shopId}/order/${orderId}`,config)
+        const{data}=await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/order/${orderId}`,config)
   
         dispatch({
             type:"DELETE_ORDERS_SUCCESS",
@@ -152,7 +152,7 @@ export const getOrderDetails=(orderId,shopId)=>async(dispatch)=>{
         const config={withCredentials: true}
 
 
-        const{data}=await axios.get(`http://localhost:4000/api/v1/${shopId}/order/${orderId}`,config)
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/${shopId}/order/${orderId}`,config)
         // console.log(data)
   
         dispatch({

@@ -1,0 +1,58 @@
+{"categoriesList" : [
+    {
+      "id": 1,
+      "name": "pizza",
+ 
+      "imageSrc": "/categoriesPng/pizza.png"
+
+    },
+    {
+      "id": 2,
+      "name": "burger",
+ 
+      "imageSrc": "/categoriesPng/burger.png"
+    
+    },
+    {
+      "id": 3,
+      "name": "dessert",
+    
+      "imageSrc": "/categoriesPng/dessert.png"
+   
+    },
+    {
+      "id": 4,
+      "name": "juice",
+  
+      "imageSrc": "/categoriesPng/juice.png"
+   
+    }
+
+  ],
+  "hiddenCategoriesList":
+      [
+        {
+            "id": 4,
+            "name": "south Indian",
+          
+            "imageSrc": "/categoriesPng/southIndian.png"
+         
+          },
+          {
+            "id": 5,
+            "name": "chinese",
+        
+            "imageSrc": "/categoriesPng/chinese.png"
+         
+          }
+      ],
+      "categoriesOptions":[
+        "burger",
+        "juice",
+        "pizza",
+        "dessert",
+        "chinese",
+        "southIndian"
+    ]
+  
+}
