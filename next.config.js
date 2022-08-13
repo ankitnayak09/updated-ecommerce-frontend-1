@@ -16,7 +16,13 @@ const nextConfig = {
     domains:["tailwindui.com","picsum.photos","lh3.googleusercontent.com","res.cloudinary.com"],
     // loader: 'cloudinary',
     // path: 'https://res.cloudinary.com/mohith/image/upload/'
+  },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
   }
+
 }
 
 module.exports = nextConfig
