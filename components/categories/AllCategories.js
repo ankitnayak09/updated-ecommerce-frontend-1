@@ -2,7 +2,7 @@ import Link from "next/link"
 
 // import { Fragment, useEffect } from 'react'
 import { Disclosure, Transition } from '@headlessui/react'
-import { BellIcon,SearchIcon, ChevronDoubleDownIcon,ChevronDoubleUpIcon,ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline'
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline'
 import SingleCategoryCard from "./SingleCategoryCard"
 import categoriesJson from "../../json/categories.json"
 
