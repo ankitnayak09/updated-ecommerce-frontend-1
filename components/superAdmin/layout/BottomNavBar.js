@@ -15,11 +15,11 @@ const BottomNavBar = () => {
      
     
 
-   <div className="backdrop-blur-3xl border-t-2 bg-white/50  py-3 flex justify-between"> 
+   <div className="backdrop-blur-3xl border-t-2 bg-white/50  py-2 flex justify-between"> 
 
    <Link href="/" >
    <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
-    <HomeIcon className="inline-block mb-1 w-8"/>
+    <HomeIcon className="inline-block mb-1 w-7"/>
     <span className="tab tab-home block text-xs">Home</span>
         </a>
         </Link>
@@ -27,7 +27,7 @@ const BottomNavBar = () => {
 <Link href={`/superAdmin/analytics`} >
    <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
     <PresentationChartBarIcon className={classNames(
-                    router.pathname.includes("/analytics")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/analytics")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
     <span className="tab tab-home block text-xs">Analytics</span>
         </a>
@@ -36,7 +36,7 @@ const BottomNavBar = () => {
 <Link href={`/superAdmin/shops`} >
    <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
     <CakeIcon className={classNames(
-                    router.pathname.includes("/shops")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/shops")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
     <span className="tab tab-home block text-xs">All shops</span>
         </a>

@@ -8,14 +8,14 @@ const Analytics = () => {
         <div className="pb-20 bg-gray-50 absolute top-0 w-full h-[95vh] md:pt-28 md:h-full overflow-y-scroll">
            
          
-        <div className="flex w-full">
+        <div className=" md:flex w-full">
 
-<div className="w-1/2 chart-border">
+<div className="md:w-1/2 chart-border">
       
 
             <Chart autoRefresh={true}  maxDataAge={86400} height={'300px'}   chartId={'62d8f637-7336-4073-8042-9ef4a01c878b'}/>
             </div>
-            <div className="w-1/2 chart-border">
+            <div className="md:w-1/2 chart-border">
             <Chart height={'300px'}   chartId={'62d819d1-32ba-4ba2-8674-1d25def95221'}/>
             </div>
             </div>

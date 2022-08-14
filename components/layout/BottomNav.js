@@ -55,11 +55,11 @@ const BottomNav = () => {
             }
             </div>
 
-       <div className="backdrop-blur-3xl bg-white/50 border-t-2 py-3 flex justify-between"> 
+       <div className="backdrop-blur-3xl bg-white/50 border-t-2 py-2 flex justify-between"> 
 <Link href="/" >
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
         <CakeIcon className={classNames(
-                    router.pathname==="/"?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname==="/"?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
         {/* <CakeIcon className="inline-block mb-1 w-8 "/> */}
         <span className="tab tab-home block text-xs">Food</span>
@@ -69,7 +69,7 @@ const BottomNav = () => {
             <Link href="/search" >
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
         <SearchIcon className={classNames(
-                    router.pathname.includes("/search")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/search")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
         <span className="tab tab-home block text-xs">Search</span>
 			</a>
@@ -79,7 +79,7 @@ const BottomNav = () => {
             <Link href="/myAccount">
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center ">
         <UserCircleIcon className={classNames(
-                    router.pathname.includes("/myAccount")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/myAccount")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
         <span className="tab tab-home block text-xs">Account</span>
 			</a>
@@ -89,7 +89,7 @@ const BottomNav = () => {
             {user?.isSuperAdmin&&
             <Link href="/superAdmin/shops" >
        <a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center self-center ">
-        <LibraryIcon className="inline-block mb-1 w-8"/>
+        <LibraryIcon className="inline-block mb-1 w-7"/>
         <span className="tab tab-home block text-xs">superAdmin</span>
 			</a>
             </Link>

@@ -20,11 +20,11 @@ const BottomNavBar = () => {
 
         
 
-       <div className="backdrop-blur-3xl border-t-2 bg-white/50 py-3 flex justify-between"> 
+       <div className="backdrop-blur-3xl border-t-2 bg-white/50 py-2 flex justify-between"> 
 
        <Link href="/" >
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
-        <HomeIcon className="inline-block mb-1 w-8"/>
+        <HomeIcon className="inline-block mb-1 w-7"/>
         <span className="tab tab-home block text-xs">Home</span>
 			</a>
             </Link>
@@ -39,7 +39,7 @@ const BottomNavBar = () => {
 <Link href={`/${router.query.shopId}/admin/shopAccount`} >
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
         <UserCircleIcon className={classNames(
-                    router.pathname.includes("/shopAccount")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/shopAccount")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
         <span className="tab tab-home block text-xs">Shop Account</span>
 			</a>
@@ -48,7 +48,7 @@ const BottomNavBar = () => {
             <Link href={`/${router.query.shopId}/admin/orders`} >
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
         <TicketIcon className={classNames(
-                    router.pathname.includes("/orders")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/orders")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
         <span className="tab tab-home block text-xs">Orders</span>
 			</a>
@@ -57,7 +57,7 @@ const BottomNavBar = () => {
             <Link href={`/${router.query.shopId}/admin/menu`}>
        <a className="w-full focus:text-pri-orange  justify-center inline-block text-center self-center">
         <MenuAlt1Icon className={classNames(
-                    router.pathname.includes("/menu")?"text-pri-orange ":"","inline-block mb-1 w-8"
+                    router.pathname.includes("/menu")?"text-pri-orange ":"","inline-block mb-1 w-7"
                   )}/>
         <span className="tab tab-home block text-xs">Menu</span>
 			</a>
