@@ -72,7 +72,7 @@ const SingleShopCard = ({shop}) => {
             </div>
           <div className="bg-sec-light-orange   px-2 py-1 rounded-full flex flex-col self-center justify-between">
             <HeartIcon onClick={(e)=>{e.preventDefault(),dispatch(updateFavourites(shop._id))}} className={classNames(
-                    user?.favourites.includes(shop._id)&&"fill-pri-orange ","w-8 my-2 cursor-pointer text-sec-orange"
+                    user?.favourites.includes(shop._id)&&"fill-pri-orange ","w-6 my-2 cursor-pointer text-sec-orange"
                   )}/>
             {/* <ShareIcon className="w-4 my-2 cursor-pointer text-sec-orange"/> */}
             <ShopShareModal shopId={shop._id}/>

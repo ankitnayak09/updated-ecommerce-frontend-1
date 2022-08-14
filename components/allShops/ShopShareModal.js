@@ -8,7 +8,7 @@ const ShopShareModal = ({shopId}) => {
 const [open,setOpen]=useState(false)
 
     return (<>
-    <ShareIcon onClick={()=>setOpen(true)} className="w-7 my-2 cursor-pointer text-sec-orange"/>
+    <ShareIcon onClick={()=>setOpen(true)} className="w-5 my-2 cursor-pointer text-sec-orange"/>
         <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="fixed z-50 inset-0 overflow-y-auto" onClose={setOpen}>
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
