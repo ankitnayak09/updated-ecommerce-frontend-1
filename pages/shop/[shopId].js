@@ -105,13 +105,13 @@ if(shopId) {
             <p className="mt-1 text-sm text-sec-text-gray">{shop?.description} </p>
             </div>
 
-            <div className="flex h-20 w-60 self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
+            <div className="flex h-20 w-52 self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
               {/* <div className="rounded-full aspect-square flex flex-col justify-center h-full  bg-sec-orange">
               <p className="text-sm justify-center flex text-pri-text-gray font-semibold">
                 {shop.ratings} <StarIcon className="w-4 fill-white"/> </p>
               </div> */}
               <ViewShopReviews/>
-            <div className="mx-2 self-center ">
+            <div className="mx-2 w-full  self-center text-center">
               {(isShopOpen===true&&shop.isActive)?(
               <p className="text-success-green text-sm  font-bold pb-1"> Open now</p>
               ):( <p className="text-gray-300 text-sm  font-bold"> Closed now</p>)}
