@@ -16,6 +16,8 @@ const SingleShopCard = ({shop}) => {
   // console.log(shop)
     return ( 
         <div key={shop._id} className="group relative flex md:flex-col sm:w-full lg:flex-col">
+          
+ <Link href={`/shop/${shop._id}`}>
         <div className="w-1/2 h-36  md:w-full md:h-72  aspect-w-1 aspect-h-1 rounded-medium overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative" >
           {/* <img
             src={shop?.images[0]?.url}
@@ -29,7 +31,6 @@ const SingleShopCard = ({shop}) => {
    src={shop?.images[0]?.url}
    alt={shop?.name}
  /> */}
-
 <Image
    
   //  src={shop?.images[0]?.public_id}
@@ -42,9 +43,9 @@ const SingleShopCard = ({shop}) => {
 // width="80px"
  />
 
-
   
         </div>
+</Link>
         <div className=" w-full pl-4 md:pl-0 md:pt-2 flex flex-col md:flex justify-center  ">
           <div className="flex justify-between">
             <div>
