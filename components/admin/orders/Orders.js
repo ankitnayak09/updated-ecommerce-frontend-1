@@ -25,7 +25,7 @@ import AllShopsLoader from '../../loading/AllShopsLoader'
 
 
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_HOST;
 var socket
 
 function classNames(...classes) {

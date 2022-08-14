@@ -62,7 +62,7 @@ const OrderHistoryCard = ({order}) => {
 
               <div className="mt-6 ">
      
-                <div className="mt-6 mx-4  border-dashed  border-t-[3px] border-sec-orange py-5 px-7 flex justify-between   sm:mt-0  ">
+                <div className="mt-6 mx-4  border-dashed  border-t-[3px] border-sec-orange py-4  flex justify-between   sm:mt-0  ">
                   <p className="flex justify-center md:flex-col ">
                   
                  <span className="hidden md:block">   Order status : <br/></span> <span 
@@ -71,7 +71,7 @@ const OrderHistoryCard = ({order}) => {
                       order.orderStatus=="accepted"&& 'text-yellow-500' ,
                       order.orderStatus=="initiated"&& 'text-yellow-500' ,
                       order.orderStatus=="rejected"&& 'text-pri-orange' ,
-                      ' text-xl font-bold'
+                      ' text-lg font-bold text'
                     )}
                     > {order.orderStatus}</span>
 
