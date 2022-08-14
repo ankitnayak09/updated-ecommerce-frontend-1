@@ -308,9 +308,9 @@ body:JSON.stringify(data)
               <ChevronLeftIcon className="w-8 fill-pri-text-gray"/>
               </button>
               </Link>
-              <div className="flex justify-center flex-col ">
+              <div className="flex justify-center  flex-col ">
               <Link href={`/shop/${cartShop}`}>
-          <p className='text-lg font-bold'>{cartShopName}</p>
+          <p className='text-lg text-center font-bold'>{cartShopName}</p>
           </Link>
           <p className="text-center text-secondary-text-gray text-xs">LPU</p>
         </div>
@@ -372,7 +372,7 @@ body:JSON.stringify(data)
               <>
                 {/* <div className=" flex"> */}
                   <div className="flex  w-full flex-col">
-                    <RadioGroup.Label as="span" className="block text-lg font-bold text-center text-pri-text-gray">
+                    <RadioGroup.Label as="span" className="block text-lg mt-2 font-bold text-center text-pri-text-gray">
                       For now
                     </RadioGroup.Label>
                  
@@ -417,7 +417,7 @@ body:JSON.stringify(data)
               <>
                 {/* <div className=" flex"> */}
                   <div className="flex justify-center self-center w-full flex-col">
-                    <RadioGroup.Label as="span" className=" text-lg font-bold text-center text-pri-text-gray flex flex-col">
+                    <RadioGroup.Label as="span" className=" text-lg mt-2 font-bold text-center text-pri-text-gray flex flex-col">
                       PreBook time
                       <span className="font-normal text-base">({date.format(date.addMinutes(new Date(), cookingTime), 'hh:mm A ') } - {
             date.transform(cartShopTimings.cartShopCloseTime, 'HH:mm', 'hh:mm A')
@@ -425,7 +425,7 @@ body:JSON.stringify(data)
                     </RadioGroup.Label>
                   
                {/* <Timepicker  setfinalTime={setfinalTime} setHour={setHour} setMinute={setMinute}/> */}
-               <div className="mt-2 py-4 px-1 bg-white rounded-lg">
+               <div className="mt-2 py-2 px-1 bg-white rounded-lg">
                <input type="time" defaultValue={date.format(date.addMinutes(new Date(), cookingTime), 'HH:mm')} 
 onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-pri-orange placeholder-gray-400 rounded-lg text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
                </div>
