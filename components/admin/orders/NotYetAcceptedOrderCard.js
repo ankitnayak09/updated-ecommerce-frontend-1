@@ -60,7 +60,7 @@ const dispatch = useDispatch()
               <div className=" flex justify-center"><span className="bg-pri-blue  font-bold text-white px-3 rounded-b-small pb-1"> {order.orderNumber}</span></div>
 
 
-              <div className="flex items-center px-6 pb-6 mx-4 border-dashed border-b-[4px] border-sec-orange ">
+              <div className="flex items-center px-6 md:pb-6 pb-2 mx-4 border-dashed border-b-[3px] border-sec-orange ">
                 <dl className="flex-1  grid grid-cols-2 gap-x-6 text-sm ">
                   <div>
                     <dt className="font-bold text-2xl text-pri-text-light-gray text-center">{order.orderInfo.wantFoodAt=="now"?"now": date.transform(order.orderInfo.wantFoodAt, 'HH:mm', 'h:mm A')}</dt>
@@ -113,11 +113,11 @@ const dispatch = useDispatch()
                     <div className="mt-6 ">
                     {order.orderInfo.description?(  
 <p className="text-left px-4 text-sec-text-gray"> <span className="font-bold ">Suggestion:</span> {order.orderInfo.description}</p>):("")}   
-                      <div className="mt-1 mx-4 p-4 border-dashed  border-t-[4px] border-sec-orange  flex justify-between   ">
+                      <div className="mt-1 mx-4 p-4 border-dashed  border-t-[3px] border-sec-orange  flex justify-between   ">
                         <button onClick={(e)=>{
                                e.preventDefault()
                                handleRejectOrder(order._id)
-                               }} className=" self-center rounded-md  text-center py-2 w-36  bg-sec-light-orange text-pri-orange font-bold cursor-pointer">
+                               }} className=" self-center rounded-md  text-center py-2 w-32 md:w-36  bg-sec-light-orange text-pri-orange font-bold cursor-pointer">
                           
                           Reject
                         </button>
@@ -126,7 +126,7 @@ const dispatch = useDispatch()
                            <button onClick={(e)=>{
                                e.preventDefault()
                                handleAcceptOrder(order._id)
-                               }} className="pri-button w-36 text-center self-center py-2 "> 
+                               }} className="pri-button w-32 md:w-36 text-center self-center py-2 "> 
            Accept
             </button>
                         </div>

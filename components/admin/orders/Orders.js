@@ -232,8 +232,8 @@ const [newOrder, setNewOrder] = useState()
               
               </div>
 
-          <div className="relative bg-white pb-10">    
-          <div className="bg-black/40 z-10 absolute w-full h-full top-0"></div>
+          <div className="relative z-30 bg-white pb-10">    
+          <div className="bg-black/40 z-40 absolute w-full h-full top-0"></div>
              
             <h1 className=" text-3xl px-7 py-10  font-bold tracking-tight text-pri-text-gray ">Future Orders</h1>
 

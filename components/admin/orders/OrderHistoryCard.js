@@ -17,7 +17,7 @@ const OrderHistoryCard = ({order}) => {
  
      <div className=" flex justify-center"><span className="bg-pri-blue  font-bold text-white px-3 rounded-b-small pb-1"> {order.orderNumber}</span></div>
 
-        <div className="flex  items-center px-6 pb-6 mx-4 border-dashed border-b-[4px] border-sec-orange">
+        <div className="flex  items-center px-6 md:pb-6 pb-2  mx-4 border-dashed border-b-[3px] border-sec-orange">
           <dl className="flex-1  grid grid-cols-2 gap-x-6 text-sm ">
           <div>
                     <dt className="font-bold text-2xl text-pri-text-light-gray text-center">{order.orderInfo.wantFoodAt=="now"?"now": date.transform(order.orderInfo.wantFoodAt, 'HH:mm', 'h:mm A')}</dt>
@@ -62,19 +62,20 @@ const OrderHistoryCard = ({order}) => {
 
               <div className="mt-6 ">
      
-                <div className="mt-6 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-7 flex justify-between   sm:mt-0  ">
-                  <div className=" ">
+                <div className="mt-6 mx-4  border-dashed  border-t-[3px] border-sec-orange py-5 px-7 flex justify-between   sm:mt-0  ">
+                  <p className="flex justify-center md:flex-col ">
                   
-                    Order status : <br/> <span 
+                 <span className="hidden md:block">   Order status : <br/></span> <span 
                     className={classNames(
                       order.orderStatus=="delivered"&& 'text-success-green' ,
                       order.orderStatus=="accepted"&& 'text-yellow-500' ,
-                      order.orderStatus=="initiated"&& 'text-pri-orange' ,
+                      order.orderStatus=="initiated"&& 'text-yellow-500' ,
+                      order.orderStatus=="rejected"&& 'text-pri-orange' ,
                       ' text-xl font-bold'
                     )}
                     > {order.orderStatus}</span>
 
-                  </div>
+                  </p>
                   <div className=" flex justify-center">
                     
                      <button onClick={(e)=>{

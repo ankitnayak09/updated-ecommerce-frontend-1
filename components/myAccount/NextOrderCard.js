@@ -9,7 +9,7 @@ const NextOrderCard = ({order}) => {
     //     // testOrderId:order._id
     // }
     return (
-        <div className=" shadow-lg rounded-2xl   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  md:w-96 mx-auto mt-2  p-2">
+        <div className=" shadow-lg rounded-2xl   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow mx-3 mb-2 md:w-96 md:mx-auto mt-2  p-2">
 <div className="flex">
 <BadgeCheckIcon className="w-8 fill-success-green"/>
 <p className="self-center pl-1"> Paid - ₹ {order.totalPrice} </p> 

@@ -95,7 +95,7 @@ const QrModal = ({qrOpen,setQrOpen}) => {
 
 <h1 className=" text-3xl my-4   font-bold tracking-tight text-pri-text-gray ">scan qr</h1>
                   
-<QrReader
+<QrReader constraints={{ facingMode: 'user'}}
         onResult={(result, error) => {
           if (!!result) {
             //   console.log(result)

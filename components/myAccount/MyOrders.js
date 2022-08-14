@@ -225,12 +225,12 @@ const MyOrders = () => {
                               {/* <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" /> */}
                               <p className="ml-2  text-sm font-medium text-gray-500">
                             
-                   <span className="hidden md:block"> Order status : </span><br/> <span 
+                   <span className="hidden md:block"> Order status : <br/></span> <span 
                     className={classNames(
                       order.orderStatus=="delivered"&& 'text-success-green' ,
                       order.orderStatus=="accepted"&& 'text-yellow-500' ,
-                      order.orderStatus=="rejected"&& 'text-yellow-500' ,
-                      order.orderStatus=="initiated"&& 'text-pri-orange' ,
+                      order.orderStatus=="initiated"&& 'text-yellow-500' ,
+                      order.orderStatus=="rejected"&& 'text-pri-orange' ,
                       '  font-bold'
                     )}
                     > {order.orderStatus}</span>

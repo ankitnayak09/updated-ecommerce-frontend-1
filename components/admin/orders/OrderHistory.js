@@ -72,7 +72,7 @@ const OrderHistory = () => {
         <div className="relative mt-1">
       
           <Listbox.Button className="relative flex w-full cursor-pointer rounded-full bg-sec-light-orange py-2 px-4 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="flex-grow my-auto text-pri-orange text-center text-lg font-bold ">{selected?selected.name:"Filter"}</span>
+            <span className=" my-auto whitespace-nowrap text-pri-orange text-center text-lg font-bold ">{selected?selected.name:"Filter"}</span>
             <span className="">
               <FilterIcon
                 className=" w-8 fill-pri-orange text-gray-400"

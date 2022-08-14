@@ -39,7 +39,7 @@ const SingleOrderCard = ({order,}) => {
               {/* Order placed on <time dateTime={order.createdDatetime}>{order.createdDate}</time> */}
             </h3>
 
-            <div className="flex items-center px-6 pb-6 mx-4 border-dashed border-b-[4px] border-sec-orange ">
+            <div className="flex items-center px-6 md:pb-6 pb-2  mx-4 border-dashed border-b-[3px] border-sec-orange ">
               <dl className="flex-1  grid grid-cols-2 gap-x-6 text-sm ">
               <div>
                     <dt className="font-bold text-2xl text-pri-text-light-gray text-center">{order.orderInfo.wantFoodAt=="now"?"now": date.transform(order.orderInfo.wantFoodAt, 'HH:mm', 'h:mm A')}</dt>
@@ -99,7 +99,7 @@ const SingleOrderCard = ({order,}) => {
                       </p>
                     </div> */}
 
-                    <div className="mt-1 mx-4  border-dashed  border-t-[4px] border-sec-orange py-5 px-4 flex justify-between ">
+                    <div className="mt-1 mx-4  border-dashed  border-t-[3px] border-sec-orange py-5 px-4 flex justify-between ">
                       <div onClick={()=>handleCancel(order._id)} className="flex ">
                       
                         cancel
@@ -112,7 +112,7 @@ const SingleOrderCard = ({order,}) => {
           Click Again
           </button>):(
                <button onClick={()=>{
-                setClickConfirmed(true)}} className="pri-button w-36 text-center self-center py-2 "> 
+                setClickConfirmed(true)}} className="pri-button w-32 md:w-36 text-center self-center py-2 "> 
 Delivered
 </button>
           )}

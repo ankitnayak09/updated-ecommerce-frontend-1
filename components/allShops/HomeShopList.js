@@ -65,7 +65,7 @@ const HomeShopList = () => {
   // const executedRef=useRef(false);
  
   // const [page,setpage]=useState(1);
-  const [pageSize,setpageSize]=useState(3)
+  const [pageSize,setpageSize]=useState(4)
   // const [shops,setshops]=useState([])
   // const [loading,setloading]=useState(false)
 
