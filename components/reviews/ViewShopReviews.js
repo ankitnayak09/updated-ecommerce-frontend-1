@@ -62,14 +62,14 @@ const ViewShopReviews = () => {
 
         <button  type="button"
           onClick={openModal} className="rounded-full aspect-square flex flex-col justify-center h-full  bg-sec-orange">
-              <p className="text-sm flex self-center text-pri-text-gray font-semibold">
-                {shop.ratings} <StarIcon className="w-4 fill-white"/> </p>
+              <p className="text-lg flex self-center text-sec-text-gray font-bold">
+                {shop.ratings} <StarIcon className="w-5 fill-sec-text-gray"/> </p>
               </button>
 
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -79,7 +79,7 @@ const ViewShopReviews = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur transition-opacity" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -108,7 +108,7 @@ const ViewShopReviews = () => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Shop review
+                    Shop reviews
                   </Dialog.Title>
                   <div className="mt-2">
 

@@ -44,9 +44,7 @@ const MenuModal = ({categories}) => {
             </Transition.Child>
   
             {/* This element is to trick the browser into centering the modal contents. */}
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-              &#8203;
-            </span>
+         
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -62,9 +60,9 @@ const MenuModal = ({categories}) => {
 
               <div className="flex  flex-col">
                     {categories.map((cat)=>(
-                        <div key={cat} className="flex hover:bg-gray-100 border-b-2 pr-16">
+                        <div key={cat}  onClick={()=>{menuBtnClick("#"+`${cat}`)}}  className="flex hover:bg-gray-100 border-b-2 pr-16">
                             {/* <Link href={"#"+`${cat}`}> */}
-          <button  onClick={()=>{menuBtnClick("#"+`${cat}`)}} className="p-2 text-lg font-medium text-pri-text-light-gray" >{cat}</button>
+          <button className="p-2  text-lg font-medium text-pri-text-light-gray" >{cat}</button>
           {/* <a onClick={ menuBtnClick(cat)} className="p-2" >{cat}</a> */}
           {/* </Link> */}
           </div>

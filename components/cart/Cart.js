@@ -376,8 +376,8 @@ body:JSON.stringify(data)
                       For now
                     </RadioGroup.Label>
                  
-                <div className="flex mt-5 md:mt-2 justify-center w-full">
-                  <p className="text-pri-text-light-gray self-center text-7xl font-bold"> {cookingTime}</p>
+                <div className="flex mt-3 md:mt-2 justify-center w-full">
+                  <p className="text-pri-text-light-gray self-center text-5xl md:text-7xl font-bold"> {cookingTime}</p>
                   <p className="text-pri-text-light-gray self-center text-base font-medium"> min <br /> (Aprox.)</p>
 
                 </div>
@@ -419,15 +419,15 @@ body:JSON.stringify(data)
                   <div className="flex justify-center self-center w-full flex-col">
                     <RadioGroup.Label as="span" className=" text-lg mt-2 font-bold text-center text-pri-text-gray flex flex-col">
                       PreBook time
-                      <span className="font-normal text-base">({date.format(date.addMinutes(new Date(), cookingTime), 'hh:mm A ') } - {
+                      <span className="font-normal text-xs">({date.format(date.addMinutes(new Date(), cookingTime), 'hh:mm A')}-{
             date.transform(cartShopTimings.cartShopCloseTime, 'HH:mm', 'hh:mm A')
           })</span>
-                    </RadioGroup.Label>
-                  
+                    </RadioGroup.Label>    
+             
                {/* <Timepicker  setfinalTime={setfinalTime} setHour={setHour} setMinute={setMinute}/> */}
                <div className="mt-2 py-2 px-1 bg-white rounded-lg">
                <input type="time" defaultValue={date.format(date.addMinutes(new Date(), cookingTime), 'HH:mm')} 
-onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-pri-orange placeholder-gray-400 rounded-lg text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
+onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-pri-orange placeholder-gray-400 rounded-lg text-base md:text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
                </div>
                    
                  

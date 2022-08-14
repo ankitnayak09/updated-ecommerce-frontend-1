@@ -6,7 +6,7 @@ import { addItemsToCart, clearCartLocalStorage, removeItemsFromCart } from "../.
 import CartQtyBtn from "../button/CartQtyBtn";
 import AlreadyItemsInCartModal from "./AlreadyItemsInCartModal";
 
-const SingleProductCard = ({product}) => {
+const SingleProductCard = ({product,isShopActive}) => {
     const dispatch=useDispatch()
     const [quantity, setQuantity] = useState(0)
     const [open, setOpen] = useState(false)
@@ -93,7 +93,7 @@ className="rounded-bl-medium "
  />
  </div>
  }
- {isShopOpen?( product.Stock==0?(<button className="bg-gray-100 font-bold text-pri-orange text-lg rounded-xl  h-12 ml-3 mr-3 my-4 cursor-not-allowed"  >Out of stock</button> ):( quantity==0?(
+ {(isShopOpen===true&&isShopActive)?( product.Stock==0?(<button className="bg-gray-100 font-bold text-pri-orange text-lg rounded-xl  h-12 ml-3 mr-3 my-4 cursor-not-allowed"  >Out of stock</button> ):( quantity==0?(
      <button className="pri-button w-36 h-12 ml-3 mr-3 my-4" onClick={(e)=>{
          if(Object.keys(cartShop).length !== 0&&( cartShop!==product.shop )){
             //  console.log(cartShop)

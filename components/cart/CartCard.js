@@ -88,8 +88,8 @@ const CartCard = ({product}) => {
                     </div> */}
   
                     <div  className="ml-4 w-full  flex  justify-between ">
-                      <div className="relative md:pr-9">
-                        <div>
+                      <div className=" flex flex-col justify-center">
+                        {/* <div> */}
                           <div className="flex justify-between">
                             <h3 className="text-sm">
                               <a href="#" className="font-bold text-lg text-pri-text-gray hover:text-gray-800">
@@ -104,7 +104,7 @@ const CartCard = ({product}) => {
                             ) : null} */}
                           <p className="ml-2 text-sm font-medium text-gray-900">₹{product.price}</p>
                           </div>
-                        </div>
+                        {/* </div> */}
   
                         {/* <div className="mt-4 sm:mt-0 sm:pr-9"> */}
                          
