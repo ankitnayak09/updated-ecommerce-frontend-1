@@ -53,7 +53,7 @@ const ShopReview = ({shopId,yourReview,orderId}) => {
         <button
           type="button"
           onClick={openModal}
-          className="rounded-small w-36 self-center py-2 bg-sec-light-orange text-pri-orange font-extrabold text-base"
+          className="rounded-small w-32 md:w-36 self-center py-2 bg-sec-light-orange text-pri-orange font-extrabold text-base"
         >
           {/* Give Rating,yourRating-({rating}) */}
           {rating==0?"Rate":(<> <span className="font-medium"> your rating -</span> {rating} </>) }

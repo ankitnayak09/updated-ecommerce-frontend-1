@@ -16,7 +16,7 @@ const SingleShopCard = ({shop}) => {
   // console.log(shop)
     return ( 
         <div key={shop._id} className="group relative flex md:flex-col sm:w-full lg:flex-col">
-        <div className="w-1/2 h-40  md:w-full md:h-72  aspect-w-1 aspect-h-1 rounded-medium overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative" >
+        <div className="w-1/2 h-36  md:w-full md:h-72  aspect-w-1 aspect-h-1 rounded-medium overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative" >
           {/* <img
             src={shop?.images[0]?.url}
             alt={shop?.name}
@@ -60,7 +60,7 @@ const SingleShopCard = ({shop}) => {
             <p className="text-sm flex text-sec-text-gray">{shop.ratings} <StarIcon className="w-4 fill-pri-orange"/> </p>
 
             {/* <p  className="mt-1 text-sm text-gray-700">{shop.description}</p> */}
-            <div className="flex">
+            <div className="flex flex-wrap ">
             {shop.categories.map((cat,i)=>{
               return(
               <p key={i} className="mt-1 text-sm text-gray-500">{cat} ,</p>

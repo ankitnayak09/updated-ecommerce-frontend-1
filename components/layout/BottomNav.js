@@ -46,7 +46,7 @@ const BottomNav = () => {
             {cartItems.length!==0&&
               <Link href="/cart" >
             
-            <div  className="flex shadow-test rounded-b-primary justify-between rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 px-20">
+            <div  className="flex text-sm shadow-test rounded-b-primary justify-between rounded-t-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow  w-full  py-3 md:px-20 px-12">
               <p className=" text-white font-semibold text-center" > Total - ₹{cartTotal} <span className="text-sm"> ({cartShopName})</span></p>
               <p className=" text-white underline-offset-0 font-semibold text-center" >Go to cart</p>
              

@@ -164,7 +164,7 @@ const AllCategories = () => {
                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                > */}
                
-                 <Disclosure.Button className="w-full">
+                 <Disclosure.Button className="w-full text-sm">
                  {open ? (
                        <div className="w-full text-center border-dashed border-2 border-sec-orange rounded-small mt-6 font-semibold py-1 "><span className="inline-flex mx-auto">  Show less <ArrowUpIcon className="w-4 mx-1"/> </span> </div>
                  ) : (

@@ -95,7 +95,7 @@ if(shopId) {
               <div className="flex justify-between mt-3">
                 <div className=" m-5">
           <p className="text-2xl font-bold">  {shop.name}</p>
-          <div className="flex">
+          <div className="flex flex-wrap">
             {shop?.categories?.map((cat,i)=>{
               return(
               <p key={i} className=" text-sm text-pri-text-gray">{cat} ,</p>

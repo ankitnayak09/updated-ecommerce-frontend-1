@@ -72,7 +72,7 @@ const MyProfile = () => {
             </button></Link>
             </div>
             <div className=" md:flex-row-reverse md:flex w-full">
-        <div className="flex bg-sec-light-orange h-44 rounded-l-full ml-4 py-3 pl-3 flex-grow self-center ">
+        <div className="flex bg-sec-light-orange h-36 md:h-44 rounded-l-full ml-4 py-3 pl-3 flex-grow self-center ">
             <div className="aspect-square h-full rounded-full relative ">
               {/* {loading===false&&isAuthenticated===true&&   */}
                       <Image src={user?.avatar}

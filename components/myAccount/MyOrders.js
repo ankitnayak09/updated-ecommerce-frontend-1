@@ -208,7 +208,7 @@ const MyOrders = () => {
                         <li className=" ">
                           <div className="flex border-dashed border-y-[2px] border-sec-orange  sm:items-start pb-4">
                             <div >
-                            <div className="flex-shrink-0 w-28 h-20 -mt-1     relative">
+                            <div className="flex-shrink-0 w-24 h-20 -mt-1     relative">
                               {/* <img
                                 src="https://picsum.photos/200"
                             
@@ -221,14 +221,15 @@ const MyOrders = () => {
                       className="rounded-br-medium "
                       />
 </div>
-<div className="flex ml-4 mt-3 items-center">
+<div className="flex ml-2 md:ml-4 md:mt-3 items-center">
                               {/* <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" /> */}
                               <p className="ml-2  text-sm font-medium text-gray-500">
                             
-                    Order status : <br/> <span 
+                   <span className="hidden md:block"> Order status : </span><br/> <span 
                     className={classNames(
                       order.orderStatus=="delivered"&& 'text-success-green' ,
                       order.orderStatus=="accepted"&& 'text-yellow-500' ,
+                      order.orderStatus=="rejected"&& 'text-yellow-500' ,
                       order.orderStatus=="initiated"&& 'text-pri-orange' ,
                       '  font-bold'
                     )}
@@ -262,10 +263,10 @@ const MyOrders = () => {
                                     }
                                   }>
                                   <a >
-                              <p className="w-full text-pri-text-light-gray px-3 pt-3  inline-grid grid-cols-2  gap-1">
+                              <p className="w-full text-sm md:text-base md:font-semibold text-smtext-pri-text-light-gray px-3 pt-3  inline-grid md:grid-cols-2  gap-1">
                               {order.orderItems.map((product) => (
-                                  <span key={product._id} className="font-semibold text-black text-sm">
-                                <span className="font-semibold  text-sec-text-gray"> {product.quantity}x&nbsp; </span>    {product.name}  
+                                  <span key={product._id} className=" text-black ">
+                                <span className="text-sec-text-gray "> {product.quantity}x&nbsp; </span>    {product.name}  
                                   </span>
                               ))}
                                   </p>
@@ -285,7 +286,7 @@ const MyOrders = () => {
                               </div>
                               <div className=" flex justify-center">
                                 
-                                   <Link  href={`/shop/${order.shop._id}`}><a className="pri-button w-36 text-center self-center py-2 "> 
+                                   <Link  href={`/shop/${order.shop._id}`}><a className="pri-button w-32 md:w-36 text-center self-center py-2 "> 
                   Reorder
                   </a></Link>
                               </div>
