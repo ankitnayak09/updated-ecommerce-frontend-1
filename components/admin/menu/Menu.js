@@ -76,7 +76,7 @@ const {isDeleted} = useSelector(state => state.updateProduct)
 
 
 
-        <div>
+        <div className="pb-28">
 
 <div className="flex justify-between md:pt-24 p-4">
     <h1 className="text-3xl font-bold">Your menu</h1>

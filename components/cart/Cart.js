@@ -376,7 +376,7 @@ body:JSON.stringify(data)
                       For now
                     </RadioGroup.Label>
                  
-                <div className="flex mt-2 justify-center w-full">
+                <div className="flex mt-5 md:mt-2 justify-center w-full">
                   <p className="text-pri-text-light-gray self-center text-7xl font-bold"> {cookingTime}</p>
                   <p className="text-pri-text-light-gray self-center text-base font-medium"> min <br /> (Aprox.)</p>
 
