@@ -91,8 +91,7 @@ const MyProfile = () => {
             </div>
 
         </div>
-     
-        {user.admin.length!==0&&
+    
       <div className="flex relative md:my-auto md:w-2/5 bg-pri-orange/40 text-white mt-14 mx-4 py-4 pl-4 rounded-tl-md rounded-br-md rounded-bl-medium rounded-tr-medium">
 
 <div>
@@ -111,7 +110,7 @@ const MyProfile = () => {
             <button className="bg-sec-light-orange m-2 rounded-tl-md rounded-br-md rounded-bl-medium rounded-tr-medium p-2 absolute bottom-0 left-0 text-pri-text-light-gray"><PlusIcon className="w-6  "/></button>
             </Link>
                 </div>
-            }
+
              </div>
         </div>
    
