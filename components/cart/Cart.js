@@ -424,7 +424,11 @@ body:JSON.stringify(data)
           })</span>
                     </RadioGroup.Label>
                   
-               <Timepicker  setfinalTime={setfinalTime} setHour={setHour} setMinute={setMinute}/>
+               {/* <Timepicker  setfinalTime={setfinalTime} setHour={setHour} setMinute={setMinute}/> */}
+               <div className="mt-2 py-4 px-1 bg-white rounded-lg">
+               <input type="time" 
+onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-pri-orange placeholder-gray-400 rounded-lg text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
+               </div>
                    
                  
 

@@ -22,6 +22,7 @@ const Timepicker = ({setfinalTime,setHour,setMinute}) => {
 
    
   </div> */}
+  
 
 <input type="time" 
 onChange={(e)=>{setfinalTime(e.target.value)}} className="appearance-none w-full bg-white text-pri-orange placeholder-gray-400 rounded-lg text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
