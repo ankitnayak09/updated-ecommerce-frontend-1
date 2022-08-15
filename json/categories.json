@@ -1,51 +1,83 @@
 {"categoriesList" : [
     {
-      "id": 1,
       "name": "pizza",
  
       "imageSrc": "/categoriesPng/pizza.png"
 
     },
     {
-      "id": 2,
       "name": "burger",
  
       "imageSrc": "/categoriesPng/burger.png"
     
     },
     {
-      "id": 3,
       "name": "dessert",
     
       "imageSrc": "/categoriesPng/dessert.png"
    
     },
     {
-      "id": 4,
       "name": "juice",
   
       "imageSrc": "/categoriesPng/juice.png"
    
+    },
+    {
+      "name": "south Indian",
+      "imageSrc": "/categoriesPng/southIndian.png"
+    },
+    {
+      "name": "chinese",
+      "imageSrc": "/categoriesPng/chinese.png"
+   
+    },
+    {
+      "name": "beverages",
+      "imageSrc": "/categoriesPng/beverages.png"
+    },
+   
+    {
+      "name": "chat ",
+      "imageSrc": "/categoriesPng/chat.png"
+    },
+    {
+      "name": "dessert",
+      "imageSrc": "/categoriesPng/dessert.png"
+    },
+    {
+      "name": "healthy",
+      "imageSrc": "/categoriesPng/healthy.png"
+    },
+    {
+      "name": "juice",
+      "imageSrc": "/categoriesPng/juice.png"
+    },
+    {
+      "name": "momos",
+      "imageSrc": "/categoriesPng/momos.png"
+    },
+    {
+      "name": "north Indian ",
+      "imageSrc": "/categoriesPng/northIndian.png"
+    },
+    {
+      "name": "paratha",
+      "imageSrc": "/categoriesPng/paratha.png"
+    }
+    ,
+    {
+      "name": "thali",
+      "imageSrc": "/categoriesPng/thali.png"
+    }
+    ,
+    {
+      "name": "wrap",
+      "imageSrc": "/categoriesPng/wrap.png"
     }
 
   ],
-  "hiddenCategoriesList":
-      [
-        {
-            "id": 4,
-            "name": "south Indian",
-          
-            "imageSrc": "/categoriesPng/southIndian.png"
-         
-          },
-          {
-            "id": 5,
-            "name": "chinese",
-        
-            "imageSrc": "/categoriesPng/chinese.png"
-         
-          }
-      ],
+
       "shopCategoriesOptions":[
         "burger",
         "juice",
@@ -59,8 +91,9 @@
         "paratha",
         "chat",
         "healthy",
-        "wraps&rolls",
+        "wraps",
         "momos",
+        "breakFast",
         "sandwich"
 
     ],

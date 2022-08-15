@@ -6,7 +6,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/outline'
 import SingleCategoryCard from "./SingleCategoryCard"
 import categoriesJson from "../../json/categories.json"
 
-const categories = categoriesJson.categoriesList
+const categories = categoriesJson.categoriesList.slice(0,4)
 
 // const categories = [
 //     {
@@ -40,7 +40,7 @@ const categories = categoriesJson.categoriesList
 
 //   ]
 
-  const hiddenCategories=categoriesJson.hiddenCategoriesList
+  const hiddenCategories=categoriesJson.categoriesList.slice(4,categoriesJson.categoriesList.length)
 
 const AllCategories = () => {
     return (
@@ -99,7 +99,7 @@ const AllCategories = () => {
               // </a>
               // </Link>
            
-           <SingleCategoryCard key={category.id} category={category}/>
+           <SingleCategoryCard key={category.name} category={category}/>
            ))}
 
 
@@ -134,7 +134,7 @@ const AllCategories = () => {
              
           <div className="grid grid-cols-4 gap-y-10 mt-6  gap-x-5">
             {hiddenCategories.map((category) => (
-                 <SingleCategoryCard key={category.id} category={category}/>
+                 <SingleCategoryCard key={category.name} category={category}/>
             ))}
 
 
