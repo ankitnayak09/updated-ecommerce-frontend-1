@@ -99,11 +99,12 @@ const SingleOrderCard = ({order,}) => {
                       </p>
                     </div> */}
 
-                    <div className="mt-1 mx-4  border-dashed  border-t-[3px] border-sec-orange py-5 px-4 flex justify-between ">
-                      <div onClick={()=>handleCancel(order._id)} className="flex ">
+                    <div className="mt-1 mx-4  border-dashed  border-t-[3px] border-sec-orange py-5 px-4 flex justify-center ">
+                      {/* <div></div> */}
+                      {/* <div onClick={()=>handleCancel(order._id)} className="flex ">
                       
                         cancel
-                      </div>
+                      </div> */}
                       <div className=" flex justify-center">
                         {clickConfirmed?(
                          <button onClick={(e)=>{
