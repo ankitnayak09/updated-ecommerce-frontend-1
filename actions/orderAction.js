@@ -24,6 +24,30 @@ export const myOrders=(page,pageSize)=>async(dispatch)=>{
     }
 
 }
+export const myActiveOrders=()=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:"MY_ACTIVE_ORDERS_REQUEST",
+        });
+        const config={withCredentials: true}
+
+
+        const{data}=await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/v1/activeOrders/me`,config)
+ 
+        dispatch({
+            type:"MY_ACTIVE_ORDERS_SUCCESS",
+            payload:data
+        });
+
+    }catch(error){
+
+        dispatch({
+            type:"MY_ACTIVE_ORDERS_FAIL",
+            payload:error.response.data.message
+        });
+    }
+
+}
 export const adminAllOrders=(shopId)=>async(dispatch)=>{
     try{
         dispatch({

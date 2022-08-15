@@ -5,6 +5,7 @@ import { StarIcon} from '@heroicons/react/solid'
 import ShopShareModal from "./ShopShareModal"
 import { useDispatch, useSelector } from "react-redux"
 import { updateFavourites } from "../../actions/userAction"
+import { useState } from "react"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -12,6 +13,7 @@ function classNames(...classes) {
 
 const SingleShopCard = ({shop}) => {
   const {user}  = useSelector(state =>state.user)
+  const [Liked, setLiked] = useState(user?.favourites.includes(shop._id))
   const dispatch = useDispatch()
   // console.log(shop)
     return ( 
@@ -72,7 +74,7 @@ const SingleShopCard = ({shop}) => {
 
             </div>
           <div className="bg-sec-light-orange   px-2 py-1 rounded-full flex flex-col self-center justify-between">
-            <HeartIcon onClick={(e)=>{e.preventDefault(),dispatch(updateFavourites(shop._id))}} className={classNames(
+            <HeartIcon onClick={(e)=>{e.preventDefault(),setLiked(!Liked),dispatch(updateFavourites(shop._id))}} className={classNames(
                     user?.favourites.includes(shop._id)&&"fill-pri-orange ","w-6 my-2 cursor-pointer text-sec-orange"
                   )}/>
             {/* <ShareIcon className="w-4 my-2 cursor-pointer text-sec-orange"/> */}

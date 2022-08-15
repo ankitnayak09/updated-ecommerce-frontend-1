@@ -168,6 +168,20 @@ export const myOrdersReducer=createReducer({orders:[],ordersCount:0,page:1},{
         state.loading=false;
         state.error=action.payload
     },
+    MY_ACTIVE_ORDERS_REQUEST:(state)=>{
+        state.loading=true;        
+    },
+    MY_ACTIVE_ORDERS_SUCCESS:(state,action)=>{
+        state.loading=false;
+        state.activeOrders=action.payload.activeOrders;
+
+    
+  
+    },
+    MY_ACTIVE_ORDERS_FAIL:(state,action)=>{
+        state.loading=false;
+        state.error=action.payload
+    },
     CLEAR_ERRORS:(state,action)=>{
         
         state.error=null

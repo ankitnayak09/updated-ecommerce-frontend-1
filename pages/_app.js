@@ -13,6 +13,7 @@ import LoadingBar from 'react-top-loading-bar'
 import { useGeolocated } from 'react-geolocated';
 
 import Image from 'next/image';
+import { myActiveOrders } from '../actions/orderAction';
 
 // function MyApp({ Component, pageProps }) {
 //   const [showChild, setShowChild] = useState(false);
@@ -68,6 +69,10 @@ function MyApp({ Component, pageProps }) {
   //   }
   
   // },[location])
+  useEffect(() => {
+    dispatch(myActiveOrders())
+    
+}, [])
 
   useEffect(()=>{   
 
@@ -80,6 +85,7 @@ function MyApp({ Component, pageProps }) {
       }
     
       dispatch(loadUser(location))  
+      
 
       localStorage.setItem("userLocation",JSON.stringify({
         latitude:coords.latitude,

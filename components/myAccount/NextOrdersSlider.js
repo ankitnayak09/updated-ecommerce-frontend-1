@@ -3,41 +3,40 @@ import { Carousel } from 'react-responsive-carousel';
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { myOrders } from "../../actions/orderAction";
+import { clearErrors, myActiveOrders, myOrders } from "../../actions/orderAction";
 import NextOrderCard from "./NextOrderCard";
+import AllShopsLoader from "../loading/AllShopsLoader"
 
 const NextOrdersSlider = () => {
-
-    const dispatch=useDispatch()
-    const [nextOrders,setnextOrders]=useState([])
-    const {loading,error,orders} = useSelector(state => state.myOrders)
-    const {user} = useSelector(state => state.user)
-
+const dispatch = useDispatch()
+const {loading,error,activeOrders} = useSelector(state => state.myOrders)
 
     useEffect(() => {
-    if(error){
-        toast.error(error);
-        dispatch(clearErrors())
-        // console.log("mmmmmm")
-    }
-    dispatch(myOrders())
-    }, [dispatch,toast,error])
-
-    useEffect(() => {
-        let nxtOrd=orders.filter((ord)=>ord.orderStatus=="accepted")
-        // console.log(nxtOrd)
-        setnextOrders(nxtOrd)
-    }, [orders])
+        if(error){
+            toast.error(error);
+            dispatch(clearErrors())
+            // console.log("mmmmmm")
+        }
+    }, [error])
+    
+    // const [nextOrders,setnextOrders]=useState([])
+    // useEffect(() => {
+        //     let nxtOrd=orders.filter((ord)=>ord.orderStatus=="accepted")
+        //     // console.log(nxtOrd)
+        //     setnextOrders(nxtOrd)
+        // }, [orders])
 
     return (
         <div className="mb-5"> 
               <Carousel showStatus={false} showThumbs={false}>
-           {nextOrders.map((ord)=>(
+           {loading===false?(activeOrders.map((ord)=>(
                <NextOrderCard key={ord._id} order={ord}/>
-           ))}
+           )) ):(
+        <AllShopsLoader/>
+           )}
          
             </Carousel>
-
+  
 
 
             {/* <div className="overflow-x-scroll flex bg-green-200 

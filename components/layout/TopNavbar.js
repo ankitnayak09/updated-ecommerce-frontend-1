@@ -66,6 +66,19 @@ const TopNavbar = () => {
   }, [dispatch,error,toast])
 
 
+
+
+
+
+ 
+  
+  
+  
+
+
+
+
+
     return (
         
                <Disclosure as="nav" className="bg-white border-b-2 drop-shadow rounded-b-primary py-1 fixed z-30 w-full top-0  ">
@@ -231,8 +244,8 @@ const TopNavbar = () => {
           <Disclosure.Panel className="">
           {/* <Disclosure.Panel className="sm:hidden"> */}
             <div className="px-2 pt-2  text-white space-y-1">
-             Here i will display ur next order
-             <NextOrdersSlider/>
+             {/* Here i will display ur next order */}
+             <NextOrdersSlider  />
             </div>
           </Disclosure.Panel>
         </>
