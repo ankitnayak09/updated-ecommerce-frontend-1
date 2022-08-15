@@ -113,7 +113,7 @@ if(shopId) {
               </div> */}
               <ViewShopReviews/>
             <div className="mx-2 w-full  self-center text-center">
-              {(isShopOpen===true&&!shop.isActive)?(
+              {(isShopOpen===true&&shop.isActive)?(
               <p className="text-success-green text-sm  font-bold pb-1"> Open now</p>
               ):( <p className="text-gray-300 text-center text-sm  font-bold"> Closed now</p>)}
               <p className="text-white text-xs "> {shop.openTime&&date.transform(shop.openTime, 'HH:mm', 'h:mm A')} (to)</p>
