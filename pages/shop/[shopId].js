@@ -94,16 +94,19 @@ if(shopId) {
 
 
               <div className="flex justify-between mt-3">
-                <div className=" m-5">
+                <div className=" m-5 w-48">
           <p className="text-2xl font-bold">  {shop.name}</p>
-          <div className="flex flex-wrap">
+
+          <p className="mt-1 text-sm font-bold text-sec-text-gray">~ {shop?.description} ~ </p>
+
+          <div className="flex flex-wrap italic">
             {shop?.categories?.map((cat,i)=>{
               return(
               <p key={i} className=" text-sm text-pri-text-gray">{cat} ,</p>
               )
             })}
             </div>
-            <p className="mt-1 text-sm text-sec-text-gray">{shop?.description} </p>
+           
             </div>
 
             <div className="flex h-20 w-52 self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">

@@ -63,7 +63,7 @@ const SingleShopCard = ({shop}) => {
             <p className="text-sm flex text-sec-text-gray">{shop.ratings} <StarIcon className="w-4 fill-pri-orange"/> </p>
 
             {/* <p  className="mt-1 text-sm text-gray-700">{shop.description}</p> */}
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap h-14 truncate">
             {shop.categories.map((cat,i)=>{
               return(
               <p key={i} className="mt-1 text-sm text-gray-500">{cat} ,</p>
