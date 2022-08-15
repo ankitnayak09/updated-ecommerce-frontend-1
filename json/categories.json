@@ -49,10 +49,7 @@
       "name": "healthy",
       "imageSrc": "/categoriesPng/healthy.png"
     },
-    {
-      "name": "juice",
-      "imageSrc": "/categoriesPng/juice.png"
-    },
+    
     {
       "name": "momos",
       "imageSrc": "/categoriesPng/momos.png"
@@ -74,6 +71,11 @@
     {
       "name": "wrap",
       "imageSrc": "/categoriesPng/wrap.png"
+    }
+    ,
+    {
+      "name": "sandwich",
+      "imageSrc": "/categoriesPng/sandwich.png"
     }
 
   ],
