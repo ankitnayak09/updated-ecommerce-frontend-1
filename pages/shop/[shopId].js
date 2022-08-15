@@ -97,7 +97,7 @@ if(shopId) {
                 <div className=" m-5 w-44">
           <p className="text-2xl font-bold">  {shop.name}</p>
 
-             <p className="mt-1 text-sm font-bold text-sec-text-gray">~ {shop?.description} ~ </p>
+             <p className="mt-1 text-sm font-bold text-sec-text-gray mb-1">~ {shop?.description} ~ </p>
 
           <div className="flex flex-wrap italic">
             {shop?.categories?.map((cat,i)=>{
@@ -118,7 +118,7 @@ if(shopId) {
             <div className="mx-2 w-full  self-center text-center">
               {(isShopOpen===true&&shop.isActive)?(
               <p className="text-success-green text-sm  font-bold pb-1"> Open now</p>
-              ):( <p className="text-gray-300 text-center text-sm  font-bold"> Closed now</p>)}
+              ):( <p className="text-gray-300 text-center text-sm bg-black w-full font-bold"> Closed now</p>)}
               <p className="text-white text-xs "> {shop.openTime&&date.transform(shop.openTime, 'HH:mm', 'h:mm A')} (to)</p>
               <p className="text-white text-xs "> {shop.closeTime&&date.transform(shop.closeTime, 'HH:mm', 'h:mm A')}</p>
             </div>
