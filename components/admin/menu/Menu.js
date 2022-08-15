@@ -29,7 +29,7 @@ const {isDeleted} = useSelector(state => state.updateProduct)
     useEffect(() => {
 
        
-        if(shopId){
+        if(shopId){  
             dispatch(getAdminProducts(shopId))
            } 
       
@@ -40,6 +40,7 @@ const {isDeleted} = useSelector(state => state.updateProduct)
     useEffect(() => {
       
         if(isDeleted){
+        
             dispatch({type:"DELETE_PRODUCT_RESET"}),
   toast.success("product deleted") 
             dispatch(getAdminProducts(shopId))
@@ -56,7 +57,7 @@ const {isDeleted} = useSelector(state => state.updateProduct)
             let tempProducts=products.find((rev)=>
                 rev.category===category
              ).products
-            // console.log(tempProducts)
+ 
             setcategoryProducts(tempProducts)
         }
       
