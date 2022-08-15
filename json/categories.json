@@ -42,10 +42,6 @@
       "imageSrc": "/categoriesPng/chat.png"
     },
     {
-      "name": "dessert",
-      "imageSrc": "/categoriesPng/dessert.png"
-    },
-    {
       "name": "healthy",
       "imageSrc": "/categoriesPng/healthy.png"
     },
