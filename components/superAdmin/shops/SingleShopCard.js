@@ -37,8 +37,8 @@ const SingleShopCard = ({shop,handleApprove,handleReject}) => {
                 </div>
 
                 <div className="flex justify-between p-4">
-                    <button onClick={()=>handleReject(shop._id)} className="rounded-small bg-sec-light-orange md:py-3 py-2 w-32 md:w-36 font-bold text-pri-orange">Reject</button>
-                    <button onClick={()=>handleApprove(shop._id)} className="pri-button md:py-3 w-32 md:w-36 text-center py-2">Approve</button>
+                 {  shop.shopStatus!=="rejected"  &&<button onClick={(e)=>{e.preventDefault(),handleReject(shop._id)}} className="rounded-small bg-sec-light-orange md:py-3 py-2 w-32 md:w-36 font-bold text-pri-orange">Reject</button>}
+                  {  shop.shopStatus!=="approved" &&<button onClick={(e)=>{e.preventDefault(),handleApprove(shop._id)}} className="pri-button md:py-3 w-32 md:w-36 text-center py-2">Approve</button>}
                 </div>
         </div>
     )

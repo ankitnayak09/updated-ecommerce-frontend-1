@@ -65,7 +65,7 @@ const HomeShopList = () => {
   // const executedRef=useRef(false);
  
   // const [page,setpage]=useState(1);
-  const [pageSize,setpageSize]=useState(4)
+  const [pageSize,setpageSize]=useState(10)
   // const [shops,setshops]=useState([])
   // const [loading,setloading]=useState(false)
 
@@ -127,7 +127,7 @@ const HomeShopList = () => {
           dataLength={shops.length}
           next={fetchMoreData}
           hasMore={shops.length!==shopCount}
-          loader={<AllShopsLoader/>}
+          // loader={<AllShopsLoader/>}
         >
             {/* <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 

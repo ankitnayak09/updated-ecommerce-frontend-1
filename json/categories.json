@@ -46,13 +46,29 @@
          
           }
       ],
-      "categoriesOptions":[
+      "shopCategoriesOptions":[
         "burger",
         "juice",
         "pizza",
         "dessert",
         "chinese",
-        "southIndian"
+        "southIndian",
+        "beverages",
+        "rice&pulao",
+        "fastFood"
+
+    ],
+      "productCategoriesOptions":[
+        "burger",
+        "juice",
+        "pizza",
+        "dessert",
+        "chinese",
+        "southIndian",
+        "beverages",
+        "rice&pulao",
+        "fastFood"
+
     ]
   
 }

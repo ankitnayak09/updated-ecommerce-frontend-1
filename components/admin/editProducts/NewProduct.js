@@ -27,7 +27,7 @@ const NewProduct = ({setIsOpen}) => {
     const [isPureVeg, setIsPureVeg] = useState();
     
 
-    const categories=categoriesJson.categoriesOptions
+    const categories=categoriesJson.productCategoriesOptions
 
     useEffect(() => {
      if(error){

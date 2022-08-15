@@ -53,7 +53,7 @@ const ShopDetails = () => {
 
             <EditShopModal/>
             <div className="flex"> <h1 className=" text-xl self-center  mr-4 font-bold  text-sec-light-orange ">{shop.name}</h1>
-
+{shop.shopStatus==="approved"?(
             <Switch
         checked={enabled}
         // checked={enabled}
@@ -68,7 +68,7 @@ const ShopDetails = () => {
           className={`${enabled ? 'translate-x-9' : 'translate-x-0'}
             pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
         />
-      </Switch>
+      </Switch>):( <p className="font-bold text-white decoration-pri-blue bg-red-500 px-4 py-1 rounded-lg underline ">Approval <br/> pending</p> )}
 </div>
             </div>
  

@@ -43,7 +43,7 @@ const EditShop = ({setIsOpen}) => {
     //     "chinese",
     //     "southIndian"
     // ]
-    const categories=categoriesJson.categoriesOptions
+    const categories=categoriesJson.shopCategoriesOptions
     
     const workingDays=[
         "monday",

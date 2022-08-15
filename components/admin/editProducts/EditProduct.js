@@ -28,7 +28,7 @@ const EditProduct = ({setIsOpen,product}) => {
     const [enabled, setEnabled] = useState(product.enableStockRenew)
     const [isPureVeg, setIsPureVeg] = useState();
     
-    const categories=categoriesJson.categoriesOptions
+    const categories=categoriesJson.productCategoriesOptions
 
     useEffect(() => {
      if(error){

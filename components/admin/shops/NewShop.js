@@ -31,7 +31,7 @@ const NewShop = () => {
     const [imagesPreview, setImagesPreview] = useState([]);
     const [isPureVeg, setIsPureVeg] = useState();
     
-    const categories=categoriesJson.categoriesOptions
+    const categories=categoriesJson.shopCategoriesOptions
     // const categories=[
     //     "burger",
     //     "juice",
