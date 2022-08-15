@@ -26,7 +26,7 @@ const AllShops = () => {
   const {loading,error,shops,shopCount,page}=useSelector(state => state.superAdminShops)
 
   const {loading:updateShopLoading,error:updateShopError,success} = useSelector(state => state.superAdminShopUpdate)
-  const [pageSize,setpageSize]=useState(3)
+  const [pageSize,setpageSize]=useState(8)
 
   useEffect(() => {
     if(error){
@@ -165,13 +165,14 @@ const AllShops = () => {
           dataLength={shops.length}
           next={fetchMoreData}
           hasMore={shops.length!==shopCount}
-          loader={<AllShopsLoader/>}
+          // loader={<AllShopsLoader/>}
         >
             <div className="my-6 grid grid-cols-1 gap-y-10 gap-x-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 ">
 {shops.map((shop) => (
   <SingleShopCard handleApprove={handleApprove} handleReject={handleReject} shop={shop} key={shop._id}/>
              
             ))}
+              {loading===true&& <AllShopsLoader/>}
 
         </div>
 </InfiniteScroll>

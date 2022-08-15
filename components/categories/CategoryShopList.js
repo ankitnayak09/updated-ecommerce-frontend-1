@@ -115,10 +115,11 @@ const CategoryShopList = () => {
           dataLength={shops.length}
           next={fetchMoreData}
           hasMore={shops.length!==shopCount}
-          loader={<AllShopsLoader/>}
+          // loader={<AllShopsLoader/>}
         >
           
         <ShopList shops={shops}/>
+        {loading===true&& <AllShopsLoader/>}
         </InfiniteScroll>
         </div>
       {/* </div> */}

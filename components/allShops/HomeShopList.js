@@ -94,7 +94,7 @@ const HomeShopList = () => {
   
     dispatch(getAllShops(page,pageSize,location))
     
-    loading
+    // loading
   };
   
   // useEffect(() => {
@@ -136,7 +136,9 @@ const HomeShopList = () => {
              
             ))}
         </div> */}
+        
         <ShopList shops={shops}/>
+        {loading===true&& <AllShopsLoader/>}
         </InfiniteScroll>
         </div>
       </div>
