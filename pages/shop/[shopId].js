@@ -94,10 +94,10 @@ if(shopId) {
 
 
               <div className="flex justify-between mt-3">
-                <div className=" m-5 w-48">
+                <div className=" m-4 ">
           <p className="text-2xl font-bold">  {shop.name}</p>
 
-          <p className="mt-1 text-sm font-bold text-sec-text-gray">~ {shop?.description} ~ </p>
+          <p className="mt-1 pb-1 text-sm font-bold text-sec-text-gray">~ {shop?.description} ~ </p>
 
           <div className="flex flex-wrap italic">
             {shop?.categories?.map((cat,i)=>{
@@ -109,7 +109,7 @@ if(shopId) {
            
             </div>
 
-            <div className="flex h-20 w-52 self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
+            <div className="flex h-20 w-[590px] self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
               {/* <div className="rounded-full aspect-square flex flex-col justify-center h-full  bg-sec-orange">
               <p className="text-sm justify-center flex text-pri-text-gray font-semibold">
                 {shop.ratings} <StarIcon className="w-4 fill-white"/> </p>
