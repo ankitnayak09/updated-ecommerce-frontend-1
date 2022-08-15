@@ -109,7 +109,7 @@ if(shopId) {
            
             </div>
 
-            <div className="flex h-20  self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
+            <div className="flex h-20 flex-grow self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
               {/* <div className="rounded-full aspect-square flex flex-col justify-center h-full  bg-sec-orange">
               <p className="text-sm justify-center flex text-pri-text-gray font-semibold">
                 {shop.ratings} <StarIcon className="w-4 fill-white"/> </p>
