@@ -36,11 +36,11 @@ const MyProfile = () => {
             dispatch({type:"NEW_SHOP_RESET"});
             }
             if(isGeolocationAvailable==true&&isGeolocationEnabled==true&&coords){
-                console.log("_app.js",coords)
+               
                 const location={ 
                   latitude:coords.latitude,
                   longitude:coords.longitude
-                }
+                } 
               
                 dispatch(loadUser(location))  
           
@@ -59,7 +59,7 @@ const MyProfile = () => {
     return ( 
         <>
         {loading===false&&
-        <div className="pt-28  pb-24 sticky top-0   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow flex flex-col  ">
+        <div className="pt-28  pb-24   bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow flex flex-col  ">
 
 <div className="flex justify-between px-4 pb-8">
 

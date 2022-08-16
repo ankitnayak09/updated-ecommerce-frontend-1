@@ -30,6 +30,8 @@ const NewShop = () => {
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
     const [isPureVeg, setIsPureVeg] = useState();
+    const [closeTime, setCloseTime] = useState();
+    const [openTime, setOpenTime] = useState();
     
     const categories=categoriesJson.shopCategoriesOptions
     // const categories=[
@@ -68,7 +70,8 @@ const NewShop = () => {
         }
  
         const myForm=new FormData();
-
+        { openTime&&  myForm.set("openTime",openTime)};
+        { closeTime&&  myForm.set("closeTime",closeTime)};
         myForm.set("name",name);
         myForm.set("location",location);
         
@@ -206,6 +209,39 @@ const NewShop = () => {
                 </div>
               </div>
             </div>
+
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+         <label htmlFor="location" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+           Shop Open Time
+         </label>
+         <div className="mt-1 sm:mt-0 sm:col-span-2">
+           <div className="max-w-lg flex rounded-md shadow-sm">
+           
+           <input type="time"  defaultValue={"09:00"}
+               
+               onChange={(e)=>{setOpenTime(e.target.value)}} className="appearance-none border border-gray-300 w-full py-2 px-4 bg-white  placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
+    
+           </div>
+         </div>
+       </div>
+
+
+       <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+         <label htmlFor="location" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+           Shop Close Time
+         </label>
+         <div className="mt-1 sm:mt-0 sm:col-span-2">
+           <div className="max-w-lg flex rounded-md shadow-sm">
+           
+           <input type="time"  defaultValue={"17:00"}
+               
+               onChange={(e)=>{setCloseTime(e.target.value)}} className="appearance-none border border-gray-300 w-full py-2 px-4 bg-white  placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
+    
+           </div>
+         </div>
+       </div>
+
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">

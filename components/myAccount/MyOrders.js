@@ -85,7 +85,7 @@ const MyOrders = () => {
      
 
     return (
-        <div className="bg-white rounded-t-primary z-10 relative shadow-myOrderTop -mt-10">
+        <div className="bg-white rounded-t-primary shadow-myOrderTop -mt-10">
         <div className="pt-10  pb-36">
           <div className="max-w-7xl px-6 mx-auto sm:px-2 lg:px-8">
             {/* <div className="max-w-2xl px-14"> */}
@@ -206,7 +206,7 @@ const MyOrders = () => {
                     <ul role="list" className="divide-y  divide-gray-200">
                     
                         <li className=" ">
-                          <div className="flex border-dashed border-y-[2px] border-sec-orange  sm:items-start pb-4">
+                          <div className="flex border-dashed border-y-[2px] border-sec-orange  sm:items-start ">
                             <div >
                             <div className="flex-shrink-0 w-24 h-20 -mt-1     relative">
                               {/* <img
