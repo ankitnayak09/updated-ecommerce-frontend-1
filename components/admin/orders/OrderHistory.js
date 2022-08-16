@@ -145,8 +145,8 @@ const OrderHistory = () => {
      <OrderHistoryCard key={order._id} order={order}/>)
       ))} */}
 
+            {loading===true&& <div className="w-full"> <AllShopsLoader/></div>}
             </div>
-            {loading===true&& <AllShopsLoader/>}
             </InfiniteScroll>
         </div>
     )
