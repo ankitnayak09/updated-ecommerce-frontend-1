@@ -86,15 +86,15 @@ const MyOrders = () => {
 
     return (
         <div className="bg-white rounded-t-primary z-10 relative shadow-myOrderTop -mt-10">
-        <div className="pt-16  pb-36">
-          <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
-            <div className="max-w-2xl px-14">
+        <div className="pt-10  pb-36">
+          <div className="max-w-7xl px-6 mx-auto sm:px-2 lg:px-8">
+            {/* <div className="max-w-2xl px-14"> */}
 
      
 
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 ">Order history</h1>
            
-            </div>
+            {/* </div> */}
           </div>
     
           <div className="mt-4">
@@ -107,7 +107,7 @@ const MyOrders = () => {
           hasMore={orders.length!==ordersCount}
           loader={<AllShopsLoader/>}
         >
-              <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+              <div className="grid bg-white grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {orders&&orders.map((order) => (
                   <div
                     key={order._id}

@@ -131,7 +131,7 @@ const OrderHistory = () => {
           dataLength={orders.length}
           next={fetchMoreData}
           hasMore={orders.length!==ordersCount}
-          loader={<AllShopsLoader/>}
+          // loader={<AllShopsLoader/>}
         >
                <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-28 ">
                {/* <div className="max-w-2xl pb-28 mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0"> */}
@@ -146,6 +146,7 @@ const OrderHistory = () => {
       ))} */}
 
             </div>
+            {loading===true&& <AllShopsLoader/>}
             </InfiniteScroll>
         </div>
     )

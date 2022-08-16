@@ -17,6 +17,7 @@ import MenuModal from "../../components/allShops/MenuModal"
 import axios from "axios"
 import date from 'date-and-time';
 import { updateFavourites } from "../../actions/userAction"
+import ListLoader from "../../components/loading/ListLoader"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -127,7 +128,7 @@ if(shopId) {
 
             </div>
 
-
+{loading===true?(<ListLoader/>):(
 <div className="w-full px-0 pt-6 pb-11">
       <div className="mx-auto w-full max-w-lg rounded-2xl bg-white p-0">
       {groupProducts.map((groupListItem)=>(
@@ -154,6 +155,7 @@ if(shopId) {
             ))}
       </div>
     </div>
+    )}
 
 {/* 
     <Popover className="fixed -right-3  z-10 -bottom-4" > 
