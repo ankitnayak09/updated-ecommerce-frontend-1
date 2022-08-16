@@ -71,7 +71,7 @@ const AdvSearch = () => {
           className="cursor-pointer flex justify-between  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 
           w-full text-center border-dashed border-[3px] border-pri-orange rounded-3xl  py-3 px-3 mx-3 mb-8"
         >
-            <p className="text-lg font-bold text-pri-orange self-center">Search for shops,dishes...</p>
+            <p className="text-md font-bold text-pri-orange self-center">Search for shops,dishes...</p>
             <span className="bg-sec-light-orange pri-button rounded-small px-10 py-2 m-1">
           <SearchIcon className="w-6 fill-pri-orange   "/>
           </span>
