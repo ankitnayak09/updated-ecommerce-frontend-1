@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Combobox, Dialog, Transition } from '@headlessui/react'
-import { SearchIcon } from '@heroicons/react/solid'
+import { SearchIcon,XCircleIcon } from '@heroicons/react/solid'
 import {
 
   ExclamationCircleIcon,
@@ -83,7 +83,7 @@ const ProductSearch = ({items}) => {
               onChange={() => {}}
             //   onChange={(item) => (window.location = item)}
             >
-              <div className="relative">
+              <div className="flex justify-between">
                 <SearchIcon
                   className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
                   aria-hidden="true"
@@ -92,6 +92,10 @@ const ProductSearch = ({items}) => {
                   className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm" 
                   placeholder="Search..."
                   onChange={(event) => setQuery(event.target.value)}
+                />
+                  <XCircleIcon onClick={()=>setOpen(false)}
+                  className="pointer-events-none self-center mr-4 w-7 text-pri-orange"
+        
                 />
               </div>
   
