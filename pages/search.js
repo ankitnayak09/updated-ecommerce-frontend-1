@@ -11,7 +11,7 @@ const search = () => {
             {/* </div> */}
             {/* <Search/> */}
             <div className="flex md:flex-col-reverse flex-col  h-full">
-                <div className="flex-grow mb-8">
+                <div className="mb-8">
                 <h2 className="text-2xl max-w-2xl mx-auto lg:max-w-3xl lg:px-8  px-4 font-bold tracking-tight text-gray-900 mt-32 md:mt-0 mb-8">Popular Categories</h2>
                     <AllCategories/>
                 </div>
