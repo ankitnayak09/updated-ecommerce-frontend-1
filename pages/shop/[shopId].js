@@ -119,7 +119,7 @@ if(shopId) {
             <div className="mx-2 w-full  self-center text-right">
               {loading===false&&(<>
              { (isShopOpen===true&&shop.isActive)?(
-              <p className="text-success-green text-sm  font-bold pb-1"> Open now</p>
+              <p className="text-success-green text-md  font-bold pb-1"> Open now</p>
               ):( <p className="text-gray-300  text-sm  font-bold"> Closed now</p>)}
               <p className="text-white text-xs "> {shop.openTime&&date.transform(shop.openTime, 'HH:mm', 'h:mm A')} (to)</p>
               <p className="text-white text-xs "> {shop.closeTime&&date.transform(shop.closeTime, 'HH:mm', 'h:mm A')}</p>
@@ -131,13 +131,13 @@ if(shopId) {
             </div>
 
 {loading===true?(<ListLoader/>):(
-<div className="w-full px-0 pt-6 pb-11">
+<div className="w-full px-0  pb-11">
       <div className="mx-auto w-full max-w-lg rounded-2xl bg-white p-0">
       {groupProducts.map((groupListItem)=>(
         <Disclosure defaultOpen="true" key={groupListItem.category} >
           {({ open }) => ( 
             <div id={`${groupListItem.category}`}>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-xl font-bold text-pri-text-light-gray  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              <Disclosure.Button className="flex w-full justify-between rounded-lg mt-8 px-4  text-left text-xl font-bold text-pri-text-light-gray  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <span className="text-2xl">{groupListItem.category}</span>
                 <ChevronDownIcon
                   className={`${
