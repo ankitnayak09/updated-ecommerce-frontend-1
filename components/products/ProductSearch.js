@@ -90,7 +90,7 @@ const ProductSearch = ({items}) => {
                 />
                 <Combobox.Input
                   className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm" 
-                  placeholder="Search..."
+                  placeholder="Search products..."
                   onChange={(event) => setQuery(event.target.value)}
                 />
                   <XCircleIcon onClick={()=>setOpen(false)}
