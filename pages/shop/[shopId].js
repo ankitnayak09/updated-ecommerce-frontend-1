@@ -133,7 +133,7 @@ if(shopId) {
       <div className="mx-auto w-full max-w-lg rounded-2xl bg-white p-0">
       {groupProducts.map((groupListItem)=>(
         <Disclosure defaultOpen="true" key={groupListItem.category} >
-          {({ open }) => (
+          {({ open }) => ( 
             <div id={`${groupListItem.category}`}>
               <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-xl font-bold text-pri-text-light-gray  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <span className="text-2xl">{groupListItem.category}</span>
