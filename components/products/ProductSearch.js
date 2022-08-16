@@ -93,8 +93,8 @@ const ProductSearch = ({items}) => {
                   placeholder="Search products..."
                   onChange={(event) => setQuery(event.target.value)}
                 />
-                  <XCircleIcon onClick={()=>setOpen(false)}
-                  className="pointer-events-none self-center mr-4 w-7 text-pri-orange"
+                  <XCircleIcon onClick={()=>{setOpen(false)}}
+                  className=" self-center mr-4 w-7 text-pri-orange"
         
                 />
               </div>
