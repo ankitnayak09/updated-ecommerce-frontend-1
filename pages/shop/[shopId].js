@@ -88,7 +88,7 @@ if(shopId) {
           <p className="text-center text-secondary-text-gray text-xs">LPU</p>
         </div>
        
-          <ProductSearch items={shop.products}/>
+          <ProductSearch items={shop.products} isShopActive/>
  
               </div>
 

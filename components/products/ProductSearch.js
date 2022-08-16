@@ -24,7 +24,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const ProductSearch = ({items}) => {
+const ProductSearch = ({items,isShopActive}) => {
     const [query, setQuery] = useState('')
     
     const [open, setOpen] = useState(false)
@@ -106,14 +106,14 @@ const ProductSearch = ({items}) => {
                       key={item._id}
                       value={item}
                       className={({ active }) =>
-                        classNames('flex cursor-default select-none rounded-xl pt-3 pl-2')
+                        classNames('flex cursor-default select-none rounded-xl pt-3 px-2')
                         // classNames('flex cursor-default select-none rounded-xl p-3', active && 'bg-gray-100')
                       }
                     >
                       {({ active }) => (
                         <>
                      
-                           <SingleProductCard product={item}/>
+                           <SingleProductCard product={item} isShopActive/>
                         </>
                       )}
                     </Combobox.Option>
