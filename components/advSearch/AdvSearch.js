@@ -37,12 +37,20 @@ const AdvSearch = () => {
            }
       if(query.length>1){
       
+        let timer = setTimeout(() => {
+
+      
           dispatch( getSearchedShops(page,pageSize,query))
+  
+      }, 1000)
+
+          // dispatch( getSearchedShops(page,pageSize,query))
       }
       if(query.length<1){
           dispatch( {type:"CLEAR_SEARCH_SHOP"})
       }
       // console.log(query)
+      return () => clearTimeout(timer)
     }, [dispatch,error,query])
   
     // const filteredItems =query === ''? []: items.filter((item) => {

@@ -115,6 +115,7 @@ export const searchShopReducer=createReducer({shops:[],shopCount:0,products:[],p
     CLEAR_SEARCH_SHOP:(state,action)=>{
         state.shopCount=0
         state.shops=[]
+        state.loading=null
         state.productCount=0
         state.products=[]
     },
