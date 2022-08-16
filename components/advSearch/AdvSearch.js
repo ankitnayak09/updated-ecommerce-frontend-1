@@ -11,6 +11,7 @@ import { clearErrors, getSearchedShops } from '../../actions/shopAction'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
 import Image from 'next/image'
+import ListLoader from '../loading/ListLoader'
 // import SingleProductCard from './SingleProductCard'
 
 
@@ -141,7 +142,7 @@ const AdvSearch = () => {
 
 
 
-                  {(products.length > 0||shops.length > 0) && (
+                  {loading===true?(<ListLoader/>):( (products.length > 0||shops.length > 0) && (
                 <Combobox.Options static className="max-h-[600px] scroll-py-3 overflow-y-auto ">
                       {shops.length > 0 &&shops.map((shop) => (
               <Link href={`/shop/${shop._id}`}  key={shop._id}>
@@ -242,7 +243,7 @@ const AdvSearch = () => {
               </Link>
             ))}
                 </Combobox.Options>
-              )}
+              ))}
   
               {query.length>1 &&loading==false &&products.length === 0 && shops.length === 0 && (
                 <div className="py-14 px-6 text-center text-sm sm:px-14">
