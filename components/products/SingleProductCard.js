@@ -53,7 +53,7 @@ const {isShopOpen} = useSelector(state => state.shopDetails)
 
     return (
         <>
-           <AlreadyItemsInCartModal open={open} setOpen={setOpen}/>
+           <AlreadyItemsInCartModal increaseQuantity={increaseQuantity} open={open} setOpen={setOpen}/>
 
 <div className=" w-full my-4 pl-4  border-t bg-white relative flex overflow-hidden">
     {/* <img alt="moto" src="https://picsum.photos/200" className="absolute -right-20 -bottom-8 h-40 w-40 mb-4"/> */}

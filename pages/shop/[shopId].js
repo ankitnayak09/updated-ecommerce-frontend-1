@@ -27,15 +27,15 @@ const Shop = () => {
   // console.log(props)
     const router=useRouter();
     const shopId=router.query.shopId
-    const [Liked, setLiked] = useState(user?.favourites.includes(shop._id))
+    const {user} = useSelector(state => state.user)
+    
+    const [Liked, setLiked] = useState(user?.favourites.includes(shopId))
     // const [isShopOpen, setisShopOpen] = useState()
-
 
     const dispatch=useDispatch();
     // const {loading,error}=useSelector(state => state.shopDetails)
     const {loading,error,shop,groupProducts,categories,isShopOpen}=useSelector(state => state.shopDetails)
     const {cartItems,cartTotal} = useSelector(state => state.cart)
-    const {user} = useSelector(state => state.user)
     // const {loading:shopLoading,error:shopError,products}=useSelector(state => state.products)
  
     useEffect(() => {
