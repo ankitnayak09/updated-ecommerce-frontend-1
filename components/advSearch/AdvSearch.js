@@ -205,7 +205,10 @@ const AdvSearch = () => {
 
 
 {products.length > 0 &&products.map((product) => (
-   <Link href={`/shop/${product.shop}`}  key={product._id}>
+   <Link href={{
+    pathname: `/shop/${product.shop}`,
+    query: { scrollTo: product._id },
+  }}  key={product._id}>
               <Combobox.Option
                
                 value={product}

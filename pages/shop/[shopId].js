@@ -50,6 +50,12 @@ if(shopId) {
 
     }, [dispatch,error,shopId])
 
+    useEffect(() => {
+ if(loading===false&&router.query.scrollTo){
+   router.push("#"+`${router.query.scrollTo}`)
+ }
+      
+    }, [loading])
 
     // useEffect(() => {
     //   if(shop.closeTime&&shop.openTime){
@@ -77,11 +83,11 @@ if(shopId) {
         {/* {loading?("loading"):(
         <> */}
         <div className="flex justify-between bg-white  rounded-b-primary sticky top-0 border-b-2 drop-shadow-sm z-30  py-3 px-3">
-        <Link href={`/`}>
-                   <button className=" cursor-pointer  p-2 bg-sec-light-orange  rounded-tr-[21px] rounded-bl-[21px] rounded-tl-small rounded-br-small drop-shadow-xl">
+        {/* <Link href={`/`}> */}
+                   <button onClick={() => router.back()} className=" cursor-pointer  p-2 bg-sec-light-orange  rounded-tr-[21px] rounded-bl-[21px] rounded-tl-small rounded-br-small drop-shadow-xl">
               <ChevronLeftIcon className="w-8 fill-pri-text-gray"/>
               </button>
-              </Link>
+              {/* </Link> */}
               <div className="flex  flex-col ">
           <p className='text-lg font-bold flex'>{shop.name} <HeartIcon onClick={()=>{setLiked(!Liked),dispatch(updateFavourites(shop._id))}} className={classNames(
                     Liked&&"fill-pri-orange ","w-8 ml-2 cursor-pointer text-sec-orange"
@@ -147,7 +153,7 @@ if(shopId) {
               </Disclosure.Button>
               <Disclosure.Panel className=" pt-1 pb-2 ">
                   {groupListItem.products.map((product)=>
-              <SingleProductCard isShopActive={shop.isActive} isShopOpen={isShopOpen} key={product._id} product={product}/>
+              <SingleProductCard  isShopActive={shop.isActive} isShopOpen={isShopOpen} key={product._id} product={product}/>
             )}
           
               </Disclosure.Panel>
