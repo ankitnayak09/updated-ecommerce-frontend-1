@@ -109,7 +109,7 @@ const CategoryShopList = () => {
 <div className="bg-white z-10 relative  rounded-t-primary shadow-myOrderTop border-b-2 border-gray-300 -mt-8 pb-16 pt-4 px-4">
 
           {/* <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 ">Shops</h2> */}
-          <h1 className=" text-3xl px-6 py-9 font-bold tracking-tight text-pri-text-gray ">{category}</h1>
+          <h1 className=" text-3xl px-2 py-9 font-bold tracking-tight text-pri-text-gray ">{category}</h1>
       
            <InfiniteScroll
           dataLength={shops.length}

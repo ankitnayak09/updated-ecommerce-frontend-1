@@ -2,7 +2,7 @@ import { useEffect, useState,Fragment } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { getSuperAdminShops, updateShopSuperAdmin } from "../../../actions/shopAction";
+import { clearErrors, getSuperAdminShops, updateShopSuperAdmin } from "../../../actions/shopAction";
 import AllShopsLoader from "../../loading/AllShopsLoader";
 import SingleShopCard from "./SingleShopCard";
 
@@ -31,7 +31,7 @@ const AllShops = () => {
   useEffect(() => {
     if(error){
    toast.error(error);
-   dispatch(clearErrors);
+   dispatch(clearErrors());
     }
 
     if(page==1){
