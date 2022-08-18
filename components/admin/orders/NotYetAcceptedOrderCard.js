@@ -46,6 +46,7 @@ const dispatch = useDispatch()
     }
 }
 
+const {loading} = useSelector(state => state.adminOrder)
 
     return (
       
@@ -123,11 +124,14 @@ const dispatch = useDispatch()
                         </button>
                         <div className=" flex justify-center">
                           
-                           <button onClick={(e)=>{
+                           <button 
+       disabled={loading?true:false} onClick={(e)=>{
                                e.preventDefault()
                                handleAcceptOrder(order._id)
                                }} className="pri-button w-32 md:w-36 text-center self-center py-2 "> 
-           Accept
+             {loading?(      <div className="flex w-full justify-center">    <span 
+        className="w-6  aspect-square border-4 border-pri-orange border-dashed rounded-full animate-spin"></span>
+            </div>   ):("Accept")}
             </button>
                         </div>
                       </div>

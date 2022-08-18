@@ -100,8 +100,31 @@ if(shopId) {
               </div>
 
 
-              <div className="flex justify-between mt-3">
-                <div className=" m-5 w-44">
+              <div className="flex  justify-between mt-3">
+            {loading?(
+              <div className="bg-white   p-2 w-44  mx-4 ">
+                  <div className="mb-2 flex gap-3">
+                      <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full">
+                      </div>
+                  </div>
+              <div className=" sm:h-full w-full rounded-xl bg-gray-200 animate-pulse">
+              </div>
+              <div className="flex flex-col flex-1 gap-5 sm:p-2">
+                  <div className="flex flex-1 flex-col gap-3">
+                      <div className="bg-gray-200 w-full animate-pulse h-14 rounded-2xl">
+                      </div>
+                      <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl">
+                      </div>
+                      <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl">
+                      </div>
+                     
+                      <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl">
+                      </div>
+                  </div>
+                
+              </div>
+          </div>
+            ):(   <div className=" m-5 w-44">
           <p className="text-2xl font-bold">  {shop.name}</p>
 
              <p className="mt-1 text-sm font-bold text-sec-text-gray mb-1">~ {shop?.description} ~ </p>
@@ -115,7 +138,7 @@ if(shopId) {
             </div>
            
             </div>
-
+            )} 
             <div className="flex h-20 flex-grow self-center rounded-l-full bg-gradient-to-br from-pri-orange via-mid-orange to-pri-yellow pl-1 pt-1 pb-1">
               {/* <div className="rounded-full aspect-square flex flex-col justify-center h-full  bg-sec-orange">
               <p className="text-sm justify-center flex text-pri-text-gray font-semibold">
@@ -123,7 +146,13 @@ if(shopId) {
               </div> */}
               <ViewShopReviews/>
             <div className="mx-2 w-full  self-center text-right">
-              {loading===false&&(<>
+              {loading?(  <>     <div className="bg-sec-light-orange w-full animate-pulse h-3 rounded-2xl">
+                      </div>
+                      <div className="bg-sec-light-orange mt-1 ml-auto w-1/2 animate-pulse h-3 rounded-2xl">
+                      </div>
+                      <div className="bg-sec-light-orange mt-1 ml-auto w-1/3 animate-pulse h-3 rounded-2xl">
+                      </div>
+                      </>):(<>
              { (isShopOpen===true&&shop.isActive)?(
               <p className="text-success-green text-md  font-bold pb-1"> Open now</p>
               ):( <p className="text-gray-300  text-sm  font-bold"> Closed now</p>)}

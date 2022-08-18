@@ -201,7 +201,7 @@ const [newOrder, setNewOrder] = useState()
 
 
               {loading?(<div className="w-full px-6"> <AllShopsLoader/></div>):(notYetAcceptedOrders.map((order)=>(
-                <NotYetAcceptedOrderCard key={order._id} order={order}/>
+                <NotYetAcceptedOrderCard  key={order._id} order={order}/>
               )))}
               {/* {notYetAcceptedOrders&&notYetAcceptedOrders.map((order)=>(
                 <NotYetAcceptedOrderCard key={order._id} order={order}/>

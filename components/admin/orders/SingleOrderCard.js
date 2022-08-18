@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import date from 'date-and-time';
 import { useRouter } from "next/router";
@@ -24,6 +24,8 @@ const SingleOrderCard = ({order,}) => {
       }
       dispatch(updateOrder(orderData,shopId,orderId))
   }
+
+  const {loading} = useSelector(state => state.adminOrder)
 
     return (
       
@@ -107,10 +109,12 @@ const SingleOrderCard = ({order,}) => {
                       </div> */}
                       <div className=" flex justify-center">
                         {clickConfirmed?(
-                         <button onClick={(e)=>{
+                         <button disabled={loading?true:false}  onClick={(e)=>{
                              e.preventDefault()
                              handleDelivered(order._id)}} className="pri-button w-36 text-center self-center py-2 "> 
-          Click Again
+          {loading?(      <div className="flex w-full justify-center">    <span 
+        className="w-6  aspect-square border-4 border-pri-orange border-dashed rounded-full animate-spin"></span>
+            </div>   ):("Click Again")}
           </button>):(
                <button onClick={()=>{
                 setClickConfirmed(true)}} className="pri-button w-32 md:w-36 text-center self-center py-2 "> 
