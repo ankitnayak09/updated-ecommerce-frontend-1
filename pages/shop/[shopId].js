@@ -146,11 +146,12 @@ if(shopId) {
               </div> */}
               <ViewShopReviews/>
             <div className="mx-2 w-full  self-center text-right">
-              {loading?(  <>     <div className="bg-sec-light-orange w-full animate-pulse h-3 rounded-2xl">
-                      </div>
+              {!loading?(  <>    
                       <div className="bg-sec-light-orange mt-1 ml-auto w-1/2 animate-pulse h-3 rounded-2xl">
                       </div>
                       <div className="bg-sec-light-orange mt-1 ml-auto w-1/3 animate-pulse h-3 rounded-2xl">
+                      </div>
+                      <div className="bg-sec-light-orange mt-1 ml-auto w-1/4 animate-pulse h-3 rounded-2xl">
                       </div>
                       </>):(<>
              { (isShopOpen===true&&shop.isActive)?(
