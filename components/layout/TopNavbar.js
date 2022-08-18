@@ -90,7 +90,7 @@ const TopNavbar = () => {
       
               {/* <div className=" flex items-center  justify-start  sm:justify-start"> */}
                 <Link href="/">
-                <div className="flex-shrink-0 ml-2 cursor-pointer flex items-center">
+                <div className="absolute md:relative flex-shrink-0 ml-2 cursor-pointer flex items-center">
                   <img
                     className="block  h-8 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
