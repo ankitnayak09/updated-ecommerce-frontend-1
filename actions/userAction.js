@@ -15,7 +15,7 @@ export const googleSignIn=(tokenId)=>async(dispatch)=>{
             type:"GOOGLE_SIGNIN_SUCCESS",
             payload:data.user
         });
-        // Router.reload()
+        Router.reload()
 
     }catch(error){
 // console.log(error) 
